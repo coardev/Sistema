@@ -1,0 +1,244 @@
+<template>
+            <main class="main">
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+                
+            </ol>
+            <div class="container-fluid">
+                <!-- Ejemplo de tabla Listado -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa fa-align-justify"></i> Detalle Entrada de Productos
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div >
+                                <div class="input-group">
+                                    <select class="form-control col-md-6" v-model="criterio1">
+                                      <option value="nombre">Nombre</option>
+                                    </select>                                    
+                                    <input type="text" v-model="buscar1" class="form-control;col-md-3" placeholder="Escribe el Articulo">
+                                     </div>
+                                      </div>
+                                      
+                                     <div >
+                                <div class="input-group">
+                                    <select class="form-control col-md-6" v-model="criterio">
+                                      
+                                      <option value="created_at">Fecha a Buscar</option>
+                                      <option value="tipo">Tipo de Inventario</option>
+                                    </select>
+                                   
+                                    <input type="date" v-model="buscar"  class="form-control;col-md-3" placeholder="Escribe el Articulo a Buscar">
+                                 <button type="submit" @click="listarHistorial(1,buscar1,criterio1,buscar,criterio,buscar2,criterio2)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+
+                                </div>
+                                    
+                                    
+                              </div>
+                            </div>
+                            
+                        
+                           
+                        </div>
+                        
+                         <div align="right">
+                                <button  style="font-size:18px" v-print="printObj">Imprimir Reporte <i class="fa fa-print"></i></button>
+                                </div>
+                        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                        <table id="table_trans"  class="table table-bordered table-striped table-sm">
+                            <caption><h2>Reporte Entrada de Articulos</h2></caption>
+                            <caption> <h4>Piezas Entrantes</h4>
+                              <h4 id="area_total"></h4>
+                            </caption>
+                            <caption> <h4>Importe Piezas</h4>
+                              <h4 id="area_total1"></h4>
+                            </caption>
+                            <thead>
+                                <tr>
+                                    <th><i class="icon-calendar" style='font-size:18px'>&nbsp; Fecha de Registro</i></th>
+                                    <th><i class='fas fa-file-alt' style='font-size:18px'>&nbsp; Nombre</i></th>
+                                    <th><i class='fas fa-dolly-flatbed' style='font-size:18px'>&nbsp; Entrada</i></th>
+                                    <th><i class='fas fa-dolly-flatbed' style='font-size:18px'>&nbsp; Reingreso Articulos</i></th>
+                                    <th><i class='fas fa-dollar-sign' style='font-size:18px'>&nbsp; Precio Proveedor Compra</i></th>
+                                    <th><i class='fas fa-dollar-sign' style='font-size:18px'>&nbsp; Importe Entrada</i></th>
+                                    <th><i class='fas fa-dollar-sign' style='font-size:18px'>Estatus</i></th>
+                                    <th><i class='fas fa-dollar-sign' style='font-size:18px'>Fecha</i></th>
+                                  
+                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="historial in arrayHistorial" :key="historial.id">
+                                    
+                                    <td v-text="historial.created_at"></td>
+                                    <td  v-text="historial.nombre"></td>
+                                    <td  v-text="historial.stock"></td>
+                                    <td  v-text="historial.stock1"></td>
+                                    <td  v-text="historial.precio_proveedor"></td>
+                                    <td  v-text="historial.importe"></td>
+                                    <td style="color: red;font-size:18px"  v-text="historial.estado"></td>
+                                    <td v-text="historial.updated_at"></td>
+                                   
+                                    
+                                </tr>                               
+                            </tbody>
+                        </table>
+                        </div>
+                        
+                    </div>
+                </div>
+                <!-- Fin ejemplo de tabla Listado -->
+           
+        </main>
+</template>
+
+<script>
+import Print from 'vue-print-nb'
+ 
+Vue.use(Print);
+import Datepicker from 'vuejs-datepicker';
+    export default {
+        components: {
+        Datepicker
+    },
+        props : ['ruta'],
+        data (){
+            return {
+                printObj: {
+              id: "table_trans",
+              popTitle: '',
+              extraCss: 'https://www.google.com,https://www.google.com',
+              extraHead: '<meta http-equiv="Content-Language"content="zh-cn"/>'
+            },
+                historial_id: 0,
+                nombre : '',
+                stock: '',
+                stock1: '',
+                precio_proveedor: '',
+                arrayHistorial : [],
+                modal : 0,
+                tituloModal : '',
+                tipoAccion : 0,
+                pagination : {
+                    'total' : 0,
+                    'current_page' : 0,
+                    'per_page' : 0,
+                    'last_page' : 0,
+                    'from' : 0,
+                    'to' : 0,
+                },
+                offset : 3,
+                
+                criterio1 : 'nombre',
+                criterio : 'created_at',
+                criterio2 : 'created_at',
+                
+                buscar1 : '',
+                buscar : '',
+                buscar2 : ''
+            }
+        },
+        computed:{
+            isActived: function(){
+                return this.pagination.current_page;
+            },
+            //Calcula los elementos de la paginación
+            pagesNumber: function() {
+                if(!this.pagination.to) {
+                    return [];
+                }
+                
+                var from = this.pagination.current_page - this.offset; 
+                if(from < 1) {
+                    from = 1;
+                }
+
+                var to = from + (this.offset * 2); 
+                if(to >= this.pagination.last_page){
+                    to = this.pagination.last_page;
+                }  
+
+                var pagesArray = [];
+                while(from <= to) {
+                    pagesArray.push(from);
+                    from++;
+                }
+                return pagesArray;             
+
+            }
+        },
+        methods : {
+             salida3: function () {
+               var td = document.querySelectorAll('#table_trans > tbody > tr > td:nth-child(3)');
+
+var total = [].reduce.call(td, function(a, b) {
+    return a + parseInt(b.innerText);
+}, 0);
+
+document.getElementById('area_total').innerText = total;
+
+                    },
+                     importe: function () {
+               var td = document.querySelectorAll('#table_trans > tbody > tr > td:nth-child(6)');
+
+var total = [].reduce.call(td, function(a, b) {
+    return a + parseInt(b.innerText);
+}, 0);
+
+document.getElementById('area_total1').innerText = total;
+
+                    },
+             sum1: function () {
+      var table =document.getElementById("table"), sumVal = 0;
+      for(var i = 1; i < table.rows.length; i++)
+      {
+          sumVal = sumVal + parseInt(table.rows[i].cells[4].innerHTML);
+             }
+             document.getElementById("val2").innerHTML = sumVal;
+    },
+            listarHistorial (page,buscar1,criterio1,buscar,criterio,buscar2,criterio2){
+                let me=this;
+                var url= this.ruta + '/historial?page=' + page + '&buscar1='+ buscar1 + '&criterio1='+ criterio1 + '&buscar='+ buscar + '&criterio='+ criterio + '&buscar2='+ buscar2 + '&criterio2='+ criterio2;
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.arrayHistorial = respuesta.historial.data;
+                    me.pagination= respuesta.pagination;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            cambiarPagina(page,buscar1,criterio1,buscar,criterio,buscar2,criterio2){
+                let me = this;
+                //Actualiza la página actual
+                me.pagination.current_page = page;
+                //Envia la petición para visualizar la data de esa página
+                me.listarHistorial(page,buscar1,criterio1,buscar,criterio,buscar2,criterio2);
+            }
+        },
+        mounted() {
+            this.listarHistorial(1,this.buscar1,this.criterio1,this.buscar,this.criterio,this.buscar2,this.criterio2);
+        }
+    }
+</script>
+<style>    
+    .modal-content{
+        width: 100% !important;
+        position: absolute !important;
+    }
+    .mostrar{
+        display: list-item !important;
+        opacity: 1 !important;
+        position: absolute !important;
+        background-color: #3c29297a !important;
+    }
+    .div-error{
+        display: flex;
+        justify-content: center;
+    }
+    .text-error{
+        color: red !important;
+        font-weight: bold;
+    }
+</style>
