@@ -27,7 +27,7 @@ class DetalleController extends Controller
             $detalle = Detalle::select('detalle_ventas.created_at',
             'detalle_ventas.categoria',DB::raw('sum(detalle_ventas.cantidad*detalle_ventas.precio4+detalle_ventas.precio5+detalle_ventas.precio6+detalle_ventas.cantidad2*detalle_ventas.precio3) as importe'))
             ->where($criterio, 'like', '%'. $buscar . '%')
-            ->where('detalle_ventas.estado','=','Venta Concretada')
+            ->where('detalle_ventas.estado','=','Venta Cobrada')
             ->groupBy('detalle_ventas.categoria')         
             ->orderBy('id', 'desc')
             ->paginate(10000000);

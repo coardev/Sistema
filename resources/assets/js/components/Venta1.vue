@@ -1171,7 +1171,7 @@ tabla(){
        position: fixed;
        left: 40%;
        top: 20%;
-        
+       z-index: 999;
     }
     .text-error{
         color: red !important;

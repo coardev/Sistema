@@ -64684,6 +64684,34 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vue_
         }
     },
     methods: {
+        onFocus: function onFocus() {
+            this.Concepto = '';
+        },
+        onFocus1: function onFocus1() {
+            this.Concepto1 = '';
+        },
+        onFocus2: function onFocus2() {
+            this.Concepto2 = '';
+        },
+        onFocus3: function onFocus3() {
+            this.Concepto3 = '';
+        },
+        onFocus4: function onFocus4() {
+            this.Concepto4 = '';
+        },
+        onFocus5: function onFocus5() {
+            this.Concepto5 = '';
+        },
+
+        isNumber: function isNumber(evt) {
+            evt = evt ? evt : window.event;
+            var charCode = evt.which ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 46) {
+                evt.preventDefault();;
+            } else {
+                return true;
+            }
+        },
         formatPrice: function formatPrice(value) {
             var val = (value / 1).toFixed(2).replace('.', ',');
             return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -65046,18 +65074,22 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.Concepto5,
-                            expression: "Concepto5"
+                            value: _vm.Concepto,
+                            expression: "Concepto"
                           }
                         ],
-                        attrs: { type: "number" },
-                        domProps: { value: _vm.Concepto5 },
+                        attrs: { type: "number", min: 0 },
+                        domProps: { value: _vm.Concepto },
                         on: {
+                          focus: _vm.onFocus,
+                          keypress: function($event) {
+                            return _vm.isNumber(_vm.event)
+                          },
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.Concepto5 = $event.target.value
+                            _vm.Concepto = $event.target.value
                           }
                         }
                       })
@@ -65124,18 +65156,22 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.Concepto4,
-                            expression: "Concepto4"
+                            value: _vm.Concepto1,
+                            expression: "Concepto1"
                           }
                         ],
-                        attrs: { type: "number" },
-                        domProps: { value: _vm.Concepto4 },
+                        attrs: { type: "number", min: 0 },
+                        domProps: { value: _vm.Concepto1 },
                         on: {
+                          focus: _vm.onFocus1,
+                          keypress: function($event) {
+                            return _vm.isNumber(_vm.event)
+                          },
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.Concepto4 = $event.target.value
+                            _vm.Concepto1 = $event.target.value
                           }
                         }
                       })
@@ -65160,18 +65196,22 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.Concepto3,
-                            expression: "Concepto3"
+                            value: _vm.Concepto2,
+                            expression: "Concepto2"
                           }
                         ],
-                        attrs: { type: "number" },
-                        domProps: { value: _vm.Concepto3 },
+                        attrs: { type: "number", min: 0 },
+                        domProps: { value: _vm.Concepto2 },
                         on: {
+                          focus: _vm.onFocus2,
+                          keypress: function($event) {
+                            return _vm.isNumber(_vm.event)
+                          },
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.Concepto3 = $event.target.value
+                            _vm.Concepto2 = $event.target.value
                           }
                         }
                       })
@@ -65217,18 +65257,22 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.Concepto,
-                            expression: "Concepto"
+                            value: _vm.Concepto3,
+                            expression: "Concepto3"
                           }
                         ],
-                        attrs: { type: "number" },
-                        domProps: { value: _vm.Concepto },
+                        attrs: { type: "number", min: 0 },
+                        domProps: { value: _vm.Concepto3 },
                         on: {
+                          focus: _vm.onFocus3,
+                          keypress: function($event) {
+                            return _vm.isNumber(_vm.event)
+                          },
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.Concepto = $event.target.value
+                            _vm.Concepto3 = $event.target.value
                           }
                         }
                       })
@@ -65248,18 +65292,22 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.Concepto1,
-                            expression: "Concepto1"
+                            value: _vm.Concepto4,
+                            expression: "Concepto4"
                           }
                         ],
-                        attrs: { type: "number" },
-                        domProps: { value: _vm.Concepto1 },
+                        attrs: { type: "number", min: 0 },
+                        domProps: { value: _vm.Concepto4 },
                         on: {
+                          focus: _vm.onFocus4,
+                          keypress: function($event) {
+                            return _vm.isNumber(_vm.event)
+                          },
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.Concepto1 = $event.target.value
+                            _vm.Concepto4 = $event.target.value
                           }
                         }
                       })
@@ -65299,18 +65347,22 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.Concepto2,
-                          expression: "Concepto2"
+                          value: _vm.Concepto5,
+                          expression: "Concepto5"
                         }
                       ],
-                      attrs: { type: "number" },
-                      domProps: { value: _vm.Concepto2 },
+                      attrs: { type: "number", min: 0 },
+                      domProps: { value: _vm.Concepto5 },
                       on: {
+                        focus: _vm.onFocus5,
+                        keypress: function($event) {
+                          return _vm.isNumber(_vm.event)
+                        },
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.Concepto2 = $event.target.value
+                          _vm.Concepto5 = $event.target.value
                         }
                       }
                     })
@@ -75322,7 +75374,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.modal-content{\n    width: 100% !important;\n    position: absolute !important;\n}\n.mostrar{\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    background-color: #3c29297a !important;\n}\n.div-error{\n    \n  \n    justify-content: center;\n  \n   position: fixed;\n   left: 40%;\n   top: 20%;\n}\n.text-error{\n    color: red !important;\n    font-weight: bold;\n}\n@media (min-width: 600px) {\n.btnagregar {\n        margin-top: 2rem;\n}\n}\n\n", ""]);
+exports.push([module.i, "\n.modal-content{\n    width: 100% !important;\n    position: absolute !important;\n}\n.mostrar{\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    background-color: #3c29297a !important;\n}\n.div-error{\n    \n  \n    justify-content: center;\n  \n   position: fixed;\n   left: 40%;\n   top: 20%;\n   z-index: 999;\n}\n.text-error{\n    color: red !important;\n    font-weight: bold;\n}\n@media (min-width: 600px) {\n.btnagregar {\n        margin-top: 2rem;\n}\n}\n\n", ""]);
 
 // exports
 

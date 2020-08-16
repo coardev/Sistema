@@ -48,25 +48,25 @@
                                 <tbody> <tr> <th colspan="2" style="text-align:center">Retiros de Efectivo:</th> 
                                <th>Salidas-Cambios</th> <th>Efectivo Final en Caja</th> </tr> <tr>
                                 <td><input  type="text" placeholder="Concepto del Retiro..."></td>
-                                 <td><input type="number" v-model="Concepto5"></td> <td>
+                                 <td><input type="number" v-model="Concepto" @focus="onFocus" v-on:keypress="isNumber(event)" v-bind:min="0"></td> <td>
                                  <input  type="number"   v-model="myLocalData4" readonly></td>
                                  <td><input  type="number" name="txto" id="txto"   v-model="myLocalData" readonly></td> </tr>
                                   <tr> <td><input type="text" placeholder="Concepto del Retiro..."></td>
-                                  <td><input type="number" v-model="Concepto4"></td> <th>Efectivo Total</th>
+                                  <td><input type="number" v-model="Concepto1" @focus="onFocus1" v-on:keypress="isNumber(event)" v-bind:min="0"></td> <th>Efectivo Total</th>
                                    <td>$ {{efectivo=cambios+ventas1}}</td> </tr>
                                    <tr> <td><input type="text" placeholder="Concepto del Retiro..."></td> 
-                               <td><input type="number" v-model="Concepto3"></td> <th>Saldo Inicial del Dia</th> <th><input  type="number" name="txtn" id="txtn"  v-model="dinero" readonly></th> </tr> <tr>
+                               <td><input type="number" v-model="Concepto2" @focus="onFocus2" v-on:keypress="isNumber(event)" v-bind:min="0"></td> <th>Saldo Inicial del Dia</th> <th><input  type="number" name="txtn" id="txtn"  v-model="dinero" readonly></th> </tr> <tr>
                                 <td><input type="text" placeholder="Concepto del Retiro..."></td>
-                                 <td><input type="number" v-model="Concepto"></td>
+                                 <td><input type="number" v-model="Concepto3" @focus="onFocus3" v-on:keypress="isNumber(event)" v-bind:min="0"></td>
                                   <td>Saldo al Corte</td>
                                  <td><input type="text" name="txtr" id="txtr"  readonly /></td> </tr> <tr>
                                   <td><input  type="text" placeholder="Concepto del Retiro..."></td>
-                                  <td><input type="number" v-model="Concepto1" ></td> 
+                                  <td><input type="number" v-model="Concepto4" @focus="onFocus4" v-on:keypress="isNumber(event)" v-bind:min="0" ></td> 
                                   <td>Ingresos Tarjeta</td>
                                    <td><input  type="number" v-model="myLocalData1" readonly></td>
                                     </tr>
                                   <td><input  type="text" placeholder="Concepto del Retiro..."></td>
-                                 <td><input type="number" v-model="Concepto2"></td>
+                                 <td><input type="number" v-model="Concepto5" @focus="onFocus5" v-on:keypress="isNumber(event)" v-bind:min="0"></td>
                                   <td>Ingresos Vales</td>
                                  <td><input id="txtp" type="number"  v-model="myLocalData2" readonly></td> </tr> <tr>
                                   </tr></tr> <tr> </tr>
@@ -273,6 +273,33 @@ Vue.use(Print);
             }
         },
         methods : {
+            onFocus() {
+      this.Concepto = '';
+    },
+    onFocus1() {
+      this.Concepto1 = '';
+    },
+    onFocus2() {
+      this.Concepto2 = '';
+    },
+    onFocus3() {
+      this.Concepto3 = '';
+    },
+    onFocus4() {
+      this.Concepto4 = '';
+    },
+    onFocus5() {
+      this.Concepto5 = '';
+    },
+             isNumber: function(evt) {
+      evt = (evt) ? evt : window.event;
+      var charCode = (evt.which) ? evt.which : evt.keyCode;
+      if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+        evt.preventDefault();;
+      } else {
+        return true;
+      }
+    },
             formatPrice(value) {
         let val = (value/1).toFixed(2).replace('.', ',')
         return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
