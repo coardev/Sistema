@@ -325,7 +325,19 @@ class VentaController extends Controller
         $venta->cambio = $request->cambio;
         $venta->estado = 'Venta Cobrada';
         $venta->save();
+
+        $this->__detalleVenta($request->id);
+        
+
+
     }
+
+     //Actualizar Estado Detalle - Articulo Cerrar Venta
+    private function __detalleVenta($idventa = null)
+{ 
+    DetalleVenta::where('idventa', $idventa)->update(['estado' => 'Venta Cobrada']);
+} 
+  
 
     private function __historial2($articulo = '',$cantidad = '',$precio4 = '',$inventariable = '',$idarticulo = '')
     {
