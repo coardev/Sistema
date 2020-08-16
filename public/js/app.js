@@ -63275,6 +63275,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -63719,6 +63724,33 @@ var render = function() {
                                 { attrs: { align: "center" } },
                                 [
                                   detalle.estado === "Venta Concretada"
+                                    ? [
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "btn btn-danger btn-sm",
+                                            attrs: { type: "button" },
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.abrirModal(
+                                                  "detalle",
+                                                  "actualizar",
+                                                  detalle
+                                                )
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                  Cancelar Venta de Articulo\n                                "
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  detalle.estado === "Venta Cobrada"
                                     ? [
                                         _c(
                                           "button",

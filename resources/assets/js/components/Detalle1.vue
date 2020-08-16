@@ -67,6 +67,11 @@
                                         <button type="button" @click="abrirModal('detalle','actualizar',detalle)" class="btn btn-danger btn-sm">
                                           Cancelar Venta de Articulo
                                         </button>          
+                                         </template>  
+                                         <template v-if="detalle.estado === 'Venta Cobrada'">
+                                        <button type="button" @click="abrirModal('detalle','actualizar',detalle)" class="btn btn-danger btn-sm">
+                                          Cancelar Venta de Articulo
+                                        </button>          
                                          </template>      
                                          <template v-if="detalle.estado === 'Venta Cancelada'">
                                         <button type="button"  class="btn btn-primary btn-sm">
