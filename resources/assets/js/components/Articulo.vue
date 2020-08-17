@@ -294,15 +294,17 @@
                                                                      
                                 </div>
                                 </template>
-                                
-                                <div v-show="errorArticulo" class="form-group row div-error">
+                                <div class="div-error">
+                                <div v-show="errorArticulo" class="alert alert-danger alert-dismissible fade show">
                                     <div class="text-center text-error">
+                                        <h4 class="alert-heading"><i class="fa fa-warning"></i>Error al Ingresar la Venta</h4>
                                         <div v-for="error in errorMostrarMsjArticulo" :key="error" v-text="error">
 
                                         </div>
                                     </div>
                                 </div>
-
+                            </div>
+                              
                                 </template>    
                                 <template v-if="tituloModal === 'Modificar Datos de Articulo'">
                                     <div class="form-group row">
@@ -734,7 +736,7 @@ Vue.use(Print);
                     me.cerrarModal();
                     me.listarArticulo(1,'','nombre');
                 }).catch(function () {
-                    
+                   
                 });
             },
             actualizarArticulo(){
@@ -912,16 +914,19 @@ Vue.use(Print);
             validarArticulo(){
                 this.errorArticulo=0;
                 this.errorMostrarMsjArticulo =[];
-                if (!this.inventariable) this.errorMostrarMsjArticulo.push("Elije el Tipo de Articulo que deseas Registrar");
-                if (this.idcategoria==0) this.errorMostrarMsjArticulo.push("Seleccione alguna categoría.");
-                if (!this.nombre) this.errorMostrarMsjArticulo.push("Escribe el nombre del articulo");
-                if (!this.codigo) this.errorMostrarMsjArticulo.push("Escribe el codigo asociado al Producto");
-                if (!this.precio_venta) this.errorMostrarMsjArticulo.push("El Campo Precio no Puede estar Vacio");
-                if (!this.precio_proveedor) this.errorMostrarMsjArticulo.push("El Campo Precio Proveedor no Puede estar Vacio");
-                if (!this.iva) this.errorMostrarMsjArticulo.push("Debes Seleccionar al Menos una Opcion de IVA");
-                if (!this.ieps) this.errorMostrarMsjArticulo.push("Debes Seleccionar al Menos una Opcion de IEPS");
-              if (this.errorMostrarMsjArticulo.length) this.errorArticulo = 1;
 
+                if (this.idcategoria==0) this.errorMostrarMsjArticulo.push("Seleccione una categoría.");
+                if (this.inventariable=='') this.errorMostrarMsjArticulo.push("Seleccion algun Tipo de Articulo");
+                if (this.nombre=='') this.errorMostrarMsjArticulo.push("El nombre del Articulo no puede quedar vacio");
+                if (this.codigo=='') this.errorMostrarMsjArticulo.push("El codigo del Articulo no puede quedar vacio");
+                if (this.precio_venta==0) this.errorMostrarMsjArticulo.push("El precio venta deber ser mayor que 0");
+                if (this.precio_proveedor==0) this.errorMostrarMsjArticulo.push("El precio proveedor deber ser mayor que 0");
+                if (this.iva==0) this.errorMostrarMsjArticulo.push("Debes seleccionar si el Producto ya incluye IVA");
+                if (this.ieps==0) this.errorMostrarMsjArticulo.push("Debes seleccionar si el Producto ya incluye IEPS");
+
+               
+                if (this.errorMostrarMsjArticulo.length) this.errorArticulo = 1;
+                setTimeout(() => this.errorArticulo = false, 3500);
                 return this.errorArticulo;
             },
             cerrarModal(){
@@ -1068,8 +1073,14 @@ Vue.use(Print);
         background-color: #3c29297a !important;
     }
     .div-error{
-        display: flex;
+        
+      
         justify-content: center;
+      
+       position: fixed;
+       left: 30%;
+       top: 0%;
+       z-index: 999;
     }
     .text-error{
         color: red !important;

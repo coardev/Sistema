@@ -182,7 +182,7 @@ class ArticuloController extends Controller
         //Registrar en Tabla Entrada
         $this->__historial($articulo->nombre, $articulo->stock,$articulo->precio_proveedor,$articulo->inventariable);
         //Registrar en Inventario Entrada + Salida
-        $this->__historial2($articulo->nombre, $articulo->stock, $articulo->existencia,  $articulo->precio_proveedor, $articulo->precio_proveedor1, $articulo->total);
+        //$this->__historial2($articulo->nombre, $articulo->stock, $articulo->existencia,  $articulo->precio_proveedor, $articulo->precio_proveedor1, $articulo->total);
 
        
 

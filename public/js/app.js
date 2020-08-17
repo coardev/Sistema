@@ -48386,7 +48386,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.modal-content{\n    width: 100% !important;\n    position: absolute !important;\n}\n.mostrar{\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    background-color: #3c29297a !important;\n}\n.div-error{\n    display: flex;\n    justify-content: center;\n}\n.text-error{\n    color: red !important;\n    font-weight: bold;\n}\n", ""]);
+exports.push([module.i, "\n.modal-content{\n    width: 100% !important;\n    position: absolute !important;\n}\n.mostrar{\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    background-color: #3c29297a !important;\n}\n.div-error{\n    \n  \n    justify-content: center;\n  \n   position: fixed;\n   left: 30%;\n   top: 0%;\n   z-index: 999;\n}\n.text-error{\n    color: red !important;\n    font-weight: bold;\n}\n", ""]);
 
 // exports
 
@@ -48401,6 +48401,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_barcode__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_barcode___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_barcode__);
+//
+//
 //
 //
 //
@@ -49293,18 +49295,24 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default.a);
             });
         },
         validarArticulo: function validarArticulo() {
+            var _this3 = this;
+
             this.errorArticulo = 0;
             this.errorMostrarMsjArticulo = [];
-            if (!this.inventariable) this.errorMostrarMsjArticulo.push("Elije el Tipo de Articulo que deseas Registrar");
-            if (this.idcategoria == 0) this.errorMostrarMsjArticulo.push("Seleccione alguna categoría.");
-            if (!this.nombre) this.errorMostrarMsjArticulo.push("Escribe el nombre del articulo");
-            if (!this.codigo) this.errorMostrarMsjArticulo.push("Escribe el codigo asociado al Producto");
-            if (!this.precio_venta) this.errorMostrarMsjArticulo.push("El Campo Precio no Puede estar Vacio");
-            if (!this.precio_proveedor) this.errorMostrarMsjArticulo.push("El Campo Precio Proveedor no Puede estar Vacio");
-            if (!this.iva) this.errorMostrarMsjArticulo.push("Debes Seleccionar al Menos una Opcion de IVA");
-            if (!this.ieps) this.errorMostrarMsjArticulo.push("Debes Seleccionar al Menos una Opcion de IEPS");
-            if (this.errorMostrarMsjArticulo.length) this.errorArticulo = 1;
 
+            if (this.idcategoria == 0) this.errorMostrarMsjArticulo.push("Seleccione una categoría.");
+            if (this.inventariable == '') this.errorMostrarMsjArticulo.push("Seleccion algun Tipo de Articulo");
+            if (this.nombre == '') this.errorMostrarMsjArticulo.push("El nombre del Articulo no puede quedar vacio");
+            if (this.codigo == '') this.errorMostrarMsjArticulo.push("El codigo del Articulo no puede quedar vacio");
+            if (this.precio_venta == 0) this.errorMostrarMsjArticulo.push("El precio venta deber ser mayor que 0");
+            if (this.precio_proveedor == 0) this.errorMostrarMsjArticulo.push("El precio proveedor deber ser mayor que 0");
+            if (this.iva == 0) this.errorMostrarMsjArticulo.push("Debes seleccionar si el Producto ya incluye IVA");
+            if (this.ieps == 0) this.errorMostrarMsjArticulo.push("Debes seleccionar si el Producto ya incluye IEPS");
+
+            if (this.errorMostrarMsjArticulo.length) this.errorArticulo = 1;
+            setTimeout(function () {
+                return _this3.errorArticulo = false;
+            }, 3500);
             return this.errorArticulo;
         },
         cerrarModal: function cerrarModal() {
@@ -53377,35 +53385,45 @@ var render = function() {
                               ]
                             : _vm._e(),
                           _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: _vm.errorArticulo,
-                                  expression: "errorArticulo"
-                                }
-                              ],
-                              staticClass: "form-group row div-error"
-                            },
-                            [
-                              _c(
-                                "div",
-                                { staticClass: "text-center text-error" },
-                                _vm._l(_vm.errorMostrarMsjArticulo, function(
-                                  error
-                                ) {
-                                  return _c("div", {
-                                    key: error,
-                                    domProps: { textContent: _vm._s(error) }
-                                  })
-                                }),
-                                0
-                              )
-                            ]
-                          )
+                          _c("div", { staticClass: "div-error" }, [
+                            _c(
+                              "div",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errorArticulo,
+                                    expression: "errorArticulo"
+                                  }
+                                ],
+                                staticClass:
+                                  "alert alert-danger alert-dismissible fade show"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  { staticClass: "text-center text-error" },
+                                  [
+                                    _vm._m(3),
+                                    _vm._v(" "),
+                                    _vm._l(
+                                      _vm.errorMostrarMsjArticulo,
+                                      function(error) {
+                                        return _c("div", {
+                                          key: error,
+                                          domProps: {
+                                            textContent: _vm._s(error)
+                                          }
+                                        })
+                                      }
+                                    )
+                                  ],
+                                  2
+                                )
+                              ]
+                            )
+                          ])
                         ]
                       : _vm._e(),
                     _vm._v(" "),
@@ -53758,7 +53776,7 @@ var render = function() {
                               })
                             ]),
                             _vm._v(" "),
-                            _vm._m(3),
+                            _vm._m(4),
                             _vm._v(" "),
                             _c("div", { staticClass: "col-md-3" }, [
                               _c("input", {
@@ -54593,6 +54611,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("h4", { staticClass: "alert-heading" }, [
+      _c("i", { staticClass: "fa fa-warning" }),
+      _vm._v("Error al Ingresar la Venta")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-3" }, [
       _c(
         "label",
@@ -54700,7 +54727,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.modal-content{\n    width: 100% !important;\n    position: absolute !important;\n}\n.mostrar{\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    background-color: #3c29297a !important;\n}\n.div-error{\n    display: flex;\n    justify-content: center;\n}\n.text-error{\n    color: red !important;\n    font-weight: bold;\n}\n", ""]);
+exports.push([module.i, "\n.modal-content{\n     width: 100% !important;\n     position: absolute !important;\n}\n.mostrar{\n     display: list-item !important;\n     opacity: 1 !important;\n     position: absolute !important;\n     background-color: #3c29297a !important;\n}\n.div-error{\n     \n   \n     justify-content: center;\n   \n    position: fixed;\n    left: 30%;\n    top: 0%;\n    z-index: 999;\n}\n.text-error{\n     color: red !important;\n     font-weight: bold;\n}\n", ""]);
 
 // exports
 
@@ -54715,6 +54742,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_barcode__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_barcode___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_barcode__);
+//
+//
+//
 //
 //
 //
@@ -55588,15 +55618,24 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default.a);
             });
         },
         validarArticulo: function validarArticulo() {
+            var _this3 = this;
+
             this.errorArticulo = 0;
             this.errorMostrarMsjArticulo = [];
 
             if (this.idcategoria == 0) this.errorMostrarMsjArticulo.push("Seleccione una categoría.");
-            if (!this.nombre) this.errorMostrarMsjArticulo.push("El nombre del artículo no puede estar vacío.");
-            if (!this.precio_venta) this.errorMostrarMsjArticulo.push("El precio venta del artículo debe ser un número y no puede estar vacío.");
+            if (this.inventariable == '') this.errorMostrarMsjArticulo.push("Seleccion algun Tipo de Articulo");
+            if (this.nombre == '') this.errorMostrarMsjArticulo.push("El nombre del Articulo no puede quedar vacio");
+            if (this.codigo == '') this.errorMostrarMsjArticulo.push("El codigo del Articulo no puede quedar vacio");
+            if (this.precio_venta == 0) this.errorMostrarMsjArticulo.push("El precio venta deber ser mayor que 0");
+            if (this.precio_proveedor == 0) this.errorMostrarMsjArticulo.push("El precio proveedor deber ser mayor que 0");
+            if (this.iva == 0) this.errorMostrarMsjArticulo.push("Debes seleccionar si el Producto ya incluye IVA");
+            if (this.ieps == 0) this.errorMostrarMsjArticulo.push("Debes seleccionar si el Producto ya incluye IEPS");
 
             if (this.errorMostrarMsjArticulo.length) this.errorArticulo = 1;
-
+            setTimeout(function () {
+                return _this3.errorArticulo = false;
+            }, 3500);
             return this.errorArticulo;
         },
         cerrarModal: function cerrarModal() {
@@ -57007,35 +57046,45 @@ var render = function() {
                               ]
                             : _vm._e(),
                           _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: _vm.errorArticulo,
-                                  expression: "errorArticulo"
-                                }
-                              ],
-                              staticClass: "form-group row div-error"
-                            },
-                            [
-                              _c(
-                                "div",
-                                { staticClass: "text-center text-error" },
-                                _vm._l(_vm.errorMostrarMsjArticulo, function(
-                                  error
-                                ) {
-                                  return _c("div", {
-                                    key: error,
-                                    domProps: { textContent: _vm._s(error) }
-                                  })
-                                }),
-                                0
-                              )
-                            ]
-                          )
+                          _c("div", { staticClass: "div-error" }, [
+                            _c(
+                              "div",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errorArticulo,
+                                    expression: "errorArticulo"
+                                  }
+                                ],
+                                staticClass:
+                                  "alert alert-danger alert-dismissible fade show"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  { staticClass: "text-center text-error" },
+                                  [
+                                    _vm._m(3),
+                                    _vm._v(" "),
+                                    _vm._l(
+                                      _vm.errorMostrarMsjArticulo,
+                                      function(error) {
+                                        return _c("div", {
+                                          key: error,
+                                          domProps: {
+                                            textContent: _vm._s(error)
+                                          }
+                                        })
+                                      }
+                                    )
+                                  ],
+                                  2
+                                )
+                              ]
+                            )
+                          ])
                         ]
                       : _vm._e(),
                     _vm._v(" "),
@@ -57388,7 +57437,7 @@ var render = function() {
                               })
                             ]),
                             _vm._v(" "),
-                            _vm._m(3),
+                            _vm._m(4),
                             _vm._v(" "),
                             _c("div", { staticClass: "col-md-3" }, [
                               _c("input", {
@@ -58264,6 +58313,15 @@ var staticRenderFns = [
         },
         [_vm._v("Precio Venta:")]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", { staticClass: "alert-heading" }, [
+      _c("i", { staticClass: "fa fa-warning" }),
+      _vm._v("Error al Ingresar la Venta")
     ])
   },
   function() {
