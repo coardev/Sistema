@@ -95,16 +95,36 @@
                                             <th style="display: none">Precio Proveedor</th>
                                             <th style="display: none">Precio Promedio</th>
                                             <th>Precio Venta</th>
-                                            <th style="display: none">Stock</th>
+                                            <th>Stock</th>
                                             <th style="display: none">Estado</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr v-for="articulo in arrayArticulo" :key="articulo.id">
                                             <td>
+                                                <template v-if="articulo.inventariable === 1">
+                                                <template v-if="articulo.stock>=1">
                                                 <button type="button" @click="agregarDetalleModal(articulo)" class="btn btn-success btn-sm active" aria-pressed="true">
                                                 <i class="icon-check"></i>
                                                 </button>
+                                                </template>
+                                                
+                                                <template v-if="articulo.stock==0">
+                                                <button type="button" class="btn btn-warning btn-sm active" aria-pressed="true">
+                                                <i class="fa fa-exclamation-triangle"></i>
+                                                </button>
+                                                </template>
+                                                </template>
+                                                <template v-if="articulo.inventariable === 2">
+                                                <button type="button" @click="agregarDetalleModal(articulo)" class="btn btn-success btn-sm active" aria-pressed="true">
+                                                <i class="icon-check"></i>
+                                                </button>                                             
+                                                </template>
+                                                <template v-if="articulo.inventariable === 3">
+                                                <button type="button" @click="agregarDetalleModal(articulo)" class="btn btn-success btn-sm active" aria-pressed="true">
+                                                <i class="icon-check"></i>
+                                                </button>                                             
+                                                </template>
                                             </td>
                                             <td style="display: none" v-text="articulo.inventariable"></td>
                                             <td v-text="articulo.codigo"></td>
@@ -113,7 +133,21 @@
                                             <td style="display: none" v-text="articulo.precio_proveedor"></td>
                                             <td style="display: none" v-text="articulo.precio_proveedor1"></td>
                                             <td v-text="articulo.precio_venta"></td>
-                                            <td style="display: none" v-text="articulo.stock"></td>
+                                            <template v-if="articulo.inventariable === 1">
+                                            <template v-if="articulo.stock>=1">
+                                            <td v-text="articulo.stock"></td>
+                                            </template>
+                                            <template v-else="articulo.stock==0">
+                                            <td style="color:red;"  v-text="articulo.stock">
+                                            </td>
+                                            </template>
+                                            </template>
+                                            <template v-if="articulo.inventariable === 2">
+                                            <td>N/A</td>
+                                            </template>
+                                            <template v-if="articulo.inventariable === 3">
+                                            <td>N/A</td>
+                                            </template>
                                             <td style="display: none">
                                                 <div v-if="articulo.condicion">
                                                     <span class="badge badge-success">Activo</span>
@@ -142,7 +176,7 @@
                                             <th>Tipo</th>
                                             <th>Stock</th>
                                             <th>Artículo</th>
-                                            <th>Cetegoria</th>
+                                            <th>Categoria</th>
                                             <th style="display: none">Precio!</th>
                                             <th>Precio Sugerido</th>
                                             <th>$</th>
@@ -161,11 +195,11 @@
                                             </td>
                                             <template v-if="detalle.inventariable === 1">
                                             <template v-if="detalle.stock < 1">
-                                            <td style="background-color:#db9260" v-text="detalle.stock">
+                                            <td v-text="detalle.stock">
                                             </td>
                                             </template>
                                             <template v-else="detalle.stock > 0">
-                                            <td v-text="detalle.stock">
+                                            <td  v-text="detalle.stock">
                                             </td>
                                             </template>
                                             </template>
@@ -706,14 +740,7 @@ tabla(){
     //Set the first row to selected color
     rows[0].style.backgroundColor = "#8888FF";
 },
-
-
-
-         
-
-
-
-            listarVenta (page,buscar,criterio){
+listarVenta (page,buscar,criterio){
                 let me=this;
                 var url= this.ruta + '/venta3?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
                 axios.get(url).then(function (response) {
@@ -810,70 +837,6 @@ tabla(){
                 let me = this;
                 me.arrayDetalle.splice(index, 1);
             },
-            agregarDetalle(){
-                let me=this;
-                if(me.idarticulo==0 || me.cantidad==0 || me.cantidad1==0 || me.cantidad2==0 || me.precio==0 || me.precio1==0 || me.precio2==0 || me.precio3==0 || me.precio4==0 || me.precio5==0 || me.inventariable==0 ){
-                }
-                else{
-                    if(me.encuentra(me.idarticulo)){
-                        swal({
-                            type: 'error',
-                            title: 'Error...',
-                            text: 'Ese artículo ya se encuentra agregado!',
-                            })
-                    }
-                    else{
-                       if(me.cantidad>me.stock){
-                           swal({
-                            type: 'error',
-                            title: 'Error...',
-                            text: 'NO hay stock disponible!',
-                            })
-                       } 
-                       else{
-                           me.arrayDetalle.push({
-                                idarticulo: me.idarticulo,
-                                articulo: me.articulo,
-                                cantidad: me.cantidad,
-                                cantidad1: me.cantidad1,
-                                cantidad2: me.cantidad2,
-                                
-                                inventariable: me.inventariable,
-                                precio3: me.precio3,
-                                precio4: me.precio4,
-                                precio: me.precio5,
-                                precio2: me.precio2,
-                                precio1: me.precio1,
-                                precio: me.precio,
-                                stock: me.stock,
-                                nombre_categoria: me.nombre_categoria,
-                                minimo: me.minimo
-                            });
-                            me.codigo="";
-                            me.idarticulo=0;
-                            me.articulo="";
-                            me.nombre_categoria="";
-                            me.cantidad=0;
-                            me.cantidad1=0;
-                            me.cantidad2=0;
-                           
-                            me.inventariable=0;
-                            me.precio1=0;
-                            me.precio2=0;
-                            me.precio3=0;
-                            me.precio4=0;
-                            me.precio5=0;
-                            me.precio=0;
-                            me.stock=0;
-                            me.minimo=0
-                       }
-                    }
-                    
-                }
-
-                
-
-            },
             agregarDetalleModal(data =[]){
                 let me=this;
                 if(me.encuentra(data['id'])){
@@ -961,6 +924,7 @@ tabla(){
                     me.minimo=0;
                     me.inventariable=0;
                     me.codigo='';
+                    me.stock=0;
                     me.nombre_categoria='';
                     me.arrayDetalle=[];
 

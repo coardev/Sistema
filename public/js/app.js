@@ -49135,9 +49135,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default.a);
                 swal("Articulo Registrado en Inventario", "Enter", "success");
                 me.cerrarModal();
                 me.listarArticulo(1, '', 'nombre');
-            }).catch(function () {
-                sweetAlert("Oops...", "El Articulo ya se Encuentra Registrado!!!", "error");
-            });
+            }).catch(function () {});
         },
         actualizarArticulo: function actualizarArticulo() {
             if (this.validarArticulo()) {
@@ -49297,11 +49295,14 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default.a);
         validarArticulo: function validarArticulo() {
             this.errorArticulo = 0;
             this.errorMostrarMsjArticulo = [];
-
-            if (this.idcategoria == 0) this.errorMostrarMsjArticulo.push("Seleccione una categoría.");
-            if (!this.nombre) this.errorMostrarMsjArticulo.push("El nombre del artículo no puede estar vacío.");
-            if (!this.precio_venta) this.errorMostrarMsjArticulo.push("El precio venta del artículo debe ser un número y no puede estar vacío.");
-
+            if (!this.inventariable) this.errorMostrarMsjArticulo.push("Elije el Tipo de Articulo que deseas Registrar");
+            if (this.idcategoria == 0) this.errorMostrarMsjArticulo.push("Seleccione alguna categoría.");
+            if (!this.nombre) this.errorMostrarMsjArticulo.push("Escribe el nombre del articulo");
+            if (!this.codigo) this.errorMostrarMsjArticulo.push("Escribe el codigo asociado al Producto");
+            if (!this.precio_venta) this.errorMostrarMsjArticulo.push("El Campo Precio no Puede estar Vacio");
+            if (!this.precio_proveedor) this.errorMostrarMsjArticulo.push("El Campo Precio Proveedor no Puede estar Vacio");
+            if (!this.iva) this.errorMostrarMsjArticulo.push("Debes Seleccionar al Menos una Opcion de IVA");
+            if (!this.ieps) this.errorMostrarMsjArticulo.push("Debes Seleccionar al Menos una Opcion de IEPS");
             if (this.errorMostrarMsjArticulo.length) this.errorArticulo = 1;
 
             return this.errorArticulo;
@@ -75911,6 +75912,40 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -76224,60 +76259,6 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.directive("autofocus", __WEBPACK_IMP
             var me = this;
             me.arrayDetalle.splice(index, 1);
         },
-        agregarDetalle: function agregarDetalle() {
-            var me = this;
-            if (me.idarticulo == 0 || me.cantidad == 0 || me.cantidad1 == 0 || me.cantidad2 == 0 || me.precio == 0 || me.precio1 == 0 || me.precio2 == 0 || me.precio3 == 0 || me.precio4 == 0 || me.precio5 == 0 || me.inventariable == 0) {} else {
-                if (me.encuentra(me.idarticulo)) {
-                    swal({
-                        type: 'error',
-                        title: 'Error...',
-                        text: 'Ese artículo ya se encuentra agregado!'
-                    });
-                } else {
-                    if (me.cantidad > me.stock) {
-                        swal({
-                            type: 'error',
-                            title: 'Error...',
-                            text: 'NO hay stock disponible!'
-                        });
-                    } else {
-                        var _me$arrayDetalle$push;
-
-                        me.arrayDetalle.push((_me$arrayDetalle$push = {
-                            idarticulo: me.idarticulo,
-                            articulo: me.articulo,
-                            cantidad: me.cantidad,
-                            cantidad1: me.cantidad1,
-                            cantidad2: me.cantidad2,
-
-                            inventariable: me.inventariable,
-                            precio3: me.precio3,
-                            precio4: me.precio4,
-                            precio: me.precio5,
-                            precio2: me.precio2,
-                            precio1: me.precio1
-                        }, _defineProperty(_me$arrayDetalle$push, "precio", me.precio), _defineProperty(_me$arrayDetalle$push, "stock", me.stock), _defineProperty(_me$arrayDetalle$push, "nombre_categoria", me.nombre_categoria), _defineProperty(_me$arrayDetalle$push, "minimo", me.minimo), _me$arrayDetalle$push));
-                        me.codigo = "";
-                        me.idarticulo = 0;
-                        me.articulo = "";
-                        me.nombre_categoria = "";
-                        me.cantidad = 0;
-                        me.cantidad1 = 0;
-                        me.cantidad2 = 0;
-
-                        me.inventariable = 0;
-                        me.precio1 = 0;
-                        me.precio2 = 0;
-                        me.precio3 = 0;
-                        me.precio4 = 0;
-                        me.precio5 = 0;
-                        me.precio = 0;
-                        me.stock = 0;
-                        me.minimo = 0;
-                    }
-                }
-            }
-        },
         agregarDetalleModal: function agregarDetalleModal() {
             var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 
@@ -76363,6 +76344,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.directive("autofocus", __WEBPACK_IMP
                 me.minimo = 0;
                 me.inventariable = 0;
                 me.codigo = '';
+                me.stock = 0;
                 me.nombre_categoria = '';
                 me.arrayDetalle = [];
 
@@ -76817,119 +76799,232 @@ var render = function() {
                               _c(
                                 "tbody",
                                 _vm._l(_vm.arrayArticulo, function(articulo) {
-                                  return _c("tr", { key: articulo.id }, [
-                                    _c("td", [
+                                  return _c(
+                                    "tr",
+                                    { key: articulo.id },
+                                    [
                                       _c(
-                                        "button",
-                                        {
-                                          staticClass:
-                                            "btn btn-success btn-sm active",
-                                          attrs: {
-                                            type: "button",
-                                            "aria-pressed": "true"
-                                          },
-                                          on: {
-                                            click: function($event) {
-                                              return _vm.agregarDetalleModal(
-                                                articulo
-                                              )
-                                            }
-                                          }
-                                        },
-                                        [_c("i", { staticClass: "icon-check" })]
+                                        "td",
+                                        [
+                                          articulo.inventariable === 1
+                                            ? [
+                                                articulo.stock >= 1
+                                                  ? [
+                                                      _c(
+                                                        "button",
+                                                        {
+                                                          staticClass:
+                                                            "btn btn-success btn-sm active",
+                                                          attrs: {
+                                                            type: "button",
+                                                            "aria-pressed":
+                                                              "true"
+                                                          },
+                                                          on: {
+                                                            click: function(
+                                                              $event
+                                                            ) {
+                                                              return _vm.agregarDetalleModal(
+                                                                articulo
+                                                              )
+                                                            }
+                                                          }
+                                                        },
+                                                        [
+                                                          _c("i", {
+                                                            staticClass:
+                                                              "icon-check"
+                                                          })
+                                                        ]
+                                                      )
+                                                    ]
+                                                  : _vm._e(),
+                                                _vm._v(" "),
+                                                articulo.stock == 0
+                                                  ? [_vm._m(2, true)]
+                                                  : _vm._e()
+                                              ]
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          articulo.inventariable === 2
+                                            ? [
+                                                _c(
+                                                  "button",
+                                                  {
+                                                    staticClass:
+                                                      "btn btn-success btn-sm active",
+                                                    attrs: {
+                                                      type: "button",
+                                                      "aria-pressed": "true"
+                                                    },
+                                                    on: {
+                                                      click: function($event) {
+                                                        return _vm.agregarDetalleModal(
+                                                          articulo
+                                                        )
+                                                      }
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("i", {
+                                                      staticClass: "icon-check"
+                                                    })
+                                                  ]
+                                                )
+                                              ]
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          articulo.inventariable === 3
+                                            ? [
+                                                _c(
+                                                  "button",
+                                                  {
+                                                    staticClass:
+                                                      "btn btn-success btn-sm active",
+                                                    attrs: {
+                                                      type: "button",
+                                                      "aria-pressed": "true"
+                                                    },
+                                                    on: {
+                                                      click: function($event) {
+                                                        return _vm.agregarDetalleModal(
+                                                          articulo
+                                                        )
+                                                      }
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("i", {
+                                                      staticClass: "icon-check"
+                                                    })
+                                                  ]
+                                                )
+                                              ]
+                                            : _vm._e()
+                                        ],
+                                        2
+                                      ),
+                                      _vm._v(" "),
+                                      _c("td", {
+                                        staticStyle: { display: "none" },
+                                        domProps: {
+                                          textContent: _vm._s(
+                                            articulo.inventariable
+                                          )
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("td", {
+                                        domProps: {
+                                          textContent: _vm._s(articulo.codigo)
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("td", {
+                                        domProps: {
+                                          textContent: _vm._s(articulo.nombre)
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("td", {
+                                        domProps: {
+                                          textContent: _vm._s(
+                                            articulo.nombre_categoria
+                                          )
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("td", {
+                                        staticStyle: { display: "none" },
+                                        domProps: {
+                                          textContent: _vm._s(
+                                            articulo.precio_proveedor
+                                          )
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("td", {
+                                        staticStyle: { display: "none" },
+                                        domProps: {
+                                          textContent: _vm._s(
+                                            articulo.precio_proveedor1
+                                          )
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("td", {
+                                        domProps: {
+                                          textContent: _vm._s(
+                                            articulo.precio_venta
+                                          )
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      articulo.inventariable === 1
+                                        ? [
+                                            articulo.stock >= 1
+                                              ? [
+                                                  _c("td", {
+                                                    domProps: {
+                                                      textContent: _vm._s(
+                                                        articulo.stock
+                                                      )
+                                                    }
+                                                  })
+                                                ]
+                                              : [
+                                                  _c("td", {
+                                                    staticStyle: {
+                                                      color: "red"
+                                                    },
+                                                    domProps: {
+                                                      textContent: _vm._s(
+                                                        articulo.stock
+                                                      )
+                                                    }
+                                                  })
+                                                ]
+                                          ]
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      articulo.inventariable === 2
+                                        ? [_c("td", [_vm._v("N/A")])]
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      articulo.inventariable === 3
+                                        ? [_c("td", [_vm._v("N/A")])]
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _c(
+                                        "td",
+                                        { staticStyle: { display: "none" } },
+                                        [
+                                          articulo.condicion
+                                            ? _c("div", [
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "badge badge-success"
+                                                  },
+                                                  [_vm._v("Activo")]
+                                                )
+                                              ])
+                                            : _c("div", [
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "badge badge-danger"
+                                                  },
+                                                  [_vm._v("Desactivado")]
+                                                )
+                                              ])
+                                        ]
                                       )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("td", {
-                                      staticStyle: { display: "none" },
-                                      domProps: {
-                                        textContent: _vm._s(
-                                          articulo.inventariable
-                                        )
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("td", {
-                                      domProps: {
-                                        textContent: _vm._s(articulo.codigo)
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("td", {
-                                      domProps: {
-                                        textContent: _vm._s(articulo.nombre)
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("td", {
-                                      domProps: {
-                                        textContent: _vm._s(
-                                          articulo.nombre_categoria
-                                        )
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("td", {
-                                      staticStyle: { display: "none" },
-                                      domProps: {
-                                        textContent: _vm._s(
-                                          articulo.precio_proveedor
-                                        )
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("td", {
-                                      staticStyle: { display: "none" },
-                                      domProps: {
-                                        textContent: _vm._s(
-                                          articulo.precio_proveedor1
-                                        )
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("td", {
-                                      domProps: {
-                                        textContent: _vm._s(
-                                          articulo.precio_venta
-                                        )
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("td", {
-                                      staticStyle: { display: "none" },
-                                      domProps: {
-                                        textContent: _vm._s(articulo.stock)
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "td",
-                                      { staticStyle: { display: "none" } },
-                                      [
-                                        articulo.condicion
-                                          ? _c("div", [
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "badge badge-success"
-                                                },
-                                                [_vm._v("Activo")]
-                                              )
-                                            ])
-                                          : _c("div", [
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "badge badge-danger"
-                                                },
-                                                [_vm._v("Desactivado")]
-                                              )
-                                            ])
-                                      ]
-                                    )
-                                  ])
+                                    ],
+                                    2
+                                  )
                                 }),
                                 0
                               )
@@ -76949,7 +77044,7 @@ var render = function() {
                             "table table-bordered table-striped table-sm"
                         },
                         [
-                          _vm._m(2),
+                          _vm._m(3),
                           _vm._v(" "),
                           _vm.arrayDetalle.length
                             ? _c(
@@ -76999,10 +77094,6 @@ var render = function() {
                                               detalle.stock < 1
                                                 ? [
                                                     _c("td", {
-                                                      staticStyle: {
-                                                        "background-color":
-                                                          "#db9260"
-                                                      },
                                                       domProps: {
                                                         textContent: _vm._s(
                                                           detalle.stock
@@ -77628,7 +77719,7 @@ var render = function() {
                                       }
                                     },
                                     [
-                                      _vm._m(3),
+                                      _vm._m(4),
                                       _vm._v(" "),
                                       _c("td", [
                                         _vm._v(
@@ -77647,7 +77738,7 @@ var render = function() {
                                 ],
                                 2
                               )
-                            : _c("tbody", [_vm._m(4)])
+                            : _c("tbody", [_vm._m(5)])
                         ]
                       )
                     ])
@@ -77830,7 +77921,7 @@ var render = function() {
                           attrs: { id: "myTable" }
                         },
                         [
-                          _vm._m(5),
+                          _vm._m(6),
                           _vm._v(" "),
                           _c(
                             "tbody",
@@ -77976,7 +78067,7 @@ var render = function() {
                             "table table-bordered table-striped table-sm"
                         },
                         [
-                          _vm._m(6),
+                          _vm._m(7),
                           _vm._v(" "),
                           _vm.arrayDetalle.length
                             ? _c(
@@ -78217,7 +78308,7 @@ var render = function() {
                                       }
                                     },
                                     [
-                                      _vm._m(7),
+                                      _vm._m(8),
                                       _vm._v(" "),
                                       _c("td", [
                                         _vm._v("$ " + _vm._s(_vm.total))
@@ -78227,7 +78318,7 @@ var render = function() {
                                 ],
                                 2
                               )
-                            : _c("tbody", [_vm._m(8)])
+                            : _c("tbody", [_vm._m(9)])
                         ]
                       )
                     ])
@@ -78277,11 +78368,24 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Precio Venta")]),
         _vm._v(" "),
-        _c("th", { staticStyle: { display: "none" } }, [_vm._v("Stock")]),
+        _c("th", [_vm._v("Stock")]),
         _vm._v(" "),
         _c("th", { staticStyle: { display: "none" } }, [_vm._v("Estado")])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-warning btn-sm active",
+        attrs: { type: "button", "aria-pressed": "true" }
+      },
+      [_c("i", { staticClass: "fa fa-exclamation-triangle" })]
+    )
   },
   function() {
     var _vm = this
@@ -78297,7 +78401,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Artículo")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Cetegoria")]),
+        _c("th", [_vm._v("Categoria")]),
         _vm._v(" "),
         _c("th", { staticStyle: { display: "none" } }, [_vm._v("Precio!")]),
         _vm._v(" "),
