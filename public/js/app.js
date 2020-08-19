@@ -64588,6 +64588,22 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vue_
             }
             return resultado1;
         },
+        tarjetas: function tarjetas() {
+            var resultado1 = 0.0;
+
+            for (var i = 0; i < this.myLocalData1.length; i++) {
+                resultado1 = +this.myLocalData1;
+            }
+            return resultado1;
+        },
+        vales: function vales() {
+            var resultado1 = 0.0;
+
+            for (var i = 0; i < this.myLocalData2.length; i++) {
+                resultado1 = +this.myLocalData2;
+            }
+            return resultado1;
+        },
         ventas1: function ventas1() {
             var resultado1 = 0.0;
 
@@ -65425,7 +65441,12 @@ var render = function() {
                       _vm._v(
                         "$ " +
                           _vm._s(
-                            (_vm.corte = _vm.inicio + _vm.ventas - _vm.total)
+                            (_vm.corte =
+                              _vm.inicio +
+                              _vm.ventas +
+                              _vm.tarjetas +
+                              _vm.vales -
+                              _vm.total)
                           )
                       )
                     ])

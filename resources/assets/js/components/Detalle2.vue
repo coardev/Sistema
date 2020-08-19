@@ -77,7 +77,7 @@
                                    <tfoot>
                                     <tr> 
                                       <th colspan="3">Gran Total</th> 
-                                         <td>$ {{corte=inicio+ventas-total}}</td> </tr>
+                                         <td>$ {{corte=inicio+ventas+tarjetas+vales-total}}</td> </tr>
                                           </tfoot>
 
 
@@ -177,6 +177,22 @@ Vue.use(Print);
                 
                 for(var i=0;i<this.myLocalData.length;i++){
                  resultado1=+this.myLocalData
+                }
+                return resultado1;
+            },
+            tarjetas: function(){
+                var resultado1=0.0;
+                
+                for(var i=0;i<this.myLocalData1.length;i++){
+                 resultado1=+this.myLocalData1
+                }
+                return resultado1;
+            },
+            vales: function(){
+                var resultado1=0.0;
+                
+                for(var i=0;i<this.myLocalData2.length;i++){
+                 resultado1=+this.myLocalData2
                 }
                 return resultado1;
             },
