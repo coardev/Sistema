@@ -88519,8 +88519,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 
 
@@ -88545,9 +88543,9 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue2
             myLocalData3: localStorage.getItem('area_total'),
             randomNumber: '',
             venta_id: 0,
-            efectivo: 0,
-            tarjeta: 0,
-            vales: 0,
+            e: 0,
+            t: 0,
+            v: 0,
             idcliente: 0,
             cliente: '',
             fecha_hora: '',
@@ -88593,6 +88591,30 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue2
         vSelect: __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a
     },
     computed: {
+        efectivo: {
+            get: function get() {
+                return Number(this.e);
+            },
+            set: function set(val) {
+                this.e = Number(val) || 0;
+            }
+        },
+        tarjeta: {
+            get: function get() {
+                return Number(this.t);
+            },
+            set: function set(val) {
+                this.t = Number(val) || 0;
+            }
+        },
+        vales: {
+            get: function get() {
+                return Number(this.v);
+            },
+            set: function set(val) {
+                this.v = Number(val) || 0;
+            }
+        },
         isActived: function isActived() {
             return this.pagination.current_page;
         },
@@ -88642,6 +88664,15 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue2
         }
     },
     methods: {
+        onBlur: function onBlur() {
+            this.$refs.test.value = this.efectivo;
+        },
+        onBlur1: function onBlur1() {
+            this.$refs.test1.value = this.tarjeta;
+        },
+        onBlur2: function onBlur2() {
+            this.$refs.test2.value = this.vales;
+        },
         onFocus: function onFocus() {
             this.efectivo = '';
         },
@@ -89942,18 +89973,18 @@ var render = function() {
                                     expression: "efectivo"
                                   }
                                 ],
+                                ref: "test",
                                 attrs: {
-                                  name: "txta",
                                   min: 0,
-                                  id: "txta",
+                                  placeholder: "0",
                                   type: "number"
                                 },
                                 domProps: { value: _vm.efectivo },
                                 on: {
-                                  focus: _vm.onFocus,
                                   keypress: function($event) {
                                     return _vm.isNumber(_vm.event)
                                   },
+                                  blur: _vm.onBlur,
                                   input: function($event) {
                                     if ($event.target.composing) {
                                       return
@@ -89978,15 +90009,15 @@ var render = function() {
                                     expression: "tarjeta"
                                   }
                                 ],
+                                ref: "test1",
                                 attrs: {
-                                  name: "txtd",
+                                  placeholder: "0",
                                   min: 0,
-                                  id: "txtd",
                                   type: "number"
                                 },
                                 domProps: { value: _vm.tarjeta },
                                 on: {
-                                  focus: _vm.onFocus1,
+                                  blur: _vm.onBlur1,
                                   keypress: function($event) {
                                     return _vm.isNumber(_vm.event)
                                   },
@@ -90014,15 +90045,15 @@ var render = function() {
                                     expression: "vales"
                                   }
                                 ],
+                                ref: "test2",
                                 attrs: {
-                                  name: "txte",
+                                  placeholder: "0",
                                   min: 0,
-                                  id: "txte",
                                   type: "number"
                                 },
                                 domProps: { value: _vm.vales },
                                 on: {
-                                  focus: _vm.onFocus2,
+                                  blur: _vm.onBlur2,
                                   keypress: function($event) {
                                     return _vm.isNumber(_vm.event)
                                   },

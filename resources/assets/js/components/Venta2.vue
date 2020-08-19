@@ -360,11 +360,9 @@
                                             
                                       
                                             
-                                            <td style="background-color: #CEECF5"><input name="txta" @focus="onFocus"  v-bind:min="0" v-model="efectivo" v-on:keypress="isNumber(event)" id="txta" type="number"></td>
-                                       
-                                            
-                                            <td style="background-color: #CEECF5"><input name="txtd" @focus="onFocus1"  v-bind:min="0" v-model="tarjeta" v-on:keypress="isNumber(event)" id="txtd" type="number"></td>
-                                            <td style="background-color: #CEECF5"><input name="txte" @focus="onFocus2"  v-bind:min="0" v-model="vales" v-on:keypress="isNumber(event)" id="txte" type="number"></td>
+                                            <td style="background-color: #CEECF5"><input  v-bind:min="0" v-model="efectivo" v-on:keypress="isNumber(event)" placeholder="0" ref="test" @blur="onBlur" type="number"></td>
+                                            <td style="background-color: #CEECF5"><input placeholder="0" ref="test1" @blur="onBlur1" v-bind:min="0" v-model="tarjeta" v-on:keypress="isNumber(event)" type="number"></td>
+                                            <td style="background-color: #CEECF5"><input placeholder="0" ref="test2" @blur="onBlur2"  v-bind:min="0" v-model="vales" v-on:keypress="isNumber(event)" type="number"></td>
                                             <td style="background-color: #CEECF5">
                                                 <input name="txtb" id="txtb" v-bind:value="total" v-on:input="somethingElse = $event.target.value" readonly /></td>
                                             <td  style="background-color: #CEECF5">
@@ -431,9 +429,9 @@
                 myLocalData3: localStorage.getItem('area_total'),
                 randomNumber:'',
                 venta_id: 0,
-                efectivo: 0,
-                tarjeta: 0,
-                vales: 0,
+                e: 0,
+                t: 0,
+                v: 0,
                 idcliente:0,
                 cliente:'',
                 fecha_hora:'',
@@ -478,6 +476,30 @@
             vSelect
         },
         computed:{
+            efectivo: {
+      get() {
+        return Number(this.e)
+      },
+      set(val) {
+        this.e = Number(val) || 0
+      }
+    },
+    tarjeta: {
+      get() {
+        return Number(this.t)
+      },
+      set(val) {
+        this.t = Number(val) || 0
+      }
+    },
+    vales: {
+      get() {
+        return Number(this.v)
+      },
+      set(val) {
+        this.v = Number(val) || 0
+      }
+    },
             isActived: function(){
                 return this.pagination.current_page;
             },
@@ -527,6 +549,15 @@
             }
         },
         methods : {
+            onBlur() {
+      this.$refs.test.value = this.efectivo
+    },
+    onBlur1() {
+      this.$refs.test1.value = this.tarjeta
+    },
+    onBlur2() {
+      this.$refs.test2.value = this.vales
+    },
             onFocus() {
       this.efectivo = '';
     },
