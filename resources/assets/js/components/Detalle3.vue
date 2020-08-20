@@ -196,7 +196,7 @@ Vue.use(Print);
                     'to' : 0,
                 },
                 offset : 3,
-                criterio : 'articulo',
+                criterio : 'created_at',
                 buscar : ''
             }
         },

@@ -62278,7 +62278,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default.a);
                 'to': 0
             },
             offset: 3,
-            criterio: 'articulo',
+            criterio: 'created_at',
             buscar: ''
         };
     },
