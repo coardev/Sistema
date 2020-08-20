@@ -61197,6 +61197,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -61608,6 +61611,18 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           historial2.estado === "Venta Devuelta"
+                            ? [
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(
+                                      historial2.precio4 * historial2.cantidad
+                                    )
+                                  }
+                                })
+                              ]
+                            : _vm._e(),
+                          _vm._v(" "),
+                          historial2.estado === "Restado by Admin"
                             ? [
                                 _c("td", {
                                   domProps: {

@@ -73,6 +73,9 @@
                                     <td v-text="historial2.precio4"></td>
                                     <template v-if="historial2.estado === 'Venta Devuelta'">
                                     <td v-text="historial2.precio4*historial2.cantidad"></td>
+                                    </template>
+                                    <template v-if="historial2.estado === 'Restado by Admin'">
+                                    <td v-text="historial2.precio4*historial2.cantidad"></td>
                                     </template> 
                                     <template v-if="historial2.estado === 'Venta Interna'">
                                     <td v-text="historial2.precio4*historial2.cantidad"></td>

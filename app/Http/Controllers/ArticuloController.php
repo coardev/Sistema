@@ -8,7 +8,7 @@ use App\Historial;
 use App\Historial2;
 use App\Historial3;
 use App\Historial4;
-
+use Carbon\Carbon;
 use App\User;
 
 
@@ -262,6 +262,11 @@ class ArticuloController extends Controller
         $articulo->condicion = '1';
         $articulo->save();
 
+
+        //Funcion Restar Administrador -- Tabla Salidas 
+        $this->__historial6($request->id,$articulo->nombre,$articulo->inventariable,$articulo->precio_venta,$articulo->stock2);
+
+
     }
 
     public function eliminar($id)
@@ -328,6 +333,21 @@ class ArticuloController extends Controller
         $historial3->saldo1 = $salida1;
         $historial3->total = $total;
         $historial3->save();
+    }   
+
+    //Funcion Restar Administrador -- Tabla Salidas 
+    private function __historial6($id = null,$nombre = '',$inventariable = '',$precio_venta = '',$stock2 = '')
+    {
+       
+        $historial6 = new Historial2();
+        $historial6->articulo = $nombre;
+        $historial6->idarticulo = $id;
+        $historial6->inventariable = $inventariable;
+        $historial6->precio4 = $precio_venta;
+        $historial6->cantidad = $stock2;
+        $historial6->fecha_hora =  Carbon :: today();
+        $historial6->estado = 'Restado by Admin';
+        $historial6->save();
     }    
 
     
