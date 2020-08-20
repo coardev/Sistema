@@ -85454,6 +85454,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -86295,27 +86311,50 @@ var render = function() {
                                 "tbody",
                                 _vm._l(_vm.arrayArticulo, function(articulo) {
                                   return _c("tr", { key: articulo.id }, [
-                                    _c("td", [
-                                      _c(
-                                        "button",
-                                        {
-                                          staticClass:
-                                            "btn btn-success btn-sm active",
-                                          attrs: {
-                                            type: "button",
-                                            "aria-pressed": "true"
-                                          },
-                                          on: {
-                                            click: function($event) {
-                                              return _vm.agregarDetalleModal(
-                                                articulo
-                                              )
-                                            }
-                                          }
-                                        },
-                                        [_c("i", { staticClass: "icon-check" })]
-                                      )
-                                    ]),
+                                    _c(
+                                      "td",
+                                      [
+                                        articulo.inventariable === 1
+                                          ? [
+                                              articulo.stock >= 1
+                                                ? [
+                                                    _c(
+                                                      "button",
+                                                      {
+                                                        staticClass:
+                                                          "btn btn-success btn-sm active",
+                                                        attrs: {
+                                                          type: "button",
+                                                          "aria-pressed": "true"
+                                                        },
+                                                        on: {
+                                                          click: function(
+                                                            $event
+                                                          ) {
+                                                            return _vm.agregarDetalleModal(
+                                                              articulo
+                                                            )
+                                                          }
+                                                        }
+                                                      },
+                                                      [
+                                                        _c("i", {
+                                                          staticClass:
+                                                            "icon-check"
+                                                        })
+                                                      ]
+                                                    )
+                                                  ]
+                                                : _vm._e(),
+                                              _vm._v(" "),
+                                              articulo.stock == 0
+                                                ? [_vm._m(2, true)]
+                                                : _vm._e()
+                                            ]
+                                          : _vm._e()
+                                      ],
+                                      2
+                                    ),
                                     _vm._v(" "),
                                     _c("td", {
                                       staticStyle: { display: "none" },
@@ -86373,7 +86412,7 @@ var render = function() {
                                     }),
                                     _vm._v(" "),
                                     _c("td", {
-                                      staticStyle: { display: "none" },
+                                      staticStyle: { color: "red" },
                                       domProps: {
                                         textContent: _vm._s(articulo.stock)
                                       }
@@ -86426,7 +86465,7 @@ var render = function() {
                             "table table-bordered table-striped table-sm"
                         },
                         [
-                          _vm._m(2),
+                          _vm._m(3),
                           _vm._v(" "),
                           _vm.arrayDetalle.length
                             ? _c(
@@ -86473,13 +86512,25 @@ var render = function() {
                                         _vm._v(" "),
                                         detalle.inventariable === 1
                                           ? [
-                                              _c("td", {
-                                                domProps: {
-                                                  textContent: _vm._s(
-                                                    detalle.stock
-                                                  )
-                                                }
-                                              })
+                                              detalle.stock < 1
+                                                ? [
+                                                    _c("td", {
+                                                      domProps: {
+                                                        textContent: _vm._s(
+                                                          detalle.stock
+                                                        )
+                                                      }
+                                                    })
+                                                  ]
+                                                : [
+                                                    _c("td", {
+                                                      domProps: {
+                                                        textContent: _vm._s(
+                                                          detalle.stock
+                                                        )
+                                                      }
+                                                    })
+                                                  ]
                                             ]
                                           : _vm._e(),
                                         _vm._v(" "),
@@ -86968,7 +87019,7 @@ var render = function() {
                                       }
                                     },
                                     [
-                                      _vm._m(3),
+                                      _vm._m(4),
                                       _vm._v(" "),
                                       _c("td", [
                                         _vm._v(
@@ -86986,7 +87037,7 @@ var render = function() {
                                 ],
                                 2
                               )
-                            : _c("tbody", [_vm._m(4)])
+                            : _c("tbody", [_vm._m(5)])
                         ]
                       )
                     ])
@@ -87169,7 +87220,7 @@ var render = function() {
                           attrs: { id: "myTable" }
                         },
                         [
-                          _vm._m(5),
+                          _vm._m(6),
                           _vm._v(" "),
                           _c(
                             "tbody",
@@ -87329,7 +87380,7 @@ var render = function() {
                             "table table-bordered table-striped table-sm"
                         },
                         [
-                          _vm._m(6),
+                          _vm._m(7),
                           _vm._v(" "),
                           _vm.arrayDetalle.length
                             ? _c(
@@ -87479,7 +87530,7 @@ var render = function() {
                                       }
                                     },
                                     [
-                                      _vm._m(7),
+                                      _vm._m(8),
                                       _vm._v(" "),
                                       _c("td", [
                                         _vm._v("$ " + _vm._s(_vm.total))
@@ -87489,7 +87540,7 @@ var render = function() {
                                 ],
                                 2
                               )
-                            : _c("tbody", [_vm._m(8)])
+                            : _c("tbody", [_vm._m(9)])
                         ]
                       )
                     ])
@@ -87670,7 +87721,7 @@ var render = function() {
                           "table table-bordered table-striped table-sm"
                       },
                       [
-                        _vm._m(9),
+                        _vm._m(10),
                         _vm._v(" "),
                         _c(
                           "tbody",
@@ -87863,11 +87914,24 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Precio Venta")]),
         _vm._v(" "),
-        _c("th", { staticStyle: { display: "none" } }, [_vm._v("Stock")]),
+        _c("th", [_vm._v("Stock")]),
         _vm._v(" "),
         _c("th", { staticStyle: { display: "none" } }, [_vm._v("Estado")])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-warning btn-sm active",
+        attrs: { type: "button", "aria-pressed": "true" }
+      },
+      [_c("i", { staticClass: "fa fa-exclamation-triangle" })]
+    )
   },
   function() {
     var _vm = this

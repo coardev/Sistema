@@ -93,16 +93,26 @@
                                             <th style="display: none">Precio Proveedor</th>
                                             <th style="display: none">Precio Promedio</th>
                                             <th>Precio Venta</th>
-                                            <th style="display: none">Stock</th>
+                                            <th >Stock</th>
                                             <th style="display: none">Estado</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr v-for="articulo in arrayArticulo" :key="articulo.id">
                                             <td>
+                                                <template v-if="articulo.inventariable === 1">
+                                                <template v-if="articulo.stock>=1">
                                                 <button type="button" @click="agregarDetalleModal(articulo)" class="btn btn-success btn-sm active" aria-pressed="true">
                                                 <i class="icon-check"></i>
                                                 </button>
+                                                </template>
+                                                
+                                                <template v-if="articulo.stock==0">
+                                                <button type="button" class="btn btn-warning btn-sm active" aria-pressed="true">
+                                                <i class="fa fa-exclamation-triangle"></i>
+                                                </button>
+                                                </template>
+                                                </template>
                                             </td>
                                             <td style="display: none" v-text="articulo.inventariable"></td>
                                             <td v-text="articulo.codigo"></td>
@@ -111,7 +121,7 @@
                                             <td style="display: none" v-text="articulo.precio_proveedor"></td>
                                             <td style="display: none" v-text="articulo.precio_proveedor1"></td>
                                             <td v-text="articulo.precio_venta"></td>
-                                            <td style="display: none" v-text="articulo.stock"></td>
+                                            <td style="color:red;"  v-text="articulo.stock"></td>
                                             <td style="display: none">
                                                 <div v-if="articulo.condicion">
                                                     <span class="badge badge-success">Activo</span>
@@ -158,8 +168,14 @@
                                             <td v-text="detalle.inventariable">
                                             </td>
                                             <template v-if="detalle.inventariable === 1">
+                                            <template v-if="detalle.stock < 1">
                                             <td v-text="detalle.stock">
                                             </td>
+                                            </template>
+                                            <template v-else="detalle.stock > 0">
+                                            <td  v-text="detalle.stock">
+                                            </td>
+                                            </template>
                                             </template>
                                             <template v-if="detalle.inventariable === 2">
                                             <td>
