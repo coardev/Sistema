@@ -68979,12 +68979,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['ruta'],
     data: function data() {
         return {
-            historial2_id: 0,
+            registro_id: 0,
             nombre: '',
             stock: '',
             stock1: '',
             precio_proveedor: '',
-            arrayHistorial2: [],
+            arrayRegistro: [],
             modal: 0,
             tituloModal: '',
             tipoAccion: 0,
@@ -69082,7 +69082,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var url = this.ruta + '/historial2?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
             axios.get(url).then(function (response) {
                 var respuesta = response.data;
-                me.arrayHistorial2 = respuesta.historial2.data;
+                me.arrayRegistro = respuesta.registro.data;
                 me.pagination = respuesta.pagination;
             }).catch(function (error) {
                 console.log(error);
@@ -69261,79 +69261,69 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "tbody",
-                    _vm._l(_vm.arrayHistorial2, function(historial2) {
+                    _vm._l(_vm.arrayRegistro, function(registro) {
                       return _c(
                         "tr",
                         {
-                          key: historial2.id,
+                          key: registro.id,
                           staticStyle: { "text-align": "center" }
                         },
                         [
                           _c("td", {
                             domProps: {
-                              textContent: _vm._s(historial2.created_at)
+                              textContent: _vm._s(registro.created_at)
                             }
                           }),
                           _vm._v(" "),
                           _c("td", {
-                            domProps: {
-                              textContent: _vm._s(historial2.articulo)
-                            }
+                            domProps: { textContent: _vm._s(registro.articulo) }
                           }),
                           _vm._v(" "),
                           _c("td", {
                             staticStyle: { "background-color": "#ffd480" },
-                            domProps: { textContent: _vm._s(historial2.stock) }
+                            domProps: { textContent: _vm._s(registro.stock) }
                           }),
                           _vm._v(" "),
                           _c("td", {
                             staticStyle: { "background-color": "#b3ccff" },
-                            domProps: {
-                              textContent: _vm._s(historial2.cantidad)
-                            }
+                            domProps: { textContent: _vm._s(registro.cantidad) }
                           }),
                           _vm._v(" "),
                           _c("td", {
                             domProps: {
-                              textContent: _vm._s(historial2.existencia)
+                              textContent: _vm._s(registro.existencia)
                             }
                           }),
                           _vm._v(" "),
                           _c("td", {
                             staticStyle: { "background-color": "#ffd480" },
-                            domProps: {
-                              textContent: _vm._s(historial2.precio1)
-                            }
+                            domProps: { textContent: _vm._s(registro.precio1) }
                           }),
                           _vm._v(" "),
                           _c("td", {
                             staticStyle: { "background-color": "#ff9980" },
-                            domProps: {
-                              textContent: _vm._s(historial2.promedio)
-                            }
+                            domProps: { textContent: _vm._s(registro.promedio) }
                           }),
                           _vm._v(" "),
                           _c("td", {
                             staticStyle: { "background-color": "#ffd480" },
-                            domProps: { textContent: _vm._s(historial2.saldo1) }
+                            domProps: { textContent: _vm._s(registro.saldo1) }
                           }),
                           _vm._v(" "),
                           _c("td", {
                             staticStyle: { "background-color": "#b3ccff" },
-                            domProps: {
-                              textContent: _vm._s(historial2.salida1)
-                            }
+                            domProps: { textContent: _vm._s(registro.saldo) }
                           }),
                           _vm._v(" "),
                           _c("td", {
                             staticStyle: { "background-color": "#b3ffb6" },
                             domProps: {
-                              textContent: _vm._s(historial2.reingreso)
+                              textContent: _vm._s(registro.reingreso)
                             }
                           }),
                           _vm._v(" "),
                           _c("td", {
-                            domProps: { textContent: _vm._s(historial2.total) }
+                            domProps: { textContent: _vm._s(registro.total) }
                           })
                         ]
                       )

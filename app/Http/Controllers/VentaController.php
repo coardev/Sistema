@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Venta;
 use App\Historial2;
 use App\DetalleVenta;
+use App\Registro;
 
 class VentaController extends Controller
 {
@@ -297,6 +298,10 @@ class VentaController extends Controller
                 $detalle->save();
                 $this->__historial2($detalle->articulo,$detalle->cantidad,$detalle->precio4,$detalle->inventariable,$detalle->idarticulo,$detalle->fecha_hora);
                
+                //Registrar en Inventario Entrada + Salida
+                 $this->__registro($detalle->articulo,$detalle->inventariable,$detalle->cantidad,$detalle->stock,$detalle->precio4);
+
+
             }       
             DB::commit();
             return [
@@ -354,6 +359,21 @@ class VentaController extends Controller
         $historial2->fecha_hora = $fecha_hora ;
         $historial2->estado = 'Venta Normal' ;
         $historial2->save();
+    }    
+    
+    private function __registro($articulo = '',$inventariable = '',$cantidad = '',$stock = '',$precio4 = '')
+    {
+       
+        $registro = new Registro();
+        
+        $registro->articulo = $articulo ;
+        $registro->inventariable = $inventariable ;
+        $registro->cantidad = $cantidad ;
+        $registro->existencia = $stock - $cantidad ;
+        $registro->promedio = $precio4 ;
+        $registro->saldo = $cantidad*$precio4 ;
+        $registro->fecha_hora = Carbon :: today() ;
+        $registro->save();
     }    
    
 }

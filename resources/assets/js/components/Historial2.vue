@@ -65,19 +65,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr style="text-align:center" v-for="historial2 in arrayHistorial2" :key="historial2.id">
+                                <tr style="text-align:center" v-for="registro in arrayRegistro" :key="registro.id">
                                     
-                                    <td v-text="historial2.created_at"></td>
-                                    <td v-text="historial2.articulo"></td>
-                                    <td style="background-color:#ffd480" v-text="historial2.stock"></td>
-                                    <td style="background-color:#b3ccff" v-text="historial2.cantidad"></td>
-                                    <td v-text="historial2.existencia"></td>
-                                    <td style="background-color:#ffd480" v-text="historial2.precio1"></td>
-                                    <td style="background-color:#ff9980" v-text="historial2.promedio"></td>
-                                    <td style="background-color:#ffd480" v-text="historial2.saldo1"></td>
-                                    <td style="background-color:#b3ccff" v-text="historial2.salida1"></td>
-                                    <td style="background-color:#b3ffb6" v-text="historial2.reingreso"></td>
-                                    <td  v-text="historial2.total"></td>
+                                    <td v-text="registro.created_at"></td>
+                                    <td v-text="registro.articulo"></td>
+                                    <td style="background-color:#ffd480" v-text="registro.stock"></td>
+                                    <td style="background-color:#b3ccff" v-text="registro.cantidad"></td>
+                                    <td v-text="registro.existencia"></td>
+                                    <td style="background-color:#ffd480" v-text="registro.precio1"></td>
+                                    <td style="background-color:#ff9980" v-text="registro.promedio"></td>
+                                    <td style="background-color:#ffd480" v-text="registro.saldo1"></td>
+                                    <td style="background-color:#b3ccff" v-text="registro.saldo"></td>
+                                    <td style="background-color:#b3ffb6" v-text="registro.reingreso"></td>
+                                    <td  v-text="registro.total"></td>
                                   
 
                                    
@@ -102,12 +102,12 @@
         props : ['ruta'],
         data (){
             return {
-                historial2_id: 0,
+                registro_id: 0,
                 nombre : '',
                 stock: '',
                 stock1: '',
                 precio_proveedor: '',
-                arrayHistorial2 : [],
+                arrayRegistro : [],
                 modal : 0,
                 tituloModal : '',
                 tipoAccion : 0,
@@ -209,7 +209,7 @@ document.getElementById('area_total3').innerText = total;
                 var url= this.ruta + '/historial2?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
-                    me.arrayHistorial2 = respuesta.historial2.data;
+                    me.arrayRegistro = respuesta.registro.data;
                     me.pagination= respuesta.pagination;
                 })
                 .catch(function (error) {
