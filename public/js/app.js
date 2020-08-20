@@ -69276,7 +69276,9 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("td", {
-                            domProps: { textContent: _vm._s(historial2.nombre) }
+                            domProps: {
+                              textContent: _vm._s(historial2.articulo)
+                            }
                           }),
                           _vm._v(" "),
                           _c("td", {

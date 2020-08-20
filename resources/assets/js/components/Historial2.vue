@@ -68,7 +68,7 @@
                                 <tr style="text-align:center" v-for="historial2 in arrayHistorial2" :key="historial2.id">
                                     
                                     <td v-text="historial2.created_at"></td>
-                                    <td v-text="historial2.nombre"></td>
+                                    <td v-text="historial2.articulo"></td>
                                     <td style="background-color:#ffd480" v-text="historial2.stock"></td>
                                     <td style="background-color:#b3ccff" v-text="historial2.cantidad"></td>
                                     <td v-text="historial2.existencia"></td>

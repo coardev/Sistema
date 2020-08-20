@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Historial2;
+use Carbon\Carbon;
 
 class Historial2Controller extends Controller
 {
@@ -15,7 +16,9 @@ class Historial2Controller extends Controller
         $criterio = $request->criterio;
         
         if ($buscar==''){
-            $historial2 = Historial2::orderBy('id', 'desc')->paginate(100000000);
+            $historial2 = Historial2::where('inventariable','=','1')
+            ->where('fecha_hora','=', Carbon :: today())
+            ->orderBy('id', 'desc')->paginate(100000000);
         }
         else{
             $historial2 = Historial2::where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(10000000);
