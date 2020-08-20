@@ -23,11 +23,11 @@ class DetalleCancelacionController extends Controller
         
         if ($buscar==''){
             $detalle = Detalle::where('fecha_hora','=', Carbon :: today())
-            ->orderBy('id', 'desc')->paginate(10);
+            ->orderBy('id', 'desc')->paginate(10000);
         }
         else{
             $detalle = Detalle::where($criterio, 'like', '%'. $buscar . '%')
-            ->where('estado','=', 'Venta Concretada')
+            
             ->orderBy('id', 'desc')->paginate(10000000);
            
         }
