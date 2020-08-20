@@ -181,8 +181,9 @@ class ArticuloController extends Controller
         
         //Registrar en Tabla Entrada
         $this->__historial($articulo->nombre, $articulo->stock,$articulo->precio_proveedor,$articulo->inventariable);
+      
         //Registrar en Inventario Entrada + Salida
-        //$this->__historial2($articulo->nombre, $articulo->stock, $articulo->existencia,  $articulo->precio_proveedor, $articulo->precio_proveedor1, $articulo->total);
+        $this->__historial2($articulo->nombre,$articulo->inventariable,$articulo->stock, $articulo->existencia,  $articulo->precio_proveedor, $articulo->precio_proveedor1, $articulo->total);
 
        
 
@@ -306,18 +307,20 @@ class ArticuloController extends Controller
     
 
     //Registro Tabla 3 Entradas + Salidas
-    private function __historial2($nombre = '', $stock = '', $existencia = '', $precio_proveedor = '', $precio_proveedor1 = '', $total = '')
+    private function __historial2($nombre = '',$inventariable = '',$stock = '', $existencia = '', $precio_proveedor = '', $precio_proveedor1 = '', $total = '')
     {
        
         $historial2 = new Historial2();
-        $historial2->nombre = $nombre;
-        $historial2->stock = $stock ; //
+        $historial2->articulo = $nombre;
+        $historial2->inventariable = $inventariable;
+        $historial2->stock = $stock ;
         $historial2->existencia = $existencia ;
         $historial2->total = $total ;
         $historial2->precio_proveedor = $precio_proveedor ;
         $historial2->promedio = $precio_proveedor1 ;
         $historial2->precio1 = $precio_proveedor ;
         $historial2->saldo1 = $stock * $precio_proveedor ;
+        $historial2->fecha_hora =  Carbon :: today()  ;
         $historial2->save();
     }    
 
