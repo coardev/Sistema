@@ -63328,17 +63328,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -63744,10 +63733,6 @@ var render = function() {
                 [
                   _vm._m(1),
                   _vm._v(" "),
-                  _vm._m(2),
-                  _vm._v(" "),
-                  _vm._m(3),
-                  _vm._v(" "),
                   _c("thead", [
                     _c("tr", [
                       !_vm.isHidden
@@ -63884,37 +63869,17 @@ var render = function() {
                           _vm._v(" "),
                           detalle.inventariable === 2
                             ? [
-                                _c("td", {
-                                  directives: [
-                                    {
-                                      name: "show",
-                                      rawName: "v-show",
-                                      value: detalle.cantidad1 > 0,
-                                      expression: "detalle.cantidad1>0"
-                                    }
-                                  ],
-                                  domProps: {
-                                    textContent: _vm._s(detalle.cantidad1)
-                                  }
-                                })
-                              ]
-                            : _vm._e(),
-                          _vm._v(" "),
-                          detalle.inventariable === 2
-                            ? [
-                                _c("td", {
-                                  directives: [
-                                    {
-                                      name: "show",
-                                      rawName: "v-show",
-                                      value: detalle.kilogramos > 0,
-                                      expression: "detalle.kilogramos>0"
-                                    }
-                                  ],
-                                  domProps: {
-                                    textContent: _vm._s(detalle.kilogramos)
-                                  }
-                                })
+                                detalle.cantidad1 > 0
+                                  ? _c("td", {
+                                      domProps: {
+                                        textContent: _vm._s(detalle.cantidad1)
+                                      }
+                                    })
+                                  : _c("td", {
+                                      domProps: {
+                                        textContent: _vm._s(detalle.kilogramos)
+                                      }
+                                    })
                               ]
                             : _vm._e(),
                           _vm._v(" "),
@@ -63940,37 +63905,17 @@ var render = function() {
                           _vm._v(" "),
                           detalle.inventariable === 2
                             ? [
-                                _c("td", {
-                                  directives: [
-                                    {
-                                      name: "show",
-                                      rawName: "v-show",
-                                      value: detalle.precio5 > 0,
-                                      expression: "detalle.precio5>0"
-                                    }
-                                  ],
-                                  domProps: {
-                                    textContent: _vm._s(detalle.precio5)
-                                  }
-                                })
-                              ]
-                            : _vm._e(),
-                          _vm._v(" "),
-                          detalle.inventariable === 2
-                            ? [
-                                _c("td", {
-                                  directives: [
-                                    {
-                                      name: "show",
-                                      rawName: "v-show",
-                                      value: detalle.precio6 > 0,
-                                      expression: "detalle.precio6>0"
-                                    }
-                                  ],
-                                  domProps: {
-                                    textContent: _vm._s(detalle.precio6)
-                                  }
-                                })
+                                detalle.precio5 > 0
+                                  ? _c("td", {
+                                      domProps: {
+                                        textContent: _vm._s(detalle.precio5)
+                                      }
+                                    })
+                                  : _c("td", {
+                                      domProps: {
+                                        textContent: _vm._s(detalle.precio6)
+                                      }
+                                    })
                               ]
                             : _vm._e(),
                           _vm._v(" "),
@@ -63998,37 +63943,17 @@ var render = function() {
                           _vm._v(" "),
                           detalle.inventariable === 2
                             ? [
-                                _c("td", {
-                                  directives: [
-                                    {
-                                      name: "show",
-                                      rawName: "v-show",
-                                      value: detalle.precio5 > 0,
-                                      expression: "detalle.precio5>0"
-                                    }
-                                  ],
-                                  domProps: {
-                                    textContent: _vm._s(detalle.precio5)
-                                  }
-                                })
-                              ]
-                            : _vm._e(),
-                          _vm._v(" "),
-                          detalle.inventariable === 2
-                            ? [
-                                _c("td", {
-                                  directives: [
-                                    {
-                                      name: "show",
-                                      rawName: "v-show",
-                                      value: detalle.precio6 > 0,
-                                      expression: "detalle.precio6>0"
-                                    }
-                                  ],
-                                  domProps: {
-                                    textContent: _vm._s(detalle.precio6)
-                                  }
-                                })
+                                detalle.precio5 > 0
+                                  ? _c("td", {
+                                      domProps: {
+                                        textContent: _vm._s(detalle.precio5)
+                                      }
+                                    })
+                                  : _c("td", {
+                                      domProps: {
+                                        textContent: _vm._s(detalle.precio6)
+                                      }
+                                    })
                               ]
                             : _vm._e(),
                           _vm._v(" "),
@@ -64366,26 +64291,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("caption", [_c("h2", [_vm._v("Cancelacion de Ventas")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("caption", [
-      _c("h4", [_vm._v("Piezas Vendidas")]),
-      _vm._v(" "),
-      _c("h4", { attrs: { id: "area_total" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("caption", [
-      _c("h4", [_vm._v("Importe Piezas")]),
-      _vm._v(" "),
-      _c("h4", { attrs: { id: "area_total1" } })
-    ])
   }
 ]
 render._withStripped = true

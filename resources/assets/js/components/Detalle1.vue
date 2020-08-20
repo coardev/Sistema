@@ -40,12 +40,7 @@
                          <div class="table-wrapper-scroll-y my-custom-scrollbar">
                         <table id="table_trans" class="table table-bordered table-striped table-sm">
                             <caption><h2>Cancelacion de Ventas</h2></caption>
-                            <caption> <h4>Piezas Vendidas</h4>
-                              <h4 id="area_total"></h4>
-                            </caption>
-                            <caption> <h4>Importe Piezas</h4>
-                              <h4 id="area_total1"></h4>
-                            </caption>
+                           
                              <thead>
                                  
                               <tr>  <th v-if="!isHidden">Cancelar Articulo</th>
@@ -86,11 +81,9 @@
                                     <td v-text="detalle.cantidad"></td>
                                     </template>
                                     <template v-if="detalle.inventariable === 2">
-                                    <td v-show="detalle.cantidad1>0" v-text="detalle.cantidad1">
+                                    <td v-if="detalle.cantidad1>0" v-text="detalle.cantidad1">
                                     </td>
-                                    </template>
-                                    <template v-if="detalle.inventariable === 2">
-                                    <td v-show="detalle.kilogramos>0" v-text="detalle.kilogramos">
+                                    <td v-else="detalle.kilogramos>0" v-text="detalle.kilogramos">
                                      </td>
                                     </template>
                                     <template v-if="detalle.inventariable === 3">
@@ -100,11 +93,9 @@
                                     <td v-text="detalle.precio4"></td>
                                     </template>
                                     <template v-if="detalle.inventariable === 2">
-                                    <td v-show="detalle.precio5>0" v-text="detalle.precio5">
+                                    <td v-if="detalle.precio5>0" v-text="detalle.precio5">
                                     </td>
-                                    </template>
-                                    <template v-if="detalle.inventariable === 2">
-                                    <td v-show="detalle.precio6>0" v-text="detalle.precio6">
+                                    <td v-else="detalle.precio6>0" v-text="detalle.precio6">
                                     </td>
                                     </template>
                                     <template v-if="detalle.inventariable === 3">
@@ -114,11 +105,9 @@
                                     <td v-text="detalle.cantidad*detalle.precio4"></td>
                                     </template>
                                     <template v-if="detalle.inventariable === 2">
-                                    <td v-show="detalle.precio5>0" v-text="detalle.precio5">
+                                    <td v-if="detalle.precio5>0" v-text="detalle.precio5">
                                     </td>
-                                    </template>
-                                    <template v-if="detalle.inventariable === 2">
-                                    <td v-show="detalle.precio6>0" v-text="detalle.precio6">
+                                    <td v-else="detalle.precio6>0" v-text="detalle.precio6">
                                     </td>
                                     </template>
                                      <template v-if="detalle.inventariable === 3">
