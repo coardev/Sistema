@@ -276,7 +276,7 @@ document.getElementById('area_total1').innerText = total;
                },
             listarDetalle (page,buscar,criterio){
                 let me=this;
-                var url= this.ruta + '/salida?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
+                var url= this.ruta + '/salida3?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
                     me.arrayDetalle = respuesta.historial2.data;

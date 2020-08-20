@@ -182,6 +182,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/cancelacion', 'DetalleCancelacionController@index');
         Route::get('/salida', 'HistorialSalidaController@index');
         Route::get('/salida2', 'HistorialSalidaController@index2');
+        Route::get('/salida3', 'HistorialSalidaController@index3');
         Route::put('/salida2/actualizar', 'HistorialSalidaController@update');
         Route::put('/detalle/actualizar', 'DetalleController@update');
         

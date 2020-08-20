@@ -176,6 +176,8 @@ class VentaInterna extends Controller
                 $detalle->fecha_hora = $mytime->toDateString();
                 $detalle->estado = 'Venta Interna';
 
+
+                //Tabla Salidas -- Perfil Administrador
                 $detalle->save();
                 $this->__historial2($detalle->articulo,$detalle->cantidad,$detalle->precio4,$detalle->inventariable,$detalle->idarticulo,$detalle->fecha_hora);
                
@@ -188,7 +190,9 @@ class VentaInterna extends Controller
             DB::rollBack();
         }
     }
+    
 
+    //Tabla Salidas -- Perfil Administrador
     private function __historial2($articulo = '',$cantidad = '',$precio4 = '',$inventariable = '',$idarticulo = '',$fecha_hora = '')
     {
        

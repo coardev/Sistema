@@ -61319,7 +61319,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default.a);
         },
         listarDetalle: function listarDetalle(page, buscar, criterio) {
             var me = this;
-            var url = this.ruta + '/salida?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
+            var url = this.ruta + '/salida3?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
             axios.get(url).then(function (response) {
                 var respuesta = response.data;
                 me.arrayDetalle = respuesta.historial2.data;

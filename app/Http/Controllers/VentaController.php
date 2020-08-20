@@ -291,9 +291,11 @@ class VentaController extends Controller
                 $detalle->total = ($det['stock']-$det['cantidad'])*$det['precio1'];
                 $detalle->fecha_hora = $mytime->toDateString();
                 $detalle->estado = 'Venta Concretada';
+                
 
+                //Detalle Salida Tabla Administrador
                 $detalle->save();
-                $this->__historial2($detalle->articulo,$detalle->cantidad,$detalle->precio4,$detalle->inventariable,$detalle->idarticulo);
+                $this->__historial2($detalle->articulo,$detalle->cantidad,$detalle->precio4,$detalle->inventariable,$detalle->idarticulo,$detalle->fecha_hora);
                
             }       
             DB::commit();
@@ -338,8 +340,8 @@ class VentaController extends Controller
     DetalleVenta::where('idventa', $idventa)->update(['estado' => 'Venta Cobrada']);
 } 
   
-
-    private function __historial2($articulo = '',$cantidad = '',$precio4 = '',$inventariable = '',$idarticulo = '')
+    //Detalle Tabla Salidas -- Administrador
+    private function __historial2($articulo = '',$cantidad = '',$precio4 = '',$inventariable = '',$idarticulo = '',$fecha_hora = '')
     {
        
         $historial2 = new Historial2();
@@ -349,8 +351,9 @@ class VentaController extends Controller
         $historial2->idarticulo = $idarticulo ;
         $historial2->precio4 = $precio4 ;
         $historial2->inventariable = $inventariable ;
+        $historial2->fecha_hora = $fecha_hora ;
         $historial2->estado = 'Venta Normal' ;
-         $historial2->save();
+        $historial2->save();
     }    
    
 }

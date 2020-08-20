@@ -75,6 +75,40 @@ class HistorialSalidaController extends Controller
             'historial2' => $historial2
         ];
     }
+    
+
+    //Index Para Tabla Salidas -- Administrador
+    public function index3(Request $request)
+    {
+        if (!$request->ajax()) return redirect('/');
+
+        $buscar = $request->buscar;
+        $criterio = $request->criterio;
+        
+        if ($buscar==''){
+            $historial2 = Historial2::where('inventariable','=','1')
+            ->where('fecha_hora','=', Carbon :: today())
+            ->orderBy('id', 'desc')->paginate(10000);
+        }
+        else{
+            $historial2 = Historial2::where($criterio, 'like', '%'. $buscar . '%')
+            
+            ->orderBy('id', 'desc')->paginate(10000000);
+        }
+        
+
+        return [
+            'pagination' => [
+                'total'        => $historial2->total(),
+                'current_page' => $historial2->currentPage(),
+                'per_page'     => $historial2->perPage(),
+                'last_page'    => $historial2->lastPage(),
+                'from'         => $historial2->firstItem(),
+                'to'           => $historial2->lastItem(),
+            ],
+            'historial2' => $historial2
+        ];
+    }
 
     //Devolucion Articulo -- Venta Interna
     public function update(Request $request)
