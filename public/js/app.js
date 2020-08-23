@@ -65806,6 +65806,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -65842,14 +65848,14 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default.a);
                 'to': 0
             },
             offset: 3,
-
-            criterio1: 'nombre',
+            criterio2: 'nombre',
+            criterio1: 'created_at',
             criterio: 'created_at',
-            criterio2: 'created_at',
 
+            buscar2: '',
             buscar1: '',
-            buscar: '',
-            buscar2: ''
+            buscar: ''
+
         };
     },
 
@@ -65908,9 +65914,9 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default.a);
             }
             document.getElementById("val2").innerHTML = sumVal;
         },
-        listarHistorial: function listarHistorial(page, buscar1, criterio1, buscar, criterio, buscar2, criterio2) {
+        listarHistorial: function listarHistorial(page, buscar2, criterio2, buscar1, criterio1, buscar, criterio) {
             var me = this;
-            var url = this.ruta + '/historial?page=' + page + '&buscar1=' + buscar1 + '&criterio1=' + criterio1 + '&buscar=' + buscar + '&criterio=' + criterio + '&buscar2=' + buscar2 + '&criterio2=' + criterio2;
+            var url = this.ruta + '/historial?page=' + page + '&buscar2=' + buscar2 + '&criterio2=' + criterio2 + '&buscar1=' + buscar1 + '&criterio1=' + criterio1 + '&buscar=' + buscar + '&criterio=' + criterio;
             axios.get(url).then(function (response) {
                 var respuesta = response.data;
                 me.arrayHistorial = respuesta.historial.data;
@@ -65919,16 +65925,16 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default.a);
                 console.log(error);
             });
         },
-        cambiarPagina: function cambiarPagina(page, buscar1, criterio1, buscar, criterio, buscar2, criterio2) {
+        cambiarPagina: function cambiarPagina(page, buscar2, criterio2, buscar1, criterio1, buscar, criterio) {
             var me = this;
             //Actualiza la página actual
             me.pagination.current_page = page;
             //Envia la petición para visualizar la data de esa página
-            me.listarHistorial(page, buscar1, criterio1, buscar, criterio, buscar2, criterio2);
+            me.listarHistorial(page, buscar2, criterio2, buscar1, criterio1, buscar, criterio);
         }
     },
     mounted: function mounted() {
-        this.listarHistorial(1, this.buscar1, this.criterio1, this.buscar, this.criterio, this.buscar2, this.criterio2);
+        this.listarHistorial(1, this.buscar2, this.criterio2, this.buscar1, this.criterio1, this.buscar, this.criterio);
     }
 });
 
@@ -68402,6 +68408,63 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
+                        value: _vm.criterio2,
+                        expression: "criterio2"
+                      }
+                    ],
+                    staticClass: "form-control col-md-6",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.criterio2 = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "nombre" } }, [
+                      _vm._v("Articulo")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.buscar2,
+                      expression: "buscar2"
+                    }
+                  ],
+                  staticClass: "form-control;col-md-3",
+                  attrs: { type: "text", placeholder: "Escribe el Articulo" },
+                  domProps: { value: _vm.buscar2 },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.buscar2 = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
                         value: _vm.criterio1,
                         expression: "criterio1"
                       }
@@ -68424,8 +68487,8 @@ var render = function() {
                     }
                   },
                   [
-                    _c("option", { attrs: { value: "nombre" } }, [
-                      _vm._v("Nombre")
+                    _c("option", { attrs: { value: "created_at" } }, [
+                      _vm._v("Fecha Inicial")
                     ])
                   ]
                 ),
@@ -68440,7 +68503,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control;col-md-3",
-                  attrs: { type: "text", placeholder: "Escribe el Articulo" },
+                  attrs: { type: "date", placeholder: "Escribe el Articulo" },
                   domProps: { value: _vm.buscar1 },
                   on: {
                     input: function($event) {
@@ -68486,11 +68549,7 @@ var render = function() {
                   },
                   [
                     _c("option", { attrs: { value: "created_at" } }, [
-                      _vm._v("Fecha a Buscar")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "tipo" } }, [
-                      _vm._v("Tipo de Inventario")
+                      _vm._v("Fecha Final")
                     ])
                   ]
                 ),
@@ -68529,12 +68588,12 @@ var render = function() {
                       click: function($event) {
                         return _vm.listarHistorial(
                           1,
+                          _vm.buscar2,
+                          _vm.criterio2,
                           _vm.buscar1,
                           _vm.criterio1,
                           _vm.buscar,
-                          _vm.criterio,
-                          _vm.buscar2,
-                          _vm.criterio2
+                          _vm.criterio
                         )
                       }
                     }

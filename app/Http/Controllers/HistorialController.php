@@ -10,22 +10,25 @@ class HistorialController extends Controller
     public function index(Request $request)
     {
         if (!$request->ajax()) return redirect('/');
-
+        
+        $buscar2 = $request->buscar2;
+        $criterio2 = $request->criterio2;
         $buscar1 = $request->buscar1;
         $criterio1 = $request->criterio1;
         $buscar = $request->buscar;
         $criterio = $request->criterio;
-        $buscar2 = $request->buscar2;
-        $criterio2 = $request->criterio2;
+        
+       
         
         if ($buscar==''){
-            $historial = Historial::orderBy('id', 'desc')->paginate(10);
+            $historial = Historial::orderBy('id', 'desc')->paginate(100000);
         }
         else{
-            $historial = Historial::where($criterio1, 'like', '%'. $buscar1 . '%')
-            ->where($criterio, 'like', '%'. $buscar . '%')
-            ->where($criterio2, 'like', '%'. $buscar2 . '%')
-            ->orderBy('id', 'desc')->paginate(10);
+            $historial = Historial::where($criterio2, 'like', '%'. $buscar2 . '%')
+            ->whereDate($criterio1, '>=', $buscar1 )
+            ->whereDate($criterio, '<=', $buscar)
+            ->orderBy('id', 'desc')
+            ->paginate(1000000);
         }
         
 

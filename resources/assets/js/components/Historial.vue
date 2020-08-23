@@ -14,10 +14,14 @@
                         <div class="form-group row">
                             <div >
                                 <div class="input-group">
-                                    <select class="form-control col-md-6" v-model="criterio1">
-                                      <option value="nombre">Nombre</option>
+                                <select class="form-control col-md-6" v-model="criterio2">
+                                      <option value="nombre">Articulo</option>
                                     </select>                                    
-                                    <input type="text" v-model="buscar1" class="form-control;col-md-3" placeholder="Escribe el Articulo">
+                                    <input type="text" v-model="buscar2" class="form-control;col-md-3" placeholder="Escribe el Articulo">
+                                    <select class="form-control col-md-6" v-model="criterio1">
+                                      <option value="created_at">Fecha Inicial</option>
+                                    </select>                                    
+                                    <input type="date" v-model="buscar1" class="form-control;col-md-3" placeholder="Escribe el Articulo">
                                      </div>
                                       </div>
                                       
@@ -25,12 +29,14 @@
                                 <div class="input-group">
                                     <select class="form-control col-md-6" v-model="criterio">
                                       
-                                      <option value="created_at">Fecha a Buscar</option>
-                                      <option value="tipo">Tipo de Inventario</option>
+                                      <option value="created_at">Fecha Final</option>
+                                      
                                     </select>
                                    
                                     <input type="date" v-model="buscar"  class="form-control;col-md-3" placeholder="Escribe el Articulo a Buscar">
-                                 <button type="submit" @click="listarHistorial(1,buscar1,criterio1,buscar,criterio,buscar2,criterio2)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                                    
+                                 
+                                 <button type="submit" @click="listarHistorial(1,buscar2,criterio2,buscar1,criterio1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
 
                                 </div>
                                     
@@ -129,14 +135,14 @@ import Datepicker from 'vuejs-datepicker';
                     'to' : 0,
                 },
                 offset : 3,
-                
-                criterio1 : 'nombre',
+                criterio2 : 'nombre',
+                criterio1 : 'created_at',
                 criterio : 'created_at',
-                criterio2 : 'created_at',
-                
+              
+                buscar2 : '',
                 buscar1 : '',
                 buscar : '',
-                buscar2 : ''
+                
             }
         },
         computed:{
@@ -197,9 +203,9 @@ document.getElementById('area_total1').innerText = total;
              }
              document.getElementById("val2").innerHTML = sumVal;
     },
-            listarHistorial (page,buscar1,criterio1,buscar,criterio,buscar2,criterio2){
+            listarHistorial (page,buscar2,criterio2,buscar1,criterio1,buscar,criterio){
                 let me=this;
-                var url= this.ruta + '/historial?page=' + page + '&buscar1='+ buscar1 + '&criterio1='+ criterio1 + '&buscar='+ buscar + '&criterio='+ criterio + '&buscar2='+ buscar2 + '&criterio2='+ criterio2;
+                var url= this.ruta + '/historial?page=' + page + '&buscar2='+ buscar2 + '&criterio2='+ criterio2 + '&buscar1='+ buscar1 + '&criterio1='+ criterio1 + '&buscar='+ buscar + '&criterio='+ criterio;
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
                     me.arrayHistorial = respuesta.historial.data;
@@ -209,16 +215,16 @@ document.getElementById('area_total1').innerText = total;
                     console.log(error);
                 });
             },
-            cambiarPagina(page,buscar1,criterio1,buscar,criterio,buscar2,criterio2){
+            cambiarPagina(page,buscar2,criterio2,buscar1,criterio1,buscar,criterio){
                 let me = this;
                 //Actualiza la página actual
                 me.pagination.current_page = page;
                 //Envia la petición para visualizar la data de esa página
-                me.listarHistorial(page,buscar1,criterio1,buscar,criterio,buscar2,criterio2);
+                me.listarHistorial(page,buscar2,criterio2,buscar1,criterio1,buscar,criterio);
             }
         },
         mounted() {
-            this.listarHistorial(1,this.buscar1,this.criterio1,this.buscar,this.criterio,this.buscar2,this.criterio2);
+            this.listarHistorial(1,this.buscar2,this.criterio2,this.buscar1,this.criterio1,this.buscar,this.criterio);
         }
     }
 </script>
