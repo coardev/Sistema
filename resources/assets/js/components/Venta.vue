@@ -293,20 +293,28 @@
                                             <td v-text="detalle.precio4">
                                             </td>
                                             </template>
+                                             <template v-if="detalle.inventariable === 2">
+                                            <td v-show="detalle.precio5>0" v-text="detalle.precio5">
+                                            </td>
+                                            </template>
                                             <template v-if="detalle.inventariable === 2">
-                                            <td v-text="detalle.precio5">
+                                            <td v-show="detalle.precio6>0" v-text="detalle.precio6">
                                             </td>
                                             </template>
                                             <template v-if="detalle.inventariable === 3">
                                             <td v-text="detalle.precio3">
                                             </td>
                                             </template>
-                                           <template v-if="detalle.inventariable === 1">
+                                            <template v-if="detalle.inventariable === 1">
                                             <td v-text="detalle.cantidad">
                                             </td>
                                             </template>
                                             <template v-if="detalle.inventariable === 2">
-                                            <td v-text="detalle.cantidad1">
+                                            <td v-show="detalle.cantidad1>0" v-text="detalle.cantidad1">
+                                            </td>
+                                            </template>
+                                            <template v-if="detalle.inventariable === 2">
+                                            <td v-show="detalle.kilogramos>0" v-text="detalle.kilogramos">
                                             </td>
                                             </template>
                                             <template v-if="detalle.inventariable === 3">
@@ -318,7 +326,11 @@
                                             </td>
                                             </template>
                                             <template v-if="detalle.inventariable === 2">
-                                            <td v-text="detalle.cantidad1*detalle.precio5">
+                                            <td v-show="detalle.precio5>0" v-text="detalle.precio5">
+                                            </td>
+                                            </template>
+                                            <template v-if="detalle.inventariable === 2">
+                                            <td v-show="detalle.precio6>0" v-text="detalle.precio6">
                                             </td>
                                             </template>
                                             <template v-if="detalle.inventariable === 3">

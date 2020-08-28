@@ -73499,6 +73499,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -74822,9 +74834,39 @@ var render = function() {
                                         detalle.inventariable === 2
                                           ? [
                                               _c("td", {
+                                                directives: [
+                                                  {
+                                                    name: "show",
+                                                    rawName: "v-show",
+                                                    value: detalle.precio5 > 0,
+                                                    expression:
+                                                      "detalle.precio5>0"
+                                                  }
+                                                ],
                                                 domProps: {
                                                   textContent: _vm._s(
                                                     detalle.precio5
+                                                  )
+                                                }
+                                              })
+                                            ]
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        detalle.inventariable === 2
+                                          ? [
+                                              _c("td", {
+                                                directives: [
+                                                  {
+                                                    name: "show",
+                                                    rawName: "v-show",
+                                                    value: detalle.precio6 > 0,
+                                                    expression:
+                                                      "detalle.precio6>0"
+                                                  }
+                                                ],
+                                                domProps: {
+                                                  textContent: _vm._s(
+                                                    detalle.precio6
                                                   )
                                                 }
                                               })
@@ -74858,9 +74900,41 @@ var render = function() {
                                         detalle.inventariable === 2
                                           ? [
                                               _c("td", {
+                                                directives: [
+                                                  {
+                                                    name: "show",
+                                                    rawName: "v-show",
+                                                    value:
+                                                      detalle.cantidad1 > 0,
+                                                    expression:
+                                                      "detalle.cantidad1>0"
+                                                  }
+                                                ],
                                                 domProps: {
                                                   textContent: _vm._s(
                                                     detalle.cantidad1
+                                                  )
+                                                }
+                                              })
+                                            ]
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        detalle.inventariable === 2
+                                          ? [
+                                              _c("td", {
+                                                directives: [
+                                                  {
+                                                    name: "show",
+                                                    rawName: "v-show",
+                                                    value:
+                                                      detalle.kilogramos > 0,
+                                                    expression:
+                                                      "detalle.kilogramos>0"
+                                                  }
+                                                ],
+                                                domProps: {
+                                                  textContent: _vm._s(
+                                                    detalle.kilogramos
                                                   )
                                                 }
                                               })
@@ -74895,10 +74969,39 @@ var render = function() {
                                         detalle.inventariable === 2
                                           ? [
                                               _c("td", {
+                                                directives: [
+                                                  {
+                                                    name: "show",
+                                                    rawName: "v-show",
+                                                    value: detalle.precio5 > 0,
+                                                    expression:
+                                                      "detalle.precio5>0"
+                                                  }
+                                                ],
                                                 domProps: {
                                                   textContent: _vm._s(
-                                                    detalle.cantidad1 *
-                                                      detalle.precio5
+                                                    detalle.precio5
+                                                  )
+                                                }
+                                              })
+                                            ]
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        detalle.inventariable === 2
+                                          ? [
+                                              _c("td", {
+                                                directives: [
+                                                  {
+                                                    name: "show",
+                                                    rawName: "v-show",
+                                                    value: detalle.precio6 > 0,
+                                                    expression:
+                                                      "detalle.precio6>0"
+                                                  }
+                                                ],
+                                                domProps: {
+                                                  textContent: _vm._s(
+                                                    detalle.precio6
                                                   )
                                                 }
                                               })
