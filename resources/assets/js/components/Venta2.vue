@@ -56,7 +56,7 @@
                             </div>      
                             <img src="img/money.png" class="img-responsive" height="100" width="100" alt="">
                             <div class="form-group">
-                            <p>${{calcularEfectivo}}</p>
+                            <p>${{calcularReal}}</p>
                             </div></div>
                             <div align="center" class="col-md-2">
                             <div> 

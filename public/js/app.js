@@ -89814,7 +89814,7 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group" }, [
-                          _c("p", [_vm._v("$" + _vm._s(_vm.calcularEfectivo))])
+                          _c("p", [_vm._v("$" + _vm._s(_vm.calcularReal))])
                         ])
                       ]
                     ),
