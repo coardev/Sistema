@@ -18,12 +18,14 @@ class VentaController extends Controller
 
         $buscar = $request->buscar;
         $criterio = $request->criterio;
+        $buscar1 = $request->buscar1;
+        $criterio1 = $request->criterio1;
         
         if ($buscar==''){
             $ventas = Venta::join('personas','ventas.idcliente','=','personas.id')
             ->join('users','ventas.idusuario','=','users.id')
             ->select('ventas.id','ventas.tipo_comprobante',
-            'ventas.created_at','ventas.efectivo','ventas.efectivo1','ventas.tarjeta','ventas.vales','ventas.cambio','ventas.total',
+            'ventas.created_at','ventas.fecha_hora','ventas.efectivo','ventas.efectivo1','ventas.tarjeta','ventas.vales','ventas.cambio','ventas.total',
             'ventas.estado','personas.nombre','users.usuario')
             ->where('ventas.fecha_hora','=', Carbon :: today())
             ->orderBy('ventas.id', 'desc')
@@ -33,13 +35,13 @@ class VentaController extends Controller
             $ventas = Venta::join('personas','ventas.idcliente','=','personas.id')
             ->join('users','ventas.idusuario','=','users.id')
             ->select('ventas.id','ventas.tipo_comprobante',
-            'ventas.created_at','ventas.efectivo','ventas.efectivo1','ventas.tarjeta','ventas.vales','ventas.cambio','ventas.total',
+            'ventas.created_at','ventas.fecha_hora','ventas.efectivo','ventas.efectivo1','ventas.tarjeta','ventas.vales','ventas.cambio','ventas.total',
             'ventas.estado','personas.nombre','users.usuario')
-            ->where('ventas.'.$criterio, 'like', '%'. $buscar . '%')
+            ->whereDate($criterio, '>=', $buscar)
+            ->whereDate($criterio1, '<=', $buscar1)
             ->orwhere('ventas.estado','=','Venta Registrada' || 'Venta Cobrada')
-           
             ->orderBy('ventas.id', 'desc')
-            ->paginate(250);
+            ->paginate(1000000);
         }
         
         return [
@@ -66,7 +68,7 @@ class VentaController extends Controller
             $ventas = Venta::join('personas','ventas.idcliente','=','personas.id')
             ->join('users','ventas.idusuario','=','users.id')
             ->select('ventas.id','ventas.tipo_comprobante',
-            'ventas.created_at','ventas.efectivo','ventas.efectivo1','ventas.tarjeta','ventas.vales','ventas.cambio','ventas.total',
+            'ventas.created_at','ventas.fecha_hora','ventas.efectivo','ventas.efectivo1','ventas.tarjeta','ventas.vales','ventas.cambio','ventas.total',
             'ventas.estado','personas.nombre','users.usuario')
             ->where('ventas.fecha_hora','=', Carbon :: today())
             ->orderBy('ventas.id', 'desc')
@@ -76,7 +78,7 @@ class VentaController extends Controller
             $ventas = Venta::join('personas','ventas.idcliente','=','personas.id')
             ->join('users','ventas.idusuario','=','users.id')
             ->select('ventas.id','ventas.tipo_comprobante',
-            'ventas.created_at','ventas.efectivo','ventas.efectivo1','ventas.tarjeta','ventas.vales','ventas.cambio','ventas.total',
+            'ventas.created_at','ventas.fecha_hora','ventas.efectivo','ventas.efectivo1','ventas.tarjeta','ventas.vales','ventas.cambio','ventas.total',
             'ventas.estado','personas.nombre','users.usuario')
             ->where('ventas.'.$criterio, 'like', '%'. $buscar . '%')
             ->orderBy('ventas.id', 'desc')
@@ -108,7 +110,7 @@ class VentaController extends Controller
             $ventas = Venta::join('personas','ventas.idcliente','=','personas.id')
             ->join('users','ventas.idusuario','=','users.id')
             ->select('ventas.id','ventas.tipo_comprobante',
-            'ventas.created_at','ventas.efectivo','ventas.efectivo1','ventas.tarjeta','ventas.vales','ventas.cambio','ventas.total',
+            'ventas.created_at','ventas.fecha_hora','ventas.efectivo','ventas.efectivo1','ventas.tarjeta','ventas.vales','ventas.cambio','ventas.total',
             'ventas.estado','personas.nombre','users.usuario')
             ->where('ventas.fecha_hora','=', Carbon :: today())
             ->orderBy('ventas.id', 'desc')
@@ -118,7 +120,7 @@ class VentaController extends Controller
             $ventas = Venta::join('personas','ventas.idcliente','=','personas.id')
             ->join('users','ventas.idusuario','=','users.id')
             ->select('ventas.id','ventas.tipo_comprobante',
-            'ventas.created_at','ventas.efectivo','ventas.efectivo1','ventas.tarjeta','ventas.vales','ventas.cambio','ventas.total',
+            'ventas.created_at','ventas.fecha_hora','ventas.efectivo','ventas.efectivo1','ventas.tarjeta','ventas.vales','ventas.cambio','ventas.total',
             'ventas.estado','personas.nombre','users.usuario')
             ->where('ventas.'.$criterio, 'like', '%'. $buscar . '%')
             ->orderBy('ventas.id', 'desc')

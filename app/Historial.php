@@ -13,6 +13,7 @@ class Historial extends Model
         'stock1',
         'precio_proveedor',
         'reingreso',
+        'fecha_hora',
         'importe'
     ];
 

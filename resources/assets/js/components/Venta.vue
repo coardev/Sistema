@@ -8,9 +8,14 @@
                 <!-- Ejemplo de tabla Listado -->
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i> Venta
+                        <i class="fa fa-align-justify"></i> Administrador Ventas
                        <button type="button" @click="mostrarDetalle()" class="btn btn-secondary">
                             <i class="fa fa-cog fa-spin"></i>&nbsp;Ventas
+                        </button>
+                        <button type="button" @click="tableToExcel('table_trans', 'name', 'Reporte.xls')" class="btn btn-info">
+                            <i class="fa fa-file-excel-o"></i>&nbsp;Obtener Reporte Excel
+                        </button>
+                        <button type="button" v-print="printObj" class="btn btn-warning">Imprimir Reporte  <i class="fa fa-print"></i>
                         </button>
                        
                               
@@ -19,29 +24,40 @@
                     <template v-if="listado==1">
                     <div class="card-body">
                         <div class="form-group row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="input-group">
-                                    <select class="form-control col-md-3" v-model="criterio">
-                                    <option value="id">Numero de Compra</option>
-                                     <option value="created_at">Fecha-Hora</option>
+                                    <select class="form-control col-md-6" v-model="criterio">
+                                    <option value="fecha_hora">Fecha-Inicial</option>
                                     </select>
-                                     <template v-if="criterio === 'id'">
-                                    <input type="text" v-autofocus  v-model="buscar" class="form-control" placeholder="Buscar Compra">
-                                    </template>
-                                    <template v-if="criterio === 'created_at'">
-                                        <input type="date"  v-model="buscar" class="form-control" placeholder="Elige el Dia">
-                                    </template>
-                                    <button type="submit" @click="listarVenta(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i>Buscar</button>
+                                    <input type="date"  v-model="buscar" class="form-control" placeholder="Elige el Dia">
+                                    <select class="form-control col-md-6" v-model="criterio1">
+                                    <option value="fecha_hora">Fecha-Final</option>
+                                    </select>
+                                    <input type="date"  v-model="buscar1" class="form-control" placeholder="Elige el Dia">
+                                    
+                                    <button type="submit" @click="listarVenta(1,buscar,criterio,buscar1,criterio1)" class="btn btn-primary"><i class="fa fa-search"></i>Buscar</button>
                                 </div>
                             </div>
                         </div>
+                        <button type="button" class="btn btn-danger"  v-on:click="isHidden = !isHidden">Mostrar</button>
                         <div class="table-wrapper-scroll-y my-custom-scrollbar">
                             <table id="table_trans" class="table table-bordered table-striped table-sm">
                                 <thead>
-                                   
                                     <tr>
                                
-                                        <th>Opciones</th>
+                                        <th v-if="!isHidden"></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th>Ventas del Periodo: {{ arrayVenta.length }}</th>
+                                       
+                                        
+                                    </tr>
+                                    <tr>
+                               
+                                        <th v-if="!isHidden">Opciones</th>
                                         <th>Num. de Venta</th>
                                         <th>Usuario</th>
                                         <th>Cliente</th>
@@ -54,11 +70,11 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="venta in arrayVenta" :key="venta.id">
-                                        <td>
+                                        <td v-if="!isHidden">
                                            <button type="button" @click="verVenta(venta.id)" class="btn btn-success btn-lg">
                                             <i class="icon-eye"></i>
                                             </button>
-
+                                            <!--
                                             <template v-if="venta.tipo_comprobante=='TICKET'">
                                                 <button type="button" @click="pdfTicket(venta.id)" class="btn btn-warning btn-lg">
                                                 <i class='fas fa-ticket-alt'></i>
@@ -82,7 +98,7 @@
                                                 <i class="fa fa-file-pdf-o"></i>
                                                 </button> &nbsp;
                                             </template>
-                                             
+                                             -->
                                             
                                             
                                         </td>
@@ -424,10 +440,19 @@
     import Vue from "vue";
     import autofocus from "vue-autofocus-directive";
     Vue.directive("autofocus", autofocus);
+    import Print from 'vue-print-nb'
+    Vue.use(Print);
     export default {
         props : ['ruta'],
         data (){
             return {
+                printObj: {
+              id: "table_trans",
+              popTitle: '',
+              extraCss: 'https://www.google.com,https://www.google.com',
+              extraHead: '<meta http-equiv="Content-Language"content="zh-cn"/>'
+            },
+            isHidden: true,
                 randomNumber:'',
                 venta_id: 0,
                 idcliente:0,
@@ -453,8 +478,10 @@
                     'to' : 0,
                 },
                 offset : 3,
-                criterio : 'id',
+                criterio : 'fecha_hora',
                 buscar : '',
+                criterio1 : 'fecha_hora',
+                buscar1 : '',
                 criterioA:'nombre',
                 buscarA: '',
                 arrayArticulo: [],
@@ -509,6 +536,19 @@
             }
         },
         methods : {
+                 tableToExcel:  function (table, name, filename) {
+        let uri = 'data:application/vnd.ms-excel;base64,', 
+        template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><title></title><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/></head><body><table>{table}</table></body></html>', 
+        base64 = function(s) { return window.btoa(decodeURIComponent(encodeURIComponent(s))) },         format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; })}
+        
+        if (!table.nodeType) table = document.getElementById(table)
+        var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+
+        var link = document.createElement('a');
+        link.download = filename;
+        link.href = uri + base64(format(template, ctx));
+        link.click();
+            },
             salida: function () {
                var td = document.querySelectorAll('#table_trans > tbody > tr > td:nth-child(6)');
 
@@ -601,9 +641,9 @@ document.getElementById('area_total1').innerText = total;
     },
 
 
-            listarVenta (page,buscar,criterio){
+            listarVenta (page,buscar,criterio,buscar1,criterio1){
                 let me=this;
-                var url= this.ruta + '/venta?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
+                var url= this.ruta + '/venta?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio + '&buscar1='+ buscar1 + '&criterio1='+ criterio1;
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
                     me.arrayVenta = respuesta.ventas.data;
@@ -672,12 +712,12 @@ document.getElementById('area_total1').innerText = total;
             pdfTicket1(id){
                 window.open(this.ruta + '/venta/pdfTicket1/'+ id + ',' + '_blank');
             },
-            cambiarPagina(page,buscar,criterio){
+            cambiarPagina(page,buscar,criterio,buscar1,criterio1){
                 let me = this;
                 //Actualiza la página actual
                 me.pagination.current_page = page;
                 //Envia la petición para visualizar la data de esa página
-                me.listarVenta(page,buscar,criterio);
+                me.listarVenta(page,buscar,criterio,buscar1,criterio1);
             },
             encuentra(id){
                 var sw=0;
@@ -764,7 +804,7 @@ document.getElementById('area_total1').innerText = total;
                         }); 
                     }
             },
-            listarArticulo (buscar,criterio){
+            listarArticulo (buscar,criterio,busca){
                 let me=this;
                 var url= this.ruta + '/articulo/listarArticuloVenta?buscar='+ buscar + '&criterio='+ criterio;
                 axios.get(url).then(function (response) {
@@ -938,7 +978,7 @@ document.getElementById('area_total1').innerText = total;
         
 },
         mounted() {
-            this.listarVenta(1,this.buscar,this.criterio);
+            this.listarVenta(1,this.buscar,this.criterio,this.buscar1,this.criterio1);
         }
     }
 </script>

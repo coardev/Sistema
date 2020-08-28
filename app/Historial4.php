@@ -12,7 +12,8 @@ class Historial4 extends Model
         'stock',
         'stock1',
         'precio_proveedor',
-        'importe'
+        'importe',
+        'fecha_hora'
     ];
 
     public $timestamps = true;

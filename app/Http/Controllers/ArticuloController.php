@@ -184,7 +184,7 @@ class ArticuloController extends Controller
         $this->__historial($articulo->nombre, $articulo->stock,$articulo->precio_proveedor,$articulo->inventariable);
       
         //Registrar en Inventario Entrada + Salida
-        $this->__registro($articulo->nombre,$articulo->inventariable,$articulo->stock, $articulo->existencia,  $articulo->precio_proveedor, $articulo->precio_proveedor1, $articulo->total);
+        //$this->__registro($articulo->nombre,$articulo->inventariable,$articulo->stock, $articulo->existencia,  $articulo->precio_proveedor, $articulo->precio_proveedor1, $articulo->total);
 
        
 
@@ -234,7 +234,7 @@ class ArticuloController extends Controller
         $articulo->condicion = '1';
         $articulo->save();
 
-        //REgistrar Tabla Salidas
+        //REgistrar Tabla Entradas - Articulo Agregados
         $this->__historial4($articulo->nombre,$articulo->stock1, $articulo->precio_proveedor);
 
          //Registro Inventaros Salida + Entrada
@@ -282,6 +282,7 @@ class ArticuloController extends Controller
 
     private function __historial($nombre = '', $stock = '', $precio_proveedor = '', $inventariable = '' )
     {
+        $mytime= Carbon::now('America/Lima');
        
         $historial = new Historial();
         $historial->nombre = $nombre;
@@ -290,19 +291,21 @@ class ArticuloController extends Controller
         $historial->importe = $stock*$precio_proveedor ;
         $historial->estado = 'Ingreso' ;
         $historial->tipo = $inventariable;
+        $historial->fecha_hora = $mytime->toDateString();
         $historial->save();
     }    
 
     //Actualizacion Tabla Entradas 
     private function __historial4($nombre = '', $stock1 = '', $precio_proveedor = '' )
     {
-       
+        $mytime= Carbon::now('America/Lima');
         $historial4 = new Historial4();
         $historial4->nombre = $nombre;
-        $historial4->stock = $stock1 ;
+        $historial4->stock1 = $stock1 ;
         $historial4->precio_proveedor = $precio_proveedor ;
-        $historial4->importe = $stock1*$precio_proveedor ;
-        $historial4->estado = 'Ingreso' ;
+        $historial4->importe = $stock1*$precio_proveedor;
+        $historial4->fecha_hora = $mytime->toDateString();
+        $historial4->estado = 'Agregados' ;
         $historial4->save();
     }    
     

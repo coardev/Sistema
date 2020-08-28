@@ -8,68 +8,69 @@
                 <!-- Ejemplo de tabla Listado -->
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i> Detalle Entrada de Productos
+                         <button type="button" class="btn btn-secondary">
+                            <i class="fa fa-cog fa-spin"></i>&nbsp;Detalle Entrada de Articulos
+                        </button>
+                        <button type="button" @click="tableToExcel('table_trans', 'name', 'Reporte.xls')" class="btn btn-info">
+                            <i class="fa fa-file-excel-o"></i>&nbsp;Obtener Reporte Excel
+                        </button>
+                        <button type="button" v-print="printObj" class="btn btn-warning">Imprimir Reporte  <i class="fa fa-print"></i>
+                        </button>
                     </div>
+                    
                     <div class="card-body">
                         <div class="form-group row">
-                            <div >
+                            <div class="col-md-12" >
                                 <div class="input-group">
-                                <select class="form-control col-md-6" v-model="criterio2">
+                                <select class="form-control col-md-1" v-model="criterio2">
                                       <option value="nombre">Articulo</option>
                                     </select>                                    
-                                    <input type="text" v-model="buscar2" class="form-control;col-md-3" placeholder="Escribe el Articulo">
-                                    <select class="form-control col-md-6" v-model="criterio1">
+                                    <input type="text" v-model="buscar2" class="form-control;col-md-2" placeholder="Escribe el Articulo">
+                                    <select class="form-control col-md-2" v-model="criterio1">
                                       <option value="created_at">Fecha Inicial</option>
                                     </select>                                    
                                     <input type="date" v-model="buscar1" class="form-control;col-md-3" placeholder="Escribe el Articulo">
-                                     </div>
-                                      </div>
-                                      
-                                     <div >
-                                <div class="input-group">
-                                    <select class="form-control col-md-6" v-model="criterio">
+                                     <select class="form-control col-md-2" v-model="criterio">
                                       
                                       <option value="created_at">Fecha Final</option>
                                       
                                     </select>
+                                    <input type="date" v-model="buscar"  class="form-control;col-md-2" placeholder="Escribe el Articulo a Buscar">
+                                    <button type="submit" @click="listarHistorial(1,buscar2,criterio2,buscar1,criterio1,buscar,criterio);importe()" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                                     </div>
+                                      </div>
+                                      </div>
+                               </div>
+                                     
+                                    
                                    
-                                    <input type="date" v-model="buscar"  class="form-control;col-md-3" placeholder="Escribe el Articulo a Buscar">
                                     
                                  
-                                 <button type="submit" @click="listarHistorial(1,buscar2,criterio2,buscar1,criterio1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
 
-                                </div>
-                                    
-                                    
-                              </div>
-                            </div>
-                            
-                        
                            
-                        </div>
-                        
-                         <div align="right">
-                                <button  style="font-size:18px" v-print="printObj">Imprimir Reporte <i class="fa fa-print"></i></button>
-                                </div>
                         <div class="table-wrapper-scroll-y my-custom-scrollbar">
                         <table id="table_trans"  class="table table-bordered table-striped table-sm">
-                            <caption><h2>Reporte Entrada de Articulos</h2></caption>
-                            <caption> <h4>Piezas Entrantes</h4>
-                              <h4 id="area_total"></h4>
-                            </caption>
-                            <caption> <h4>Importe Piezas</h4>
-                              <h4 id="area_total1"></h4>
-                            </caption>
+                                                      
                             <thead>
                                 <tr>
-                                    <th><i class="icon-calendar" style='font-size:18px'>&nbsp; Fecha de Registro</i></th>
-                                    <th><i class='fas fa-file-alt' style='font-size:18px'>&nbsp; Nombre</i></th>
-                                    <th><i class='fas fa-dolly-flatbed' style='font-size:18px'>&nbsp; Entrada</i></th>
-                                    <th><i class='fas fa-dolly-flatbed' style='font-size:18px'>&nbsp; Reingreso Articulos</i></th>
-                                    <th><i class='fas fa-dollar-sign' style='font-size:18px'>&nbsp; Precio Proveedor Compra</i></th>
-                                    <th><i class='fas fa-dollar-sign' style='font-size:18px'>&nbsp; Importe Entrada</i></th>
-                                    <th><i class='fas fa-dollar-sign' style='font-size:18px'>Estatus</i></th>
-                                    <th><i class='fas fa-dollar-sign' style='font-size:18px'>Fecha</i></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th> # {{ calcularEntrada }}</th>
+                                    <th> # {{ calcularReingreso }}</th>
+                                    <th></th>
+                                    <th> $ {{ calcularImporte }}</th>
+                                    <th></th>
+                                  
+                                </tr>
+                                <tr>
+                                    <th>Fecha de Registro</i></th>
+                                    <th>Nombre</i></th>
+                                    <th>Entrada</i></th>
+                                    <th>Reingreso</i></th>
+                                    <th>Precio Proveedor</i></th>
+                                    <th>Importe Entrada</i></th>
+                                    <th>Estatus</i></th>
+                                  
                                   
                                    
                                 </tr>
@@ -84,10 +85,12 @@
                                     <td  v-text="historial.precio_proveedor"></td>
                                     <td  v-text="historial.importe"></td>
                                     <td style="color: red;font-size:18px"  v-text="historial.estado"></td>
-                                    <td v-text="historial.updated_at"></td>
+                                    
                                    
                                     
-                                </tr>                               
+                                </tr>            
+                               
+
                             </tbody>
                         </table>
                         </div>
@@ -113,7 +116,7 @@ import Datepicker from 'vuejs-datepicker';
             return {
                 printObj: {
               id: "table_trans",
-              popTitle: '',
+              popTitle: 'Reporte de Entradas - Periodo',
               extraCss: 'https://www.google.com,https://www.google.com',
               extraHead: '<meta http-equiv="Content-Language"content="zh-cn"/>'
             },
@@ -146,6 +149,30 @@ import Datepicker from 'vuejs-datepicker';
             }
         },
         computed:{
+            calcularImporte: function(){
+                var resultado1=0.0;
+                
+                for(var i=0;i<this.arrayHistorial.length;i++){
+                 resultado1=resultado1+(this.arrayHistorial[i].importe*1)
+                }
+                return resultado1;
+            },
+            calcularEntrada: function(){
+                var resultado1=0.0;
+                
+                for(var i=0;i<this.arrayHistorial.length;i++){
+                 resultado1=resultado1+(this.arrayHistorial[i].stock*1)
+                }
+                return resultado1;
+            },
+            calcularReingreso: function(){
+                var resultado1=0.0;
+                
+                for(var i=0;i<this.arrayHistorial.length;i++){
+                 resultado1=resultado1+(this.arrayHistorial[i].stock1*1)
+                }
+                return resultado1;
+            },
             isActived: function(){
                 return this.pagination.current_page;
             },
@@ -175,34 +202,6 @@ import Datepicker from 'vuejs-datepicker';
             }
         },
         methods : {
-             salida3: function () {
-               var td = document.querySelectorAll('#table_trans > tbody > tr > td:nth-child(3)');
-
-var total = [].reduce.call(td, function(a, b) {
-    return a + parseInt(b.innerText);
-}, 0);
-
-document.getElementById('area_total').innerText = total;
-
-                    },
-                     importe: function () {
-               var td = document.querySelectorAll('#table_trans > tbody > tr > td:nth-child(6)');
-
-var total = [].reduce.call(td, function(a, b) {
-    return a + parseInt(b.innerText);
-}, 0);
-
-document.getElementById('area_total1').innerText = total;
-
-                    },
-             sum1: function () {
-      var table =document.getElementById("table"), sumVal = 0;
-      for(var i = 1; i < table.rows.length; i++)
-      {
-          sumVal = sumVal + parseInt(table.rows[i].cells[4].innerHTML);
-             }
-             document.getElementById("val2").innerHTML = sumVal;
-    },
             listarHistorial (page,buscar2,criterio2,buscar1,criterio1,buscar,criterio){
                 let me=this;
                 var url= this.ruta + '/historial?page=' + page + '&buscar2='+ buscar2 + '&criterio2='+ criterio2 + '&buscar1='+ buscar1 + '&criterio1='+ criterio1 + '&buscar='+ buscar + '&criterio='+ criterio;
