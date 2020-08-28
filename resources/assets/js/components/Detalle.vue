@@ -8,47 +8,49 @@
                 <!-- Ejemplo de tabla Listado -->
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i> Detalle Salida de Productos
+                         <button type="button" class="btn btn-secondary">
+                            <i class="fa fa-cog fa-spin"></i>&nbsp;Detalle Entrada de Articulos
+                        </button>
+                        <button type="button" @click="tableToExcel('table_trans', 'name', 'Reporte.xls')" class="btn btn-info">
+                            <i class="fa fa-file-excel-o"></i>&nbsp;Obtener Reporte Excel
+                        </button>
+                        <button type="button" v-print="printObj" class="btn btn-warning">Imprimir Reporte  <i class="fa fa-print"></i>
+                        </button>
                     </div>
                     <div class="card-body">
-                       <div class="form-group row">
-                            <div class="col-md-6">
+                        <div class="form-group row">
+                            <div class="col-md-12" >
                                 <div class="input-group">
-                                    <select class="form-control col-md-3" v-model="criterio">
-                                      <option value="articulo">Nombre</option>
-                                      <option value="created_at">Fecha</option>
+                                <select class="form-control col-md-1" v-model="criterio2">
+                                      <option value="articulo">Articulo</option>
+                                    </select>                                    
+                                    <input type="text" v-model="buscar2" class="form-control;col-md-2" placeholder="Escribe el Articulo">
+                                    <select class="form-control col-md-2" v-model="criterio1">
+                                      <option value="created_at">Fecha Inicial</option>
+                                    </select>                                    
+                                    <input type="date" v-model="buscar1" class="form-control;col-md-3" placeholder="Escribe el Articulo">
+                                     <select class="form-control col-md-2" v-model="criterio">
                                       
+                                      <option value="created_at">Fecha Final</option>
                                       
-                                     
                                     </select>
-                                    <template v-if="criterio === 'articulo'">
-                                    <input v-autofocus type="text" v-model="buscar" @keyup.enter="listarDetalle(1,buscar,criterio); salida3(); importe()" class="form-control" placeholder="Texto a buscar">
-                                    </template>
-                                    <template v-if="criterio === 'created_at'">
-                                    <input type="date" v-model="buscar" class="form-control" placeholder="Texto a buscar">
-                                    </template>
-                                   
-                                     
-
-                                    <button type="submit" @click="listarDetalle(1,buscar,criterio); salida3(); importe()" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div align="right">
-                                <button  style="font-size:18px" v-print="printObj">Imprimir Reporte <i class="fa fa-print"></i></button>
-                                </div>
-
+                                    <input type="date" v-model="buscar"  class="form-control;col-md-2" placeholder="Escribe el Articulo a Buscar">
+                                    <button type="submit" @click="listarDetalle(1,buscar2,criterio2,buscar1,criterio1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                                     </div>
+                                      </div>
+                                      </div>
+                               </div>
                          <div class="table-wrapper-scroll-y my-custom-scrollbar">
                         <table id="table_trans" class="table table-bordered table-striped table-sm">
-                            <caption><h2>Reporte Salida de Articulos Inventariables</h2></caption>
-                            <caption> <h4>Piezas Vendidas</h4>
-                              <h4 id="area_total"></h4>
-                            </caption>
-                            <caption> <h4>Importe Piezas</h4>
-                              <h4 id="area_total1"></h4>
-                            </caption>
-                             <thead>
-                                 
+                              <thead>
+                              <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th># {{ calcularCantidad }}</th>
+                                    <th></th>
+                                    <th>$ {{ calcularImporte }}</th>
+                                    <th></th>
+                              </tr> 
                               <tr>  
                                 
                                     <th>Fecha de Venta</th>
@@ -164,7 +166,7 @@ Vue.use(Print);
             return {
                 printObj: {
               id: "table_trans",
-              popTitle: '',
+              popTitle: 'Reporte Salida de Articulos - Periodo',
               extraCss: 'https://www.google.com,https://www.google.com',
               extraHead: '<meta http-equiv="Content-Language"content="zh-cn"/>'
             },
@@ -191,11 +193,31 @@ Vue.use(Print);
                     'to' : 0,
                 },
                 offset : 3,
-                criterio : 'articulo',
-                buscar : ''
+                criterio2 : 'articulo',
+                criterio1 : 'created_at',
+                criterio : 'created_at',
+                buscar2 : '',
+                buscar1 : '',
+                buscar : '',
             }
         },
         computed:{
+            calcularCantidad: function(){
+                var resultado1=0.0;
+                
+                for(var i=0;i<this.arrayDetalle.length;i++){
+                 resultado1=resultado1+(this.arrayDetalle[i].cantidad*1)
+                }
+                return resultado1;
+            },
+            calcularImporte: function(){
+                var resultado1=0.0;
+                
+                for(var i=0;i<this.arrayDetalle.length;i++){
+                 resultado1=resultado1+(this.arrayDetalle[i].precio4*this.arrayDetalle[i].cantidad)
+                }
+                return resultado1;
+            },
             isActived: function(){
                 return this.pagination.current_page;
             },
@@ -225,28 +247,20 @@ Vue.use(Print);
             }
         },
         methods : {
-            salida3: function () {
-               var td = document.querySelectorAll('#table_trans > tbody > tr > td:nth-child(3)');
+            tableToExcel:  function (table, name, filename) {
+        let uri = 'data:application/vnd.ms-excel;base64,', 
+        template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><title></title><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/></head><body><table>{table}</table></body></html>', 
+        base64 = function(s) { return window.btoa(decodeURIComponent(encodeURIComponent(s))) },         format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; })}
+        
+        if (!table.nodeType) table = document.getElementById(table)
+        var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
 
-var total = [].reduce.call(td, function(a, b) {
-    return a + parseInt(b.innerText);
-}, 0);
-
-document.getElementById('area_total').innerText = total;
-
-                    },
-                     importe: function () {
-               var td = document.querySelectorAll('#table_trans > tbody > tr > td:nth-child(4)');
-
-var total = [].reduce.call(td, function(a, b) {
-    return a + parseInt(b.innerText);
-}, 0);
-
-document.getElementById('area_total1').innerText = total;
-
-                    },
-
-                    abrirModal(modelo, accion, data = []){
+        var link = document.createElement('a');
+        link.download = filename;
+        link.href = uri + base64(format(template, ctx));
+        link.click();
+            },
+             abrirModal(modelo, accion, data = []){
                 switch(modelo){
                     case "historial2":
                     {
@@ -277,9 +291,9 @@ document.getElementById('area_total1').innerText = total;
                     }
                 }
                },
-            listarDetalle (page,buscar,criterio){
+            listarDetalle (page,buscar2,criterio2,buscar1,criterio1,buscar,criterio){
                 let me=this;
-                var url= this.ruta + '/salida3?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
+                var url= this.ruta + '/salida3?page=' + page + '&buscar2='+ buscar2 + '&criterio2='+ criterio2 + '&buscar1='+ buscar1 + '&criterio1='+ criterio1 + '&buscar='+ buscar + '&criterio='+ criterio;
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
                     me.arrayDetalle = respuesta.historial2.data;
@@ -289,12 +303,12 @@ document.getElementById('area_total1').innerText = total;
                     console.log(error);
                 });
             },
-            cambiarPagina(page,buscar,criterio){
+            cambiarPagina(page,buscar2,criterio2,buscar1,criterio1,buscar,criterio){
                 let me = this;
                 //Actualiza la página actual
                 me.pagination.current_page = page;
                 //Envia la petición para visualizar la data de esa página
-                me.listarDetalle(page,buscar,criterio);
+                me.listarDetalle(page,buscar2,criterio2,buscar1,criterio1,buscar,criterio);
             },
              cerrarModal(){
                 this.modal=0;
@@ -335,7 +349,7 @@ document.getElementById('area_total1').innerText = total;
             }
         },
         mounted() {
-            this.listarDetalle(1,this.buscar,this.criterio);
+            this.listarDetalle(1,this.buscar2,this.criterio2,this.buscar1,this.criterio1,this.buscar,this.criterio);
         }
     }
 </script>

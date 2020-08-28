@@ -82,6 +82,10 @@ class HistorialSalidaController extends Controller
     {
         if (!$request->ajax()) return redirect('/');
 
+        $buscar2 = $request->buscar2;
+        $criterio2 = $request->criterio2;
+        $buscar1 = $request->buscar1;
+        $criterio1 = $request->criterio1;
         $buscar = $request->buscar;
         $criterio = $request->criterio;
         
@@ -91,9 +95,12 @@ class HistorialSalidaController extends Controller
             ->orderBy('id', 'desc')->paginate(10000);
         }
         else{
-            $historial2 = Historial2::where($criterio, 'like', '%'. $buscar . '%')
-            
-            ->orderBy('id', 'desc')->paginate(10000000);
+            $historial2 = Historial2::where($criterio2, 'like', '%'. $buscar2 . '%')
+            ->whereDate($criterio1, '>=', $buscar1 )
+            ->whereDate($criterio, '<=', $buscar)
+            ->where('inventariable','=','1')
+            ->orderBy('id', 'desc')
+            ->paginate(10000000);
         }
         
 
