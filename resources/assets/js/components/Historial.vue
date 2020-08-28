@@ -36,7 +36,7 @@
                                       
                                     </select>
                                     <input type="date" v-model="buscar"  class="form-control;col-md-2" placeholder="Escribe el Articulo a Buscar">
-                                    <button type="submit" @click="listarHistorial(1,buscar2,criterio2,buscar1,criterio1,buscar,criterio);importe()" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                                    <button type="submit" @click="listarHistorial(1,buscar2,criterio2,buscar1,criterio1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                                      </div>
                                       </div>
                                       </div>

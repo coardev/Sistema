@@ -62398,6 +62398,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -62408,7 +62411,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default.a);
         return {
             printObj: {
                 id: "table_trans",
-                popTitle: '',
+                popTitle: 'Reporte Detalle Salida Interna',
                 extraCss: 'https://www.google.com,https://www.google.com',
                 extraHead: '<meta http-equiv="Content-Language"content="zh-cn"/>'
             },
@@ -62436,12 +62439,32 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default.a);
                 'to': 0
             },
             offset: 3,
+            criterio2: 'articulo',
+            buscar2: '',
+            criterio1: 'created_at',
+            buscar1: '',
             criterio: 'created_at',
             buscar: ''
         };
     },
 
     computed: {
+        calcularCantidad: function calcularCantidad() {
+            var resultado1 = 0.0;
+
+            for (var i = 0; i < this.arrayDetalle.length; i++) {
+                resultado1 = resultado1 + this.arrayDetalle[i].cantidad * 1;
+            }
+            return resultado1;
+        },
+        calcularImporte: function calcularImporte() {
+            var resultado1 = 0.0;
+
+            for (var i = 0; i < this.arrayDetalle.length; i++) {
+                resultado1 = resultado1 + this.arrayDetalle[i].precio4 * 1;
+            }
+            return resultado1;
+        },
         isActived: function isActived() {
             return this.pagination.current_page;
         },
@@ -62470,25 +62493,26 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default.a);
         }
     },
     methods: {
-        salida3: function salida3() {
-            var td = document.querySelectorAll('#table_trans > tbody > tr > td:nth-child(4)');
+        tableToExcel: function tableToExcel(table, name, filename) {
+            var uri = 'data:application/vnd.ms-excel;base64,',
+                template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><title></title><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/></head><body><table>{table}</table></body></html>',
+                base64 = function base64(s) {
+                return window.btoa(decodeURIComponent(encodeURIComponent(s)));
+            },
+                format = function format(s, c) {
+                return s.replace(/{(\w+)}/g, function (m, p) {
+                    return c[p];
+                });
+            };
 
-            var total = [].reduce.call(td, function (a, b) {
-                return a + parseInt(b.innerText);
-            }, 0);
+            if (!table.nodeType) table = document.getElementById(table);
+            var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML };
 
-            document.getElementById('area_total').innerText = total;
+            var link = document.createElement('a');
+            link.download = filename;
+            link.href = uri + base64(format(template, ctx));
+            link.click();
         },
-        importe: function importe() {
-            var td = document.querySelectorAll('#table_trans > tbody > tr > td:nth-child(5)');
-
-            var total = [].reduce.call(td, function (a, b) {
-                return a + parseInt(b.innerText);
-            }, 0);
-
-            document.getElementById('area_total1').innerText = total;
-        },
-
         abrirModal: function abrirModal(modelo, accion) {
             var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
 
@@ -62520,9 +62544,9 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default.a);
                     }
             }
         },
-        listarDetalle: function listarDetalle(page, buscar, criterio) {
+        listarDetalle: function listarDetalle(page, buscar2, criterio2, buscar1, criterio1, buscar, criterio) {
             var me = this;
-            var url = this.ruta + '/salida2?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
+            var url = this.ruta + '/salida2?page=' + page + '&buscar2=' + buscar2 + '&criterio2=' + criterio2 + '&buscar1=' + buscar1 + '&criterio1=' + criterio1 + '&buscar=' + buscar + '&criterio=' + criterio;
             axios.get(url).then(function (response) {
                 var respuesta = response.data;
                 me.arrayDetalle = respuesta.historial2.data;
@@ -62531,12 +62555,12 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default.a);
                 console.log(error);
             });
         },
-        cambiarPagina: function cambiarPagina(page, buscar, criterio) {
+        cambiarPagina: function cambiarPagina(page, buscar2, criterio2, buscar1, criterio1, buscar, criterio) {
             var me = this;
             //Actualiza la página actual
             me.pagination.current_page = page;
             //Envia la petición para visualizar la data de esa página
-            me.listarDetalle(page, buscar, criterio);
+            me.listarDetalle(page, buscar2, criterio2, buscar1, criterio1, buscar, criterio);
         },
         cerrarModal: function cerrarModal() {
             this.modal = 0;
@@ -62574,7 +62598,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default.a);
         }
     },
     mounted: function mounted() {
-        this.listarDetalle(1, this.buscar, this.criterio);
+        this.listarDetalle(1, this.buscar2, this.criterio2, this.buscar1, this.criterio1, this.buscar, this.criterio);
     }
 });
 
@@ -62591,173 +62615,248 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "container-fluid" }, [
       _c("div", { staticClass: "card" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "card-header" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-info",
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  return _vm.tableToExcel("table_trans", "name", "Reporte.xls")
+                }
+              }
+            },
+            [
+              _c("i", { staticClass: "fa fa-file-excel-o" }),
+              _vm._v(" Obtener Reporte Excel\n                ")
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              directives: [
+                {
+                  name: "print",
+                  rawName: "v-print",
+                  value: _vm.printObj,
+                  expression: "printObj"
+                }
+              ],
+              staticClass: "btn btn-warning",
+              attrs: { type: "button" }
+            },
+            [
+              _vm._v("Imprimir Reporte  "),
+              _c("i", { staticClass: "fa fa-print" })
+            ]
+          )
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c("div", { staticClass: "form-group row" }, [
-            _c("div", { staticClass: "col-md-6" }, [
-              _c(
-                "div",
-                { staticClass: "input-group" },
-                [
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.criterio,
-                          expression: "criterio"
-                        }
-                      ],
-                      staticClass: "form-control col-md-3",
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.criterio = $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        }
-                      }
-                    },
-                    [
-                      _c("option", { attrs: { value: "articulo" } }, [
-                        _vm._v("Nombre")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "created_at" } }, [
-                        _vm._v("Fecha")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _vm.criterio === "articulo"
-                    ? [
-                        _c("input", {
-                          directives: [
-                            { name: "autofocus", rawName: "v-autofocus" },
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.buscar,
-                              expression: "buscar"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            placeholder: "Texto a buscar"
-                          },
-                          domProps: { value: _vm.buscar },
-                          on: {
-                            keyup: function($event) {
-                              if (
-                                !$event.type.indexOf("key") &&
-                                _vm._k(
-                                  $event.keyCode,
-                                  "enter",
-                                  13,
-                                  $event.key,
-                                  "Enter"
-                                )
-                              ) {
-                                return null
-                              }
-                              _vm.listarDetalle(1, _vm.buscar, _vm.criterio)
-                              _vm.salida3()
-                              _vm.importe()
-                            },
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.buscar = $event.target.value
-                            }
-                          }
-                        })
-                      ]
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.criterio === "created_at"
-                    ? [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.buscar,
-                              expression: "buscar"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "date",
-                            placeholder: "Texto a buscar"
-                          },
-                          domProps: { value: _vm.buscar },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.buscar = $event.target.value
-                            }
-                          }
-                        })
-                      ]
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { type: "submit" },
-                      on: {
-                        click: function($event) {
-                          _vm.listarDetalle(1, _vm.buscar, _vm.criterio)
-                          _vm.salida3()
-                          _vm.importe()
-                        }
-                      }
-                    },
-                    [
-                      _c("i", { staticClass: "fa fa-search" }),
-                      _vm._v(" Buscar")
-                    ]
-                  )
-                ],
-                2
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { attrs: { align: "right" } }, [
-            _c(
-              "button",
-              {
-                directives: [
+            _c("div", { staticClass: "col-md-12" }, [
+              _c("div", { staticClass: "input-group" }, [
+                _c(
+                  "select",
                   {
-                    name: "print",
-                    rawName: "v-print",
-                    value: _vm.printObj,
-                    expression: "printObj"
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.criterio2,
+                        expression: "criterio2"
+                      }
+                    ],
+                    staticClass: "form-control col-md-1",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.criterio2 = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "articulo" } }, [
+                      _vm._v("Articulo")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.buscar2,
+                      expression: "buscar2"
+                    }
+                  ],
+                  staticClass: "form-control;col-md-2",
+                  attrs: { type: "text", placeholder: "Escribe el Articulo" },
+                  domProps: { value: _vm.buscar2 },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.buscar2 = $event.target.value
+                    }
                   }
-                ],
-                staticStyle: { "font-size": "18px" }
-              },
-              [
-                _vm._v("Imprimir Reporte "),
-                _c("i", { staticClass: "fa fa-print" })
-              ]
-            )
+                }),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.criterio1,
+                        expression: "criterio1"
+                      }
+                    ],
+                    staticClass: "form-control col-md-2",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.criterio1 = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "created_at" } }, [
+                      _vm._v("Fecha Inicial")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.buscar1,
+                      expression: "buscar1"
+                    }
+                  ],
+                  staticClass: "form-control;col-md-3",
+                  attrs: { type: "date", placeholder: "Escribe el Articulo" },
+                  domProps: { value: _vm.buscar1 },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.buscar1 = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.criterio,
+                        expression: "criterio"
+                      }
+                    ],
+                    staticClass: "form-control col-md-2",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.criterio = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "created_at" } }, [
+                      _vm._v("Fecha Final")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.buscar,
+                      expression: "buscar"
+                    }
+                  ],
+                  staticClass: "form-control;col-md-2",
+                  attrs: {
+                    type: "date",
+                    placeholder: "Escribe el Articulo a Buscar"
+                  },
+                  domProps: { value: _vm.buscar },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.buscar = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "submit" },
+                    on: {
+                      click: function($event) {
+                        return _vm.listarDetalle(
+                          1,
+                          _vm.buscar2,
+                          _vm.criterio2,
+                          _vm.buscar1,
+                          _vm.criterio1,
+                          _vm.buscar,
+                          _vm.criterio
+                        )
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fa fa-search" }), _vm._v(" Buscar")]
+                )
+              ])
+            ])
           ]),
           _vm._v(" "),
           _c(
@@ -62785,11 +62884,23 @@ var render = function() {
                 [
                   _vm._m(1),
                   _vm._v(" "),
-                  _vm._m(2),
-                  _vm._v(" "),
-                  _vm._m(3),
-                  _vm._v(" "),
                   _c("thead", [
+                    _c("tr", [
+                      !_vm.isHidden ? _c("th") : _vm._e(),
+                      _vm._v(" "),
+                      _c("th", [
+                        _vm._v("Total: " + _vm._s(_vm.arrayDetalle.length))
+                      ]),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("# " + _vm._s(_vm.calcularCantidad))]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("$ " + _vm._s(_vm.calcularImporte))]),
+                      _vm._v(" "),
+                      _c("th")
+                    ]),
+                    _vm._v(" "),
                     _c("tr", [
                       !_vm.isHidden ? _c("th", [_vm._v("Opciones")]) : _vm._e(),
                       _vm._v(" "),
@@ -63152,10 +63263,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("i", { staticClass: "fa fa-align-justify" }),
-      _vm._v(" Detalle Salida de Inventario Interno\n            ")
-    ])
+    return _c(
+      "button",
+      { staticClass: "btn btn-secondary", attrs: { type: "button" } },
+      [
+        _c("i", { staticClass: "fa fa-cog fa-spin" }),
+        _vm._v(" Detalle Salida Inventario Interno\n                ")
+      ]
+    )
   },
   function() {
     var _vm = this
@@ -63163,26 +63278,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("caption", [
       _c("h2", [_vm._v("Reporte Salida - Inventario Interno")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("caption", [
-      _c("h4", [_vm._v("Piezas Vendidas")]),
-      _vm._v(" "),
-      _c("h4", { attrs: { id: "area_total" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("caption", [
-      _c("h4", [_vm._v("Importe Piezas")]),
-      _vm._v(" "),
-      _c("h4", { attrs: { id: "area_total1" } })
     ])
   }
 ]
@@ -68795,7 +68890,7 @@ var render = function() {
                     attrs: { type: "submit" },
                     on: {
                       click: function($event) {
-                        _vm.listarHistorial(
+                        return _vm.listarHistorial(
                           1,
                           _vm.buscar2,
                           _vm.criterio2,
@@ -68804,7 +68899,6 @@ var render = function() {
                           _vm.buscar,
                           _vm.criterio
                         )
-                        _vm.importe()
                       }
                     }
                   },
