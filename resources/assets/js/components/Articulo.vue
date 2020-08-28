@@ -13,8 +13,8 @@
                             <i class="icon-plus"></i>&nbsp;Nuevo
                         </button>
                         
-                        <button type="button" v-print="printObj" class="btn btn-info">
-                            <i class="fas fa-file-pdf"></i>&nbsp;Reporte PDF
+                        <button type="button" v-print="printObj" class="btn btn-warning">
+                            <i class="fa fa-print"></i>&nbsp;Imprimir Reporte
                         </button>
 
                         <button type="button" @click="tableToExcel('myTable', 'name', 'Reporte.xls')" class="btn btn-info">

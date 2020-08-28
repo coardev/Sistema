@@ -52042,12 +52042,12 @@ var render = function() {
                   expression: "printObj"
                 }
               ],
-              staticClass: "btn btn-info",
+              staticClass: "btn btn-warning",
               attrs: { type: "button" }
             },
             [
-              _c("i", { staticClass: "fas fa-file-pdf" }),
-              _vm._v(" Reporte PDF\n                ")
+              _c("i", { staticClass: "fa fa-print" }),
+              _vm._v(" Imprimir Reporte\n                ")
             ]
           ),
           _vm._v(" "),
