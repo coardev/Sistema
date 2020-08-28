@@ -55,7 +55,7 @@
                                     </div>
                             </div>
                         </div>
-                        <button v-on:click="isHidden = !isHidden">Mostrar</button>
+                        <button type="button" class="btn btn-success" v-on:click="isHidden = !isHidden">Mostrar</button>
                         <div class="table-wrapper-scroll-y my-custom-scrollbar">
                         <table id="myTable" border="3" class="table table-bordered table-striped table-sm">
                                 <thead>

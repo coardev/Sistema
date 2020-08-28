@@ -52314,6 +52314,8 @@ var render = function() {
           _c(
             "button",
             {
+              staticClass: "btn btn-success",
+              attrs: { type: "button" },
               on: {
                 click: function($event) {
                   _vm.isHidden = !_vm.isHidden
@@ -55264,6 +55266,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -55275,7 +55294,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default.a);
         return {
             printObj: {
                 id: "myTable",
-                popTitle: '',
+                popTitle: 'Reporte de Inventario',
                 extraCss: 'https://www.google.com,https://www.google.com',
                 extraHead: '<meta http-equiv="Content-Language"content="zh-cn"/>'
             },
@@ -55846,12 +55865,12 @@ var render = function() {
                   expression: "printObj"
                 }
               ],
-              staticClass: "btn btn-info",
+              staticClass: "btn btn-warning",
               attrs: { type: "button" }
             },
             [
-              _c("i", { staticClass: "fas fa-file-pdf" }),
-              _vm._v(" Reporte PDF\n                        ")
+              _c("i", { staticClass: "fa fa-print" }),
+              _vm._v(" Imprimir Reporte\n                        ")
             ]
           ),
           _vm._v(" "),
@@ -56118,6 +56137,8 @@ var render = function() {
           _c(
             "button",
             {
+              staticClass: "btn btn-success",
+              attrs: { type: "button" },
               on: {
                 click: function($event) {
                   _vm.isHidden = !_vm.isHidden
@@ -56138,11 +56159,39 @@ var render = function() {
                   attrs: { id: "myTable", border: "3" }
                 },
                 [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _vm._m(1),
-                  _vm._v(" "),
                   _c("thead", [
+                    _c("tr", [
+                      !_vm.isHidden ? _c("th") : _vm._e(),
+                      _vm._v(" "),
+                      !_vm.isHidden ? _c("th") : _vm._e(),
+                      _vm._v(" "),
+                      _c("th", [
+                        _vm._v("Total: " + _vm._s(_vm.arrayArticulo.length))
+                      ]),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th")
+                    ]),
+                    _vm._v(" "),
                     _c("tr", [
                       !_vm.isHidden
                         ? _c("th", [_vm._v("Actualizar")])
@@ -56819,7 +56868,7 @@ var render = function() {
                               })
                             ]),
                             _vm._v(" "),
-                            _vm._m(2),
+                            _vm._m(0),
                             _vm._v(" "),
                             _c("div", { staticClass: "col-md-3" }, [
                               _c("input", {
@@ -57097,7 +57146,7 @@ var render = function() {
                                   "div",
                                   { staticClass: "text-center text-error" },
                                   [
-                                    _vm._m(3),
+                                    _vm._m(1),
                                     _vm._v(" "),
                                     _vm._l(
                                       _vm.errorMostrarMsjArticulo,
@@ -57468,7 +57517,7 @@ var render = function() {
                               })
                             ]),
                             _vm._v(" "),
-                            _vm._m(4),
+                            _vm._m(2),
                             _vm._v(" "),
                             _c("div", { staticClass: "col-md-3" }, [
                               _c("input", {
@@ -58314,23 +58363,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("caption", [
-      _c("h2", [_vm._v("Reporte de Articulos en Inventario")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("caption", [
-      _c("h2", [_vm._v("Numero de Articulos:")]),
-      _c("h2", { attrs: { id: "demo" } })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

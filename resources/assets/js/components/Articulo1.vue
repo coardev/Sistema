@@ -13,8 +13,8 @@
                             <i class="icon-plus"></i>&nbsp;Nuevo
                         </button>
                         
-                        <button type="button" v-print="printObj" class="btn btn-info">
-                            <i class="fas fa-file-pdf"></i>&nbsp;Reporte PDF
+                         <button type="button" v-print="printObj" class="btn btn-warning">
+                            <i class="fa fa-print"></i>&nbsp;Imprimir Reporte
                         </button>
 
                         <button type="button" @click="tableToExcel('myTable', 'name', 'Reporte.xls')" class="btn btn-info">
@@ -55,12 +55,29 @@
                                     </div>
                             </div>
                         </div>
-                        <button v-on:click="isHidden = !isHidden">Mostrar</button>
+                        <button type="button" class="btn btn-success" v-on:click="isHidden = !isHidden">Mostrar</button>
                         <div class="table-wrapper-scroll-y my-custom-scrollbar">
                         <table id="myTable" border="3" class="table table-bordered table-striped table-sm">
-                            <caption><h2>Reporte de Articulos en Inventario</h2></caption>
-                            <caption><h2>Numero de Articulos:</h2><h2 id="demo"></h2></caption>
+                            
                             <thead>
+                            <tr>
+                                    
+                                    <th v-if="!isHidden"></th>
+                                    <th v-if="!isHidden"></th>
+                                    <th>Total: {{ arrayArticulo.length }}</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>                                 
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+
+                                </tr>
                                 <tr>
                                     
                                     <th v-if="!isHidden">Actualizar</th>
@@ -500,7 +517,7 @@ Vue.use(Print);
             return {
                 printObj: {
               id: "myTable",
-              popTitle: '',
+              popTitle: 'Reporte de Inventario',
               extraCss: 'https://www.google.com,https://www.google.com',
               extraHead: '<meta http-equiv="Content-Language"content="zh-cn"/>'
             },
