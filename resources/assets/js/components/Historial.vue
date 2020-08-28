@@ -53,7 +53,7 @@
                                                       
                             <thead>
                                 <tr>
-                                    <th></th>
+                                    <th>Total de Entradas: {{ arrayHistorial.length }}</th>
                                     <th></th>
                                     <th> # {{ calcularEntrada }}</th>
                                     <th> # {{ calcularReingreso }}</th>

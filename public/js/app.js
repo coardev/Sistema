@@ -61703,7 +61703,11 @@ var render = function() {
               [
                 _c("thead", [
                   _c("tr", [
-                    _c("th"),
+                    _c("th", [
+                      _vm._v(
+                        "Total de Salidas: " + _vm._s(_vm.arrayDetalle.length)
+                      )
+                    ]),
                     _vm._v(" "),
                     _c("th"),
                     _vm._v(" "),
@@ -62071,7 +62075,7 @@ var staticRenderFns = [
       { staticClass: "btn btn-secondary", attrs: { type: "button" } },
       [
         _c("i", { staticClass: "fa fa-cog fa-spin" }),
-        _vm._v(" Detalle Entrada de Articulos\n                ")
+        _vm._v(" Detalle Salida de Articulos\n                ")
       ]
     )
   },
@@ -68782,7 +68786,12 @@ var render = function() {
               [
                 _c("thead", [
                   _c("tr", [
-                    _c("th"),
+                    _c("th", [
+                      _vm._v(
+                        "Total de Entradas: " +
+                          _vm._s(_vm.arrayHistorial.length)
+                      )
+                    ]),
                     _vm._v(" "),
                     _c("th"),
                     _vm._v(" "),

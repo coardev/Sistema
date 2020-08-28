@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header">
                          <button type="button" class="btn btn-secondary">
-                            <i class="fa fa-cog fa-spin"></i>&nbsp;Detalle Entrada de Articulos
+                            <i class="fa fa-cog fa-spin"></i>&nbsp;Detalle Salida de Articulos
                         </button>
                         <button type="button" @click="tableToExcel('table_trans', 'name', 'Reporte.xls')" class="btn btn-info">
                             <i class="fa fa-file-excel-o"></i>&nbsp;Obtener Reporte Excel
@@ -44,7 +44,7 @@
                         <table id="table_trans" class="table table-bordered table-striped table-sm">
                               <thead>
                               <tr>
-                                    <th></th>
+                                    <th>Total de Salidas: {{ arrayDetalle.length }}</th>
                                     <th></th>
                                     <th># {{ calcularCantidad }}</th>
                                     <th></th>
