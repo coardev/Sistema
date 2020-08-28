@@ -48,7 +48,7 @@
                             </div>       
                             <img src="img/corte.png"  class="img-responsive" height="100" width="100" alt="">
                              <div class="form-group">
-                            <input type="text" name="txtr" id="txtr" readonly />
+                            <input type="text" name="txtr" id="txtr" v-model="calcularCorte1" readonly />
                             </div></div>
                             <div align="center" class="col-md-2">
                             <div>
@@ -56,7 +56,7 @@
                             </div>      
                             <img src="img/money.png" class="img-responsive" height="100" width="100" alt="">
                             <div class="form-group">
-                            <p>${{myLocalData}}</p>
+                            <p>${{calcularEfectivo}}</p>
                             </div></div>
                             <div align="center" class="col-md-2">
                             <div> 
@@ -64,7 +64,7 @@
                             </div>       
                             <img src="img/card2.png" class="img-responsive" height="100" width="100" alt="">
                             <div class="form-group">
-                            <p>${{myLocalData1}}</p>
+                            <p>${{calcularTarjeta}}</p>
                             </div></div>
                             <div align="center" class="col-md-2">
                             <div>
@@ -72,7 +72,7 @@
                             </div>
                             <img src="img/vale.png" class="img-responsive" height="100" width="100" alt="">
                             <div class="form-group">
-                            <p>${{myLocalData2}}</p>
+                            <p>${{calcularVales}}</p>
                             </div></div>
                             <div align="center" class="col-md-2">
                             <div>
@@ -80,7 +80,7 @@
                             </div>
                             <img src="img/bag.png" class="img-responsive" height="100" width="100" alt="">
                             <div class="form-group">
-                            <h2 id="demo"></h2>
+                            <h2>{{ arrayVenta.length }}</h2>
                             </div></div>
                             
                             
@@ -96,12 +96,12 @@
                                     <th></th>
                                     <th></th>
                                     <th></th>
-                                    <th style="background-color:#ff8080;" id="area_total"></th>
-                                    <th style="background-color:#ff8080;" id="area_total1"></th>
-                                    <th style="background-color:#ff8080;" id="area_total2"></th>
-                                    <th style="background-color:#ff8080;" id="area_total5"></th>
-                                    <th style="background-color:#ff8080;" id="area_total4"></th>
-                                    <th style="background-color:#ff8080;" id="area_total6"></th>
+                                    <th>$ {{ calcularEfectivo }}</th>
+                                    <th>$ {{ calcularTarjeta }}</th>
+                                    <th>$ {{ calcularVales }}</th>
+                                    <th>$ {{ calcularCambio }}</th>
+                                    <th>$ {{ calcularCorte }}</th>
+                                    <th>$ {{ calcularReal }}</th>
                                     <th></th>
                              
                                </tr>
@@ -525,6 +525,78 @@
                     from++;
                 }
                 return pagesArray;
+            },
+            calcularCambio: function(){
+                var resultado1=0.0;
+                
+                for(var i=0;i<this.arrayVenta.length;i++){
+                 resultado1=resultado1+(this.arrayVenta[i].cambio*1)
+                }
+                return resultado1;
+            },
+            calcularReal: function(){
+                var resultado1=0.0;
+                
+                for(var i=0;i<this.arrayVenta.length;i++){
+                 resultado1=resultado1+(this.arrayVenta[i].efectivo - this.arrayVenta[i].cambio)
+                }
+                return resultado1;
+            },
+            calcularEfectivo: function(){
+                var resultado1=0.0;
+                
+                for(var i=0;i<this.arrayVenta.length;i++){
+                 resultado1=resultado1+(this.arrayVenta[i].efectivo*1)
+                }
+                return resultado1;
+            },
+            calcularTarjeta: function(){
+                var resultado1=0.0;
+                
+                for(var i=0;i<this.arrayVenta.length;i++){
+                 resultado1=resultado1+(this.arrayVenta[i].tarjeta*1)
+                }
+                return resultado1;
+            },
+            calcularVales: function(){
+                var resultado1=0.0;
+                
+                for(var i=0;i<this.arrayVenta.length;i++){
+                 resultado1=resultado1+(this.arrayVenta[i].vales*1)
+                }
+                return resultado1;
+            },
+            calcularCorte: function(){
+                var resultado1=0.0;
+                var resultado2=0.0;
+                var resultado3=0.0;
+                for(var i=0;i<this.arrayVenta.length;i++){
+                 resultado1=resultado1+=(this.arrayVenta[i].tarjeta*1)
+                }
+                for(var i=0;i<this.arrayVenta.length;i++){
+                 resultado2=resultado2+=(this.arrayVenta[i].vales*1)
+                }
+                for(var i=0;i<this.arrayVenta.length;i++){
+                 resultado3=resultado3+=(this.arrayVenta[i].efectivo1*1)
+                }
+                return resultado1+resultado2+resultado3;
+            },
+            calcularCorte1: function(){
+                var resultado1=0.0;
+                var resultado2=0.0;
+                var resultado3=0.0;
+                var resultado4=0.0;
+                for(var i=0;i<this.arrayVenta.length;i++){
+                 resultado1=resultado1+=(this.arrayVenta[i].tarjeta*1)
+                }
+                for(var i=0;i<this.arrayVenta.length;i++){
+                 resultado2=resultado2+=(this.arrayVenta[i].vales*1)
+                }
+                for(var i=0;i<this.arrayVenta.length;i++){
+                 resultado3=resultado3+=(this.arrayVenta[i].efectivo1*1)
+                }
+                resultado4=resultado4+(this.dinero*1)
+                return resultado1+resultado2+resultado3+resultado4;
             },
             calcularTotal: function(){
                 var resultado=0.0;

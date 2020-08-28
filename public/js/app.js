@@ -89041,6 +89041,78 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue2
             }
             return pagesArray;
         },
+        calcularCambio: function calcularCambio() {
+            var resultado1 = 0.0;
+
+            for (var i = 0; i < this.arrayVenta.length; i++) {
+                resultado1 = resultado1 + this.arrayVenta[i].cambio * 1;
+            }
+            return resultado1;
+        },
+        calcularReal: function calcularReal() {
+            var resultado1 = 0.0;
+
+            for (var i = 0; i < this.arrayVenta.length; i++) {
+                resultado1 = resultado1 + (this.arrayVenta[i].efectivo - this.arrayVenta[i].cambio);
+            }
+            return resultado1;
+        },
+        calcularEfectivo: function calcularEfectivo() {
+            var resultado1 = 0.0;
+
+            for (var i = 0; i < this.arrayVenta.length; i++) {
+                resultado1 = resultado1 + this.arrayVenta[i].efectivo * 1;
+            }
+            return resultado1;
+        },
+        calcularTarjeta: function calcularTarjeta() {
+            var resultado1 = 0.0;
+
+            for (var i = 0; i < this.arrayVenta.length; i++) {
+                resultado1 = resultado1 + this.arrayVenta[i].tarjeta * 1;
+            }
+            return resultado1;
+        },
+        calcularVales: function calcularVales() {
+            var resultado1 = 0.0;
+
+            for (var i = 0; i < this.arrayVenta.length; i++) {
+                resultado1 = resultado1 + this.arrayVenta[i].vales * 1;
+            }
+            return resultado1;
+        },
+        calcularCorte: function calcularCorte() {
+            var resultado1 = 0.0;
+            var resultado2 = 0.0;
+            var resultado3 = 0.0;
+            for (var i = 0; i < this.arrayVenta.length; i++) {
+                resultado1 = resultado1 += this.arrayVenta[i].tarjeta * 1;
+            }
+            for (var i = 0; i < this.arrayVenta.length; i++) {
+                resultado2 = resultado2 += this.arrayVenta[i].vales * 1;
+            }
+            for (var i = 0; i < this.arrayVenta.length; i++) {
+                resultado3 = resultado3 += this.arrayVenta[i].efectivo1 * 1;
+            }
+            return resultado1 + resultado2 + resultado3;
+        },
+        calcularCorte1: function calcularCorte1() {
+            var resultado1 = 0.0;
+            var resultado2 = 0.0;
+            var resultado3 = 0.0;
+            var resultado4 = 0.0;
+            for (var i = 0; i < this.arrayVenta.length; i++) {
+                resultado1 = resultado1 += this.arrayVenta[i].tarjeta * 1;
+            }
+            for (var i = 0; i < this.arrayVenta.length; i++) {
+                resultado2 = resultado2 += this.arrayVenta[i].vales * 1;
+            }
+            for (var i = 0; i < this.arrayVenta.length; i++) {
+                resultado3 = resultado3 += this.arrayVenta[i].efectivo1 * 1;
+            }
+            resultado4 = resultado4 + this.dinero * 1;
+            return resultado1 + resultado2 + resultado3 + resultado4;
+        },
         calcularTotal: function calcularTotal() {
             var resultado = 0.0;
 
@@ -89679,7 +89751,51 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _vm._m(2),
+                    _c(
+                      "div",
+                      { staticClass: "col-md-2", attrs: { align: "center" } },
+                      [
+                        _vm._m(2),
+                        _vm._v(" "),
+                        _c("img", {
+                          staticClass: "img-responsive",
+                          attrs: {
+                            src: "img/corte.png",
+                            height: "100",
+                            width: "100",
+                            alt: ""
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.calcularCorte1,
+                                expression: "calcularCorte1"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              name: "txtr",
+                              id: "txtr",
+                              readonly: ""
+                            },
+                            domProps: { value: _vm.calcularCorte1 },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.calcularCorte1 = $event.target.value
+                              }
+                            }
+                          })
+                        ])
+                      ]
+                    ),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -89698,7 +89814,7 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group" }, [
-                          _c("p", [_vm._v("$" + _vm._s(_vm.myLocalData))])
+                          _c("p", [_vm._v("$" + _vm._s(_vm.calcularEfectivo))])
                         ])
                       ]
                     ),
@@ -89720,7 +89836,7 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group" }, [
-                          _c("p", [_vm._v("$" + _vm._s(_vm.myLocalData1))])
+                          _c("p", [_vm._v("$" + _vm._s(_vm.calcularTarjeta))])
                         ])
                       ]
                     ),
@@ -89742,12 +89858,32 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group" }, [
-                          _c("p", [_vm._v("$" + _vm._s(_vm.myLocalData2))])
+                          _c("p", [_vm._v("$" + _vm._s(_vm.calcularVales))])
                         ])
                       ]
                     ),
                     _vm._v(" "),
-                    _vm._m(6)
+                    _c(
+                      "div",
+                      { staticClass: "col-md-2", attrs: { align: "center" } },
+                      [
+                        _vm._m(6),
+                        _vm._v(" "),
+                        _c("img", {
+                          staticClass: "img-responsive",
+                          attrs: {
+                            src: "img/bag.png",
+                            height: "100",
+                            width: "100",
+                            alt: ""
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("h2", [_vm._v(_vm._s(_vm.arrayVenta.length))])
+                        ])
+                      ]
+                    )
                   ]),
                   _vm._v(" "),
                   _c("div", { attrs: { id: "printMe" } }, [
@@ -89766,7 +89902,47 @@ var render = function() {
                             attrs: { id: "table_trans" }
                           },
                           [
-                            _vm._m(7),
+                            _c("thead", [
+                              _c("tr", [
+                                _c("th"),
+                                _vm._v(" "),
+                                _c("th"),
+                                _vm._v(" "),
+                                _c("th"),
+                                _vm._v(" "),
+                                _c("th"),
+                                _vm._v(" "),
+                                _c("th"),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v("$ " + _vm._s(_vm.calcularEfectivo))
+                                ]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v("$ " + _vm._s(_vm.calcularTarjeta))
+                                ]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v("$ " + _vm._s(_vm.calcularVales))
+                                ]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v("$ " + _vm._s(_vm.calcularCambio))
+                                ]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v("$ " + _vm._s(_vm.calcularCorte))
+                                ]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v("$ " + _vm._s(_vm.calcularReal))
+                                ]),
+                                _vm._v(" "),
+                                _c("th")
+                              ]),
+                              _vm._v(" "),
+                              _vm._m(7)
+                            ]),
                             _vm._v(" "),
                             _c(
                               "tbody",
@@ -90606,21 +90782,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-2", attrs: { align: "center" } }, [
-      _c("div", [
-        _c("label", { attrs: { for: "Name" } }, [_vm._v("Saldo Al Corte:")])
-      ]),
-      _vm._v(" "),
-      _c("img", {
-        staticClass: "img-responsive",
-        attrs: { src: "img/corte.png", height: "100", width: "100", alt: "" }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("input", {
-          attrs: { type: "text", name: "txtr", id: "txtr", readonly: "" }
-        })
-      ])
+    return _c("div", [
+      _c("label", { attrs: { for: "Name" } }, [_vm._v("Saldo Al Corte:")])
     ])
   },
   function() {
@@ -90651,95 +90814,38 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-2", attrs: { align: "center" } }, [
-      _c("div", [
-        _c("label", { attrs: { for: "Name" } }, [_vm._v("Num. de Ventas:")])
-      ]),
-      _vm._v(" "),
-      _c("img", {
-        staticClass: "img-responsive",
-        attrs: { src: "img/bag.png", height: "100", width: "100", alt: "" }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("h2", { attrs: { id: "demo" } })
-      ])
+    return _c("div", [
+      _c("label", { attrs: { for: "Name" } }, [_vm._v("Num. de Ventas:")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th"),
-        _vm._v(" "),
-        _c("th"),
-        _vm._v(" "),
-        _c("th"),
-        _vm._v(" "),
-        _c("th"),
-        _vm._v(" "),
-        _c("th"),
-        _vm._v(" "),
-        _c("th", {
-          staticStyle: { "background-color": "#ff8080" },
-          attrs: { id: "area_total" }
-        }),
-        _vm._v(" "),
-        _c("th", {
-          staticStyle: { "background-color": "#ff8080" },
-          attrs: { id: "area_total1" }
-        }),
-        _vm._v(" "),
-        _c("th", {
-          staticStyle: { "background-color": "#ff8080" },
-          attrs: { id: "area_total2" }
-        }),
-        _vm._v(" "),
-        _c("th", {
-          staticStyle: { "background-color": "#ff8080" },
-          attrs: { id: "area_total5" }
-        }),
-        _vm._v(" "),
-        _c("th", {
-          staticStyle: { "background-color": "#ff8080" },
-          attrs: { id: "area_total4" }
-        }),
-        _vm._v(" "),
-        _c("th", {
-          staticStyle: { "background-color": "#ff8080" },
-          attrs: { id: "area_total6" }
-        }),
-        _vm._v(" "),
-        _c("th")
-      ]),
+    return _c("tr", [
+      _c("th", [_vm._v("Opciones")]),
       _vm._v(" "),
-      _c("tr", [
-        _c("th", [_vm._v("Opciones")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Ticket")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Usuario")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Cliente")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Fecha Hora")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Con Efectivo")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Con Tarjeta")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Con Vales")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Cambio Entregado")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Total")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Efectivo en Caja")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Estado")])
-      ])
+      _c("th", [_vm._v("Ticket")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Usuario")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Cliente")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Fecha Hora")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Con Efectivo")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Con Tarjeta")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Con Vales")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Cambio Entregado")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Total")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Efectivo en Caja")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Estado")])
     ])
   },
   function() {
