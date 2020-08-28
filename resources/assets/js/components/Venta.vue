@@ -50,7 +50,7 @@
                                         <th></th>
                                         <th></th>
                                         <th></th>
-                                        <th></th>
+                                        <th>$ {{ calcularVenta }}</th>
                                         <th>Ventas del Periodo: {{ arrayVenta.length }}</th>
                                        
                                         
@@ -531,6 +531,14 @@
                 var resultado=0.0;
                 for(var i=0;i<this.arrayDetalle.length;i++){
                     resultado=resultado+(this.arrayDetalle[i].precio*this.arrayDetalle[i].cantidad)
+                }
+                return resultado;
+            },
+
+            calcularVenta: function(){
+                var resultado=0.0;
+                for(var i=0;i<this.arrayVenta.length;i++){
+                    resultado=resultado+(this.arrayVenta[i].total*1)
                 }
                 return resultado;
             }

@@ -73493,6 +73493,14 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vue_
                 resultado = resultado + this.arrayDetalle[i].precio * this.arrayDetalle[i].cantidad;
             }
             return resultado;
+        },
+
+        calcularVenta: function calcularVenta() {
+            var resultado = 0.0;
+            for (var i = 0; i < this.arrayVenta.length; i++) {
+                resultado = resultado + this.arrayVenta[i].total * 1;
+            }
+            return resultado;
         }
     },
     methods: {
@@ -74180,7 +74188,9 @@ var render = function() {
                               _vm._v(" "),
                               _c("th"),
                               _vm._v(" "),
-                              _c("th"),
+                              _c("th", [
+                                _vm._v("$ " + _vm._s(_vm.calcularVenta))
+                              ]),
                               _vm._v(" "),
                               _c("th", [
                                 _vm._v(
