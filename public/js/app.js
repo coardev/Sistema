@@ -63486,6 +63486,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -63578,25 +63587,6 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default.a);
             link.href = uri + base64(format(template, ctx));
             link.click();
         },
-        salida3: function salida3() {
-            var td = document.querySelectorAll('#table_trans > tbody > tr > td:nth-child(5)');
-
-            var total = [].reduce.call(td, function (a, b) {
-                return a + parseInt(b.innerText);
-            }, 0);
-
-            document.getElementById('area_total').innerText = total;
-        },
-        importe: function importe() {
-            var td = document.querySelectorAll('#table_trans > tbody > tr > td:nth-child(7)');
-
-            var total = [].reduce.call(td, function (a, b) {
-                return a + parseInt(b.innerText);
-            }, 0);
-
-            document.getElementById('area_total1').innerText = total;
-        },
-
         abrirModal: function abrirModal(modelo, accion) {
             var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
 
@@ -63892,6 +63882,26 @@ var render = function() {
                   _vm._m(1),
                   _vm._v(" "),
                   _c("thead", [
+                    _c("tr", [
+                      !_vm.isHidden ? _c("th") : _vm._e(),
+                      _vm._v(" "),
+                      _c("th", [
+                        _vm._v("Total: " + _vm._s(_vm.arrayDetalle.length))
+                      ]),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th"),
+                      _vm._v(" "),
+                      _c("th")
+                    ]),
+                    _vm._v(" "),
                     _c("tr", [
                       !_vm.isHidden
                         ? _c("th", [_vm._v("Cancelar Articulo")])

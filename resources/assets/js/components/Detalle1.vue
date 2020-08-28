@@ -42,7 +42,16 @@
                             <caption><h2>Cancelacion de Ventas</h2></caption>
                            
                              <thead>
-                                 
+                                 <tr>  <th v-if="!isHidden"></th>
+                                    <th>Total: {{ arrayDetalle.length}}</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                  
+                                </tr>
                               <tr>  <th v-if="!isHidden">Cancelar Articulo</th>
                                     <th>Fecha de Venta</th>
                                     <th>Ticket de Venta</th>
@@ -275,28 +284,7 @@ Vue.use(Print);
         link.href = uri + base64(format(template, ctx));
         link.click();
             },
-            salida3: function () {
-               var td = document.querySelectorAll('#table_trans > tbody > tr > td:nth-child(5)');
-
-var total = [].reduce.call(td, function(a, b) {
-    return a + parseInt(b.innerText);
-}, 0);
-
-document.getElementById('area_total').innerText = total;
-
-                    },
-                     importe: function () {
-               var td = document.querySelectorAll('#table_trans > tbody > tr > td:nth-child(7)');
-
-var total = [].reduce.call(td, function(a, b) {
-    return a + parseInt(b.innerText);
-}, 0);
-
-document.getElementById('area_total1').innerText = total;
-
-                    },
-
-                    abrirModal(modelo, accion, data = []){
+                  abrirModal(modelo, accion, data = []){
                 switch(modelo){
                     case "detalle":
                     {
