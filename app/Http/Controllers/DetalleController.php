@@ -83,12 +83,13 @@ class DetalleController extends Controller
     //Reingreso a Tabla de Entradas
     private function __historial($articulo = '', $cantidad = '', $precio_proveedor = '')
     {
-       
+        $mytime= Carbon::now('America/Lima');
         $historial = new Historial();
         $historial->nombre = $articulo;
         $historial->stock1 = $cantidad ;
         $historial->precio_proveedor = $precio_proveedor;
         $historial->reingreso = $precio_proveedor*$cantidad;
+        $historial->fecha_hora = $mytime->toDateString();
         $historial->estado = 'Reingreso' ;
  
         $historial->save();

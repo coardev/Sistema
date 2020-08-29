@@ -81,11 +81,13 @@ class DetalleCancelacionController extends Controller
     private function __historial($articulo = '', $cantidad = '', $precio_proveedor = '')
     {
        
+
         $historial = new Historial();
         $historial->nombre = $articulo;
         $historial->stock1 = $cantidad ;
         $historial->precio_proveedor = $precio_proveedor;
         $historial->reingreso = $precio_proveedor*$cantidad;
+        
         $historial->estado = 'Reingreso' ;
  
         $historial->save();
