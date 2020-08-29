@@ -64772,6 +64772,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -64805,6 +64806,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vue_
             estado: '',
             precio: 0,
             total: 0,
+            total1: 0,
             stock2: 0,
             listado: 1,
             precio_proveedor: 0,
@@ -64818,6 +64820,10 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vue_
             Concepto3: 0,
             Concepto4: 0,
             Concepto5: 0,
+            calcularVales: 0,
+            calcularTarjeta: 0,
+            calcularReal: 0,
+            calcularCorte: 0,
             tituloModal: '',
             tipoAccion: 0,
             pagination: {
@@ -64873,6 +64879,34 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vue_
             for (var i = 0; i < this.myLocalData.length; i++) {
                 resultado1 = +this.myLocalData;
             }
+            return resultado1;
+        },
+        dia: function dia() {
+            var resultado1 = 0;
+
+            resultado1 = +this.dinero;
+
+            return resultado1;
+        },
+        dia1: function dia1() {
+            var resultado1 = 0;
+
+            resultado1 = +this.calcularReal;
+
+            return resultado1;
+        },
+        dia2: function dia2() {
+            var resultado1 = 0;
+
+            resultado1 = +this.calcularTarjeta;
+
+            return resultado1;
+        },
+        dia3: function dia3() {
+            var resultado1 = 0;
+
+            resultado1 = +this.calcularVales;
+
             return resultado1;
         },
         cambios: function cambios() {
@@ -65133,6 +65167,18 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vue_
         if (localStorage.dinero) {
             this.dinero = localStorage.dinero;
         }
+        if (localStorage.calcularReal) {
+            this.calcularReal = localStorage.calcularReal;
+        }
+        if (localStorage.calcularTarjeta) {
+            this.calcularTarjeta = localStorage.calcularTarjeta;
+        }
+        if (localStorage.calcularVales) {
+            this.calcularVales = localStorage.calcularVales;
+        }
+        if (localStorage.calcularCorte) {
+            this.calcularCorte = localStorage.calcularCorte;
+        }
         if (localStorage.dinero1) {
             this.dinero1 = localStorage.dinero1;
         }
@@ -65151,6 +65197,18 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vue_
     watch: {
         dinero: function dinero(newName) {
             localStorage.dinero = newName;
+        },
+        calcularReal: function calcularReal(newName) {
+            localStorage.calcularReal = newName;
+        },
+        calcularTarjeta: function calcularTarjeta(newName) {
+            localStorage.calcularTarjeta = newName;
+        },
+        calcularVales: function calcularVales(newName) {
+            localStorage.calcularVales = newName;
+        },
+        calcularCorte: function calcularCorte(newName) {
+            localStorage.calcularCorte = newName;
         },
         dinero1: function dinero1(newName) {
             localStorage.dinero1 = newName;
@@ -65331,7 +65389,7 @@ var render = function() {
                     ),
                     _vm._v(" "),
                     _c("th", { attrs: { colspan: "2" } }, [
-                      _vm._v("$ " + _vm._s((_vm.corte1 = _vm.ventas)))
+                      _vm._v("$ " + _vm._s(_vm.calcularCorte))
                     ])
                   ],
                   2
@@ -65370,56 +65428,9 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("td", [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.myLocalData4,
-                            expression: "myLocalData4"
-                          }
-                        ],
-                        attrs: { type: "number", readonly: "" },
-                        domProps: { value: _vm.myLocalData4 },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.myLocalData4 = $event.target.value
-                          }
-                        }
-                      })
-                    ]),
+                    _c("td"),
                     _vm._v(" "),
-                    _c("td", [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.myLocalData,
-                            expression: "myLocalData"
-                          }
-                        ],
-                        attrs: {
-                          type: "number",
-                          name: "txto",
-                          id: "txto",
-                          readonly: ""
-                        },
-                        domProps: { value: _vm.myLocalData },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.myLocalData = $event.target.value
-                          }
-                        }
-                      })
-                    ])
+                    _c("td")
                   ]),
                   _vm._v(" "),
                   _c("tr", [
@@ -65452,13 +65463,34 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("th", [_vm._v("Efectivo Total")]),
+                    _c("th", [_vm._v("Saldo Inicial del Dia")]),
                     _vm._v(" "),
                     _c("td", [
-                      _vm._v(
-                        "$ " +
-                          _vm._s((_vm.efectivo = _vm.cambios + _vm.ventas1))
-                      )
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.dinero,
+                            expression: "dinero"
+                          }
+                        ],
+                        attrs: {
+                          type: "number",
+                          name: "txtn",
+                          id: "txtn",
+                          readonly: ""
+                        },
+                        domProps: { value: _vm.dinero },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.dinero = $event.target.value
+                          }
+                        }
+                      })
                     ])
                   ]),
                   _vm._v(" "),
@@ -65492,7 +65524,7 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("th", [_vm._v("Saldo Inicial del Dia")]),
+                    _c("th", [_vm._v("Efectivo Total en Caja")]),
                     _vm._v(" "),
                     _c("th", [
                       _c("input", {
@@ -65500,23 +65532,23 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.dinero,
-                            expression: "dinero"
+                            value: _vm.calcularReal,
+                            expression: "calcularReal"
                           }
                         ],
                         attrs: {
                           type: "number",
-                          name: "txtn",
-                          id: "txtn",
+                          name: "txto",
+                          id: "txto",
                           readonly: ""
                         },
-                        domProps: { value: _vm.dinero },
+                        domProps: { value: _vm.calcularReal },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.dinero = $event.target.value
+                            _vm.calcularReal = $event.target.value
                           }
                         }
                       })
@@ -65553,13 +65585,34 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("td", [_vm._v("Saldo al Corte")]),
+                    _c("th", [_vm._v("Ingresos Tarjeta")]),
                     _vm._v(" "),
-                    _vm._m(8)
+                    _c("td", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.calcularTarjeta,
+                            expression: "calcularTarjeta"
+                          }
+                        ],
+                        attrs: { type: "number", readonly: "" },
+                        domProps: { value: _vm.calcularTarjeta },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.calcularTarjeta = $event.target.value
+                          }
+                        }
+                      })
+                    ])
                   ]),
                   _vm._v(" "),
                   _c("tr", [
-                    _vm._m(9),
+                    _vm._m(8),
                     _vm._v(" "),
                     _c("td", [
                       _c("input", {
@@ -65588,7 +65641,7 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("td", [_vm._v("Ingresos Tarjeta")]),
+                    _c("th", [_vm._v("Ingresos Vales")]),
                     _vm._v(" "),
                     _c("td", [
                       _c("input", {
@@ -65596,25 +65649,25 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.myLocalData1,
-                            expression: "myLocalData1"
+                            value: _vm.calcularVales,
+                            expression: "calcularVales"
                           }
                         ],
                         attrs: { type: "number", readonly: "" },
-                        domProps: { value: _vm.myLocalData1 },
+                        domProps: { value: _vm.calcularVales },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.myLocalData1 = $event.target.value
+                            _vm.calcularVales = $event.target.value
                           }
                         }
                       })
                     ])
                   ]),
                   _vm._v(" "),
-                  _vm._m(10),
+                  _vm._m(9),
                   _vm._v(" "),
                   _c("td", [
                     _c("input", {
@@ -65643,30 +65696,9 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
-                  _c("td", [_vm._v("Ingresos Vales")]),
+                  _c("td"),
                   _vm._v(" "),
-                  _c("td", [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.myLocalData2,
-                          expression: "myLocalData2"
-                        }
-                      ],
-                      attrs: { id: "txtp", type: "number", readonly: "" },
-                      domProps: { value: _vm.myLocalData2 },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.myLocalData2 = $event.target.value
-                        }
-                      }
-                    })
-                  ]),
+                  _c("td"),
                   _vm._v(" "),
                   _c("tr"),
                   _vm._v(" "),
@@ -65704,12 +65736,17 @@ var render = function() {
                       _vm._v(
                         "$ " +
                           _vm._s(
-                            (_vm.corte =
-                              _vm.inicio +
-                              _vm.ventas +
-                              _vm.tarjetas +
-                              _vm.vales -
-                              _vm.total)
+                            (_vm.ganancia =
+                              _vm.dia +
+                              _vm.dia1 +
+                              _vm.dia2 +
+                              _vm.dia3 -
+                              _vm.calcular1 -
+                              _vm.calcular2 -
+                              _vm.calcular3 -
+                              _vm.calcular4 -
+                              _vm.calcular5 -
+                              _vm.calcular6)
                           )
                       )
                     ])
@@ -65774,9 +65811,9 @@ var staticRenderFns = [
         [_vm._v("Retiros de Efectivo:")]
       ),
       _vm._v(" "),
-      _c("th", [_vm._v("Salidas-Cambios")]),
+      _c("th"),
       _vm._v(" "),
-      _c("th", [_vm._v("Efectivo Final en Caja")])
+      _c("th")
     ])
   },
   function() {
@@ -65816,16 +65853,6 @@ var staticRenderFns = [
     return _c("td", [
       _c("input", {
         attrs: { type: "text", placeholder: "Concepto del Retiro..." }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("input", {
-        attrs: { type: "text", name: "txtr", id: "txtr", readonly: "" }
       })
     ])
   },
@@ -88510,8 +88537,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue2_filters___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue2_filters__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_autofocus_directive__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_autofocus_directive___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vue_autofocus_directive__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -88926,7 +88951,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue2_filters___default.a);
 
 
-/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
+/* harmony default export */ __webpack_exports__["default"] = ({
     props: ['ruta'],
     data: function data() {
         return {
@@ -88982,7 +89007,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue2
             precio2: 0,
             minimo: 0,
             cantidad: 0,
-
+            efectivo: 0,
             stock: 0
         };
     },
@@ -89047,7 +89072,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue2
             for (var i = 0; i < this.arrayVenta.length; i++) {
                 resultado1 = resultado1 + this.arrayVenta[i].cambio * 1;
             }
-            return resultado1;
+            return resultado1.toFixed(2);
         },
         calcularReal: function calcularReal() {
             var resultado1 = 0.0;
@@ -89508,21 +89533,22 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue2
         this.myFunction();
         this.randomString();
     },
-    watch: {
-        modal: function modal() {
-            var _this2 = this;
 
-            if (this.modal) {
-                // modal mostrada
-                __WEBPACK_IMPORTED_MODULE_1_vue___default.a.nextTick().then(function () {
-                    return _this2.$refs.input.focus();
-                });
-            }
-        }
-    },
     mounted: function mounted() {
         if (localStorage.dinero) {
             this.dinero = localStorage.dinero;
+        }
+        if (localStorage.calcularReal) {
+            this.calcularReal = localStorage.calcularReal;
+        }
+        if (localStorage.calcularTarjeta) {
+            this.calcularTarjeta = localStorage.calcularTarjeta;
+        }
+        if (localStorage.calcularVales) {
+            this.calcularVales = localStorage.calcularVales;
+        }
+        if (localStorage.calcularCorte) {
+            this.calcularCorte = localStorage.calcularCorte;
         }
         if (localStorage.dinero1) {
             this.dinero1 = localStorage.dinero1;
@@ -89537,24 +89563,38 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue2
             this.dinero4 = localStorage.dinero4;
         }
         this.listarVenta(1, this.buscar, this.criterio);
+    },
+
+    watch: {
+        dinero: function dinero(newName) {
+            localStorage.dinero = newName;
+        },
+        calcularReal: function calcularReal(newName) {
+            localStorage.calcularReal = newName;
+        },
+        calcularTarjeta: function calcularTarjeta(newName) {
+            localStorage.calcularTarjeta = newName;
+        },
+        calcularVales: function calcularVales(newName) {
+            localStorage.calcularVales = newName;
+        },
+        calcularCorte: function calcularCorte(newName) {
+            localStorage.calcularCorte = newName;
+        },
+        dinero1: function dinero1(newName) {
+            localStorage.dinero1 = newName;
+        },
+        dinero2: function dinero2(newName) {
+            localStorage.dinero2 = newName;
+        },
+        dinero3: function dinero3(newName) {
+            localStorage.dinero3 = newName;
+        },
+        dinero4: function dinero4(newName) {
+            localStorage.dinero4 = newName;
+        }
     }
-}, 'watch', {
-    dinero: function dinero(newName) {
-        localStorage.dinero = newName;
-    },
-    dinero1: function dinero1(newName) {
-        localStorage.dinero1 = newName;
-    },
-    dinero2: function dinero2(newName) {
-        localStorage.dinero2 = newName;
-    },
-    dinero3: function dinero3(newName) {
-        localStorage.dinero3 = newName;
-    },
-    dinero4: function dinero4(newName) {
-        localStorage.dinero4 = newName;
-    }
-}));
+});
 
 /***/ }),
 /* 202 */
@@ -89687,20 +89727,11 @@ var render = function() {
                               attrs: { type: "submit" },
                               on: {
                                 click: function($event) {
-                                  _vm.listarVenta(1, _vm.buscar, _vm.criterio)
-                                  _vm.salida1()
-                                  _vm.salida2()
-                                  _vm.salida3()
-                                  _vm.salida4()
-                                  _vm.salida5()
-                                  _vm.salida6()
-                                  _vm.cambio1()
-                                  _vm.filas()
-                                  _vm.obtener()
-                                  _vm.obtener1()
-                                  _vm.obtener2()
-                                  _vm.obtener3()
-                                  _vm.obtener4()
+                                  return _vm.listarVenta(
+                                    1,
+                                    _vm.buscar,
+                                    _vm.criterio
+                                  )
                                 }
                               }
                             },

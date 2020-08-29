@@ -43,32 +43,33 @@
                                
                                </tr>
                                <th colspan="2" style="text-align:right">Subtotal:</th>
-                               <th colspan="2">$ {{corte1=ventas}}</th>
+                               <th colspan="2">$ {{ calcularCorte  }}</th>
                                </thead>
                                 <tbody> <tr> <th colspan="2" style="text-align:center">Retiros de Efectivo:</th> 
-                               <th>Salidas-Cambios</th> <th>Efectivo Final en Caja</th> </tr> <tr>
+                               <th></th> <th></th> </tr> <tr>
                                 <td><input  type="text" placeholder="Concepto del Retiro..."></td>
                                  <td><input type="number" v-model="Concepto" @focus="onFocus" v-on:keypress="isNumber(event)" v-bind:min="0"></td> <td>
-                                 <input  type="number"   v-model="myLocalData4" readonly></td>
-                                 <td><input  type="number" name="txto" id="txto"   v-model="myLocalData" readonly></td> </tr>
+                                 </td>
+                                 <td></td> </tr>
                                   <tr> <td><input type="text" placeholder="Concepto del Retiro..."></td>
-                                  <td><input type="number" v-model="Concepto1" @focus="onFocus1" v-on:keypress="isNumber(event)" v-bind:min="0"></td> <th>Efectivo Total</th>
-                                   <td>$ {{efectivo=cambios+ventas1}}</td> </tr>
+                                  <td><input type="number" v-model="Concepto1" @focus="onFocus1" v-on:keypress="isNumber(event)" v-bind:min="0"></td> <th>Saldo Inicial del Dia</th>
+                                   <td><input  type="number" name="txtn" id="txtn"  v-model="dinero" readonly></td> </tr>
                                    <tr> <td><input type="text" placeholder="Concepto del Retiro..."></td> 
-                               <td><input type="number" v-model="Concepto2" @focus="onFocus2" v-on:keypress="isNumber(event)" v-bind:min="0"></td> <th>Saldo Inicial del Dia</th> <th><input  type="number" name="txtn" id="txtn"  v-model="dinero" readonly></th> </tr> <tr>
+                               <td><input type="number" v-model="Concepto2" @focus="onFocus2" v-on:keypress="isNumber(event)" v-bind:min="0"></td> <th>Efectivo Total en Caja</th>
+                                <th><input  type="number" name="txto" id="txto"   v-model="calcularReal" readonly></th> </tr> <tr>
                                 <td><input type="text" placeholder="Concepto del Retiro..."></td>
                                  <td><input type="number" v-model="Concepto3" @focus="onFocus3" v-on:keypress="isNumber(event)" v-bind:min="0"></td>
-                                  <td>Saldo al Corte</td>
-                                 <td><input type="text" name="txtr" id="txtr"  readonly /></td> </tr> <tr>
+                                  <th>Ingresos Tarjeta</th>
+                                 <td><input  type="number" v-model="calcularTarjeta" readonly></td> </tr> <tr>
                                   <td><input  type="text" placeholder="Concepto del Retiro..."></td>
                                   <td><input type="number" v-model="Concepto4" @focus="onFocus4" v-on:keypress="isNumber(event)" v-bind:min="0" ></td> 
-                                  <td>Ingresos Tarjeta</td>
-                                   <td><input  type="number" v-model="myLocalData1" readonly></td>
+                                  <th>Ingresos Vales</th>
+                                   <td><input type="number"  v-model="calcularVales" readonly></td>
                                     </tr>
                                   <td><input  type="text" placeholder="Concepto del Retiro..."></td>
                                  <td><input type="number" v-model="Concepto5" @focus="onFocus5" v-on:keypress="isNumber(event)" v-bind:min="0"></td>
-                                  <td>Ingresos Vales</td>
-                                 <td><input id="txtp" type="number"  v-model="myLocalData2" readonly></td> </tr> <tr>
+                                  <td></td>
+                                 <td></td> </tr> <tr>
                                   </tr></tr> <tr> </tr>
                                   <th>Subtotal Retiros Efectivo:</th>
                                   <td>$ {{total=calcular1+calcular2+calcular3+calcular4+calcular5+calcular6}}</td>
@@ -77,7 +78,7 @@
                                    <tfoot>
                                     <tr> 
                                       <th colspan="3">Gran Total</th> 
-                                         <td>$ {{corte=inicio+ventas+tarjetas+vales-total}}</td> </tr>
+                                         <td>$ {{ ganancia=dia+dia1+dia2+dia3-calcular1-calcular2-calcular3-calcular4-calcular5-calcular6 }}</td> </tr>
                                           </tfoot>
 
 
@@ -135,6 +136,7 @@ Vue.use(Print);
                 estado : '',
                 precio : 0,
                 total : 0,
+                total1 : 0,
                 stock2 : 0,
                 listado:1,
                 precio_proveedor : 0,
@@ -148,6 +150,10 @@ Vue.use(Print);
                 Concepto3:0,
                 Concepto4:0,
                 Concepto5:0,
+                calcularVales: 0,
+                calcularTarjeta: 0,
+                calcularReal: 0,
+                calcularCorte: 0,
                 tituloModal : '',
                 tipoAccion : 0,
                 pagination : {
@@ -202,6 +208,34 @@ Vue.use(Print);
                 for(var i=0;i<this.myLocalData.length;i++){
                  resultado1=+this.myLocalData
                 }
+                return resultado1;
+            },
+            dia: function(){
+                var resultado1=0;
+                
+                    resultado1=+this.dinero
+                
+                return resultado1;
+            },
+            dia1: function(){
+                var resultado1=0;
+                
+                    resultado1=+this.calcularReal
+                
+                return resultado1;
+            },
+            dia2: function(){
+                var resultado1=0;
+                
+                    resultado1=+this.calcularTarjeta
+                
+                return resultado1;
+            },
+            dia3: function(){
+                var resultado1=0;
+                
+                    resultado1=+this.calcularVales
+                
                 return resultado1;
             },
             cambios: function(){
@@ -468,6 +502,18 @@ document.getElementById('area_total1').innerText = total;
             if (localStorage.dinero) {
       this.dinero = localStorage.dinero;
     }
+    if (localStorage.calcularReal) {
+      this.calcularReal = localStorage.calcularReal;
+    }
+    if (localStorage.calcularTarjeta) {
+      this.calcularTarjeta = localStorage.calcularTarjeta;
+    }
+    if (localStorage.calcularVales) {
+      this.calcularVales = localStorage.calcularVales;
+    }
+    if (localStorage.calcularCorte) {
+      this.calcularCorte = localStorage.calcularCorte;
+    }
     if (localStorage.dinero1) {
       this.dinero1 = localStorage.dinero1;
     }
@@ -485,6 +531,18 @@ document.getElementById('area_total1').innerText = total;
         watch: {
     dinero(newName) {
       localStorage.dinero = newName;
+    },
+    calcularReal(newName) {
+      localStorage.calcularReal = newName;
+    },
+    calcularTarjeta(newName) {
+      localStorage.calcularTarjeta = newName;
+    },
+    calcularVales(newName) {
+      localStorage.calcularVales = newName;
+    },
+    calcularCorte(newName) {
+      localStorage.calcularCorte = newName;
     },
     dinero1(newName) {
       localStorage.dinero1 = newName;

@@ -9,6 +9,7 @@ use App\Historial;
 use App\Historial5;
 use App\Articulo;
 use App\Venta;
+use Carbon\Carbon;
 
 
 class DetalleController extends Controller
@@ -21,7 +22,7 @@ class DetalleController extends Controller
         $criterio = $request->criterio;
         
         if ($buscar==''){
-            
+           
         }
         else{
             $detalle = Detalle::select('detalle_ventas.created_at',

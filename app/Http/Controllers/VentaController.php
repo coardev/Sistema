@@ -301,7 +301,7 @@ class VentaController extends Controller
                 $this->__historial2($detalle->articulo,$detalle->cantidad,$detalle->precio4,$detalle->inventariable,$detalle->idarticulo,$detalle->fecha_hora);
                
                 //Registrar en Inventario Entrada + Salida
-                 $this->__registro($detalle->articulo,$detalle->inventariable,$detalle->cantidad,$detalle->stock,$detalle->precio4);
+                 //$this->__registro($detalle->articulo,$detalle->inventariable,$detalle->cantidad,$detalle->stock,$detalle->precio4);
 
 
             }       

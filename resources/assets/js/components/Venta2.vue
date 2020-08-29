@@ -27,7 +27,7 @@
                                     <template v-else-if="criterio === 'created_at'">
                                     <input type="date" v-model="buscar"  class="form-control" placeholder="Escribe la Fecha a Buscar...">
                                     </template>
-                                    <button type="submit" @click="listarVenta(1,buscar,criterio);salida1();salida2();salida3();salida4();salida5();salida6();cambio1();filas();obtener();obtener1();obtener2();obtener3();obtener4()" class="btn btn-primary"><i class="fa fa-search"></i>Buscar</button>
+                                    <button type="submit" @click="listarVenta(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i>Buscar</button>
                                 
                                 </div>
                                 </div>
@@ -468,7 +468,7 @@
                  precio2: 0,
                  minimo: 0,
                 cantidad:0,
-                
+                efectivo:0, 
                 stock:0
             }
         },
@@ -532,7 +532,7 @@
                 for(var i=0;i<this.arrayVenta.length;i++){
                  resultado1=resultado1+(this.arrayVenta[i].cambio*1)
                 }
-                return resultado1;
+                return resultado1.toFixed(2);
             },
             calcularReal: function(){
                 var resultado1=0.0;
@@ -1010,17 +1010,22 @@ localStorage.setItem('area_total6', JSON.stringify(total));
         this.myFunction()
         this.randomString()
                  },
-                 watch: {
-  modal(){
-    if(this.modal){ // modal mostrada
-         Vue.nextTick().then(()=> this.$refs.input.focus());
-    }
-
-  }
-},
+                
         mounted() {
             if (localStorage.dinero) {
       this.dinero = localStorage.dinero;
+    }
+    if (localStorage.calcularReal) {
+      this.calcularReal = localStorage.calcularReal;
+    }
+    if (localStorage.calcularTarjeta) {
+      this.calcularTarjeta = localStorage.calcularTarjeta;
+    }
+    if (localStorage.calcularVales) {
+      this.calcularVales = localStorage.calcularVales;
+    }
+    if (localStorage.calcularCorte) {
+      this.calcularCorte = localStorage.calcularCorte;
     }
     if (localStorage.dinero1) {
       this.dinero1 = localStorage.dinero1;
@@ -1039,6 +1044,18 @@ localStorage.setItem('area_total6', JSON.stringify(total));
         watch: {
     dinero(newName) {
       localStorage.dinero = newName;
+    },
+    calcularReal(newName) {
+      localStorage.calcularReal = newName;
+    },
+    calcularTarjeta(newName) {
+      localStorage.calcularTarjeta = newName;
+    },
+    calcularVales(newName) {
+      localStorage.calcularVales = newName;
+    },
+    calcularCorte(newName) {
+      localStorage.calcularCorte = newName;
     },
     dinero1(newName) {
       localStorage.dinero1 = newName;
