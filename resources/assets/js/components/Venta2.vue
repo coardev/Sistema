@@ -336,7 +336,7 @@
                                     <thead>
                                        
                                         <tr>
-                                            <th>Efectivo&nbsp;&nbsp;&nbsp;<i class="fa fa-money" style="font-size:24px"></i>
+                                        <th>Efectivo&nbsp;&nbsp;&nbsp;<i class="fa fa-money" style="font-size:24px"></i>
                                        </th>
                                         <th>Tarjeta&nbsp;&nbsp;&nbsp;<i class="fa fa-cc-visa" style="font-size:24px"></i>
                                        </th>
@@ -349,17 +349,9 @@
                                        </th>
                                         <th>Imprimir Ticket
                                        </th>
-                                       
-                                       
                                         </tr>
                                     </thead>
                                     <tbody>
-                                   
-                                         
-                                          
-                                            
-                                      
-                                            
                                             <td style="background-color: #CEECF5"><input  v-bind:min="0" v-model="efectivo" v-on:keypress="isNumber(event)" placeholder="0" ref="test" @blur="onBlur" type="number"></td>
                                             <td style="background-color: #CEECF5"><input placeholder="0" ref="test1" @blur="onBlur1" v-bind:min="0" v-model="tarjeta" v-on:keypress="isNumber(event)" type="number"></td>
                                             <td style="background-color: #CEECF5"><input placeholder="0" ref="test2" @blur="onBlur2"  v-bind:min="0" v-model="vales" v-on:keypress="isNumber(event)" type="number"></td>
@@ -467,9 +459,8 @@
                 precio1: 0,
                  precio2: 0,
                  minimo: 0,
-                cantidad:0,
-                efectivo:0, 
-                stock:0
+                 cantidad:0,
+                 stock:0
             }
         },
         components: {
