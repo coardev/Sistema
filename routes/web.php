@@ -87,6 +87,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/interna/pdfTicket/{id}','VentaInterna@pdfTicket')->name('ventaticket_pdf');
         Route::post('/venta/registrar', 'VentaController@store');
         Route::put('/venta/desactivar', 'VentaController@desactivar');
+        Route::put('/interna/desactivar', 'VentaInterna@desactivar');
         Route::get('/venta/obtenerCabecera', 'VentaController@obtenerCabecera');
         Route::get('/venta/obtenerDetalles', 'VentaController@obtenerDetalles');
         Route::get('/venta1/obtenerCabecera', 'VentaController@obtenerCabecera');

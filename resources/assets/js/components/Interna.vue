@@ -121,7 +121,14 @@
                                             <td style="display: none" v-text="articulo.precio_proveedor"></td>
                                             <td style="display: none" v-text="articulo.precio_proveedor1"></td>
                                             <td v-text="articulo.precio_venta"></td>
-                                            <td style="color:red;"  v-text="articulo.stock"></td>
+                                            <template v-if="articulo.stock>=1">
+                                            <td v-text="articulo.stock"></td>
+                                            </template>
+                                            <template v-else="articulo.stock==0">
+                                            <td style="color:red;"  v-text="articulo.stock">
+                                            </td>
+                                            </template>
+                                            
                                             <td style="display: none">
                                                 <div v-if="articulo.condicion">
                                                     <span class="badge badge-success">Activo</span>
@@ -314,19 +321,34 @@
                                            <button type="button" @click="verVenta(interna.id)" class="btn btn-success btn-lg active" aria-pressed="true">
                                             <i class="icon-eye"></i>
                                             </button>
-
+                                            <template v-if="interna.estado === 'Venta Interna'">
+                                            <button type="button" @click="desactivarVenta(interna.id)" class="btn btn-danger btn-lg">
+                                            <i class="fa fa-window-close" aria-hidden="true"></i>
+                                            </button>
+                                            </template>
+                                            <template v-if="interna.estado === 'Venta Cancelada'">
+                                            <button type="button" @click="desactivarVenta(interna.id)" class="btn btn-danger btn-lg" disabled>
+                                            <i class="fa fa-window-close" aria-hidden="true"></i>
+                                            </button>
+                                            </template>
                                             
 
                                             <template v-if="interna.tipo_comprobante=='TICKET'">
-                                                <button type="button" @click="pdfTicket(interna.id)" class="btn btn-warning btn-lg">
+                                                <button v-if="interna.estado === 'Venta Interna'" type="button" @click="pdfTicket(interna.id)" class="btn btn-warning btn-lg">
                                                 <i class='fas fa-ticket-alt'></i>
-                                                </button> &nbsp;
+                                                </button>
+                                                <button v-if="interna.estado === 'Venta Cancelada'" type="button" @click="pdfTicket(interna.id)" class="btn btn-warning btn-lg" disabled>
+                                                <i class='fas fa-ticket-alt'></i>
+                                                </button>
                                             </template>
 
                                             
-                                                <button type="button" @click="pdfVenta(interna.id)" class="btn btn-danger btn-lg">
+                                                <button v-if="interna.estado === 'Venta Interna'" type="button" @click="pdfVenta(interna.id)" class="btn btn-danger btn-lg">
                                                 <i class="fa fa-file-pdf-o"></i>
-                                                </button> &nbsp;
+                                                </button>
+                                                <button v-if="interna.estado === 'Venta Cancelada'" type="button" @click="pdfVenta(interna.id)" class="btn btn-danger btn-lg" disabled>
+                                                <i class="fa fa-file-pdf-o"></i>
+                                                </button>
                                             
 
                                           
@@ -1099,7 +1121,7 @@
             },
             desactivarVenta(id){
                swal({
-                title: 'Esta seguro de anular esta venta?',
+                title: 'Seguro que quieres Cancelar la Venta?',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -1114,13 +1136,14 @@
                 if (result.value) {
                     let me = this;
 
-                    axios.put(this.ruta + '/venta/desactivar',{
+                    axios.put(this.ruta + '/interna/desactivar',{
                         'id': id
                     }).then(function (response) {
+                        me.listarArticulo(me.buscarA,me.criterioA);
                         me.listarVenta(1,'','id');
                         swal(
-                        'Anulado!',
-                        'La venta ha sido anulada con éxito.',
+                        'Cancelada!',
+                        'La venta se cancelo correctamente, los articulos han sido devueltos.',
                         'success'
                         )
                     }).catch(function (error) {

@@ -21,15 +21,8 @@ class VentaInterna extends Controller
         $criterio = $request->criterio;
         
         if ($buscar==''){
-            $internas = Interna::join('personas','internas.idcliente','=','personas.id')
-            ->join('users','internas.idusuario','=','users.id')
-            ->select('internas.id','internas.tipo_comprobante',
-            'internas.created_at','internas.efectivo','internas.efectivo1','internas.tarjeta','internas.vales','internas.cambio','internas.total',
-            'internas.estado','personas.nombre','users.usuario')
-            ->where('internas.estado','=','Venta Interna')
-            
-            ->orderBy('internas.id', 'desc')
-            ->paginate(10000000);
+            $internas = Interna::where('fecha_hora','=', Carbon :: today())
+            ->orderBy('id', 'desc')->paginate(100000000);
         }
         else{
             $internas = Interna::join('personas','internas.idcliente','=','personas.id')
@@ -39,7 +32,6 @@ class VentaInterna extends Controller
             'internas.estado','personas.nombre','users.usuario')
             ->where('internas.'.$criterio, 'like', '%'. $buscar . '%')
             ->orderBy('internas.id', 'desc')
-            ->where('internas.estado','=','Venta Interna')
             ->paginate(10000000);
         }
         
@@ -207,6 +199,22 @@ class VentaInterna extends Controller
         $historial2->fecha_hora = $fecha_hora ;
         $historial2->save();
     }    
+
+    public function desactivar(Request $request)
+    {
+        if (!$request->ajax()) return redirect('/');
+        $interna = Interna::findOrFail($request->id);
+        $interna->estado = 'Venta Cancelada';
+        $interna->save();
+
+        $this->__detalleVenta($request->id);
+    }
+
+    private function __detalleVenta($id = null)
+{ 
+    DetalleInterna::where('idventa', $id)->update(['estado' => 'Venta Cancelada']);
+          
+} 
 
    
 }

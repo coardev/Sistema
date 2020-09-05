@@ -23,8 +23,18 @@
                                 <div class="input-group">
                          <select class="form-control col-md-1" v-model="criterio2">
                                       <option value="articulo">Articulo</option>
-                                    </select>                                    
+                                      <option value="estado">Estado</option>
+                                    </select>  
+                                    <template v-if="criterio2 === 'articulo'">                                  
                                     <input type="text" v-model="buscar2" class="form-control;col-md-2" placeholder="Escribe el Articulo">
+                                    </template>
+                                    <template v-if="criterio2 === 'estado'">                                  
+                                     <select class="form-control;col-md-2" v-model="buscar2">
+                                            <option value="">Completo</option>
+                                            <option value="Venta Interna">Ventas Internas</option>
+                                            <option value="Venta Cancelada">Ventas Canceladas</option>
+                                    </select>  
+                                    </template>
                                     <select class="form-control col-md-2" v-model="criterio1">
                                       <option value="created_at">Fecha Inicial</option>
                                     </select>                                    
@@ -40,21 +50,20 @@
                                       </div>
                                       </div>
                                
-                          <button v-on:click="isHidden = !isHidden">Mostrar</button>
+                          
                          <div class="table-wrapper-scroll-y my-custom-scrollbar">
                         <table id="table_trans" class="table table-bordered table-striped table-sm">
                             <caption><h2>Reporte Salida - Inventario Interno</h2></caption>
                             <thead>
                                  <tr>  
-                                <th  v-if="!isHidden"></th>
-                                    <th>Total: {{ arrayDetalle.length }}</th>
+                                   <th></th>
                                     <th></th>
                                     <th># {{ calcularCantidad }}</th>
                                     <th>$ {{ calcularImporte }}</th>
                                     <th></th>
                               </tr> 
                               <tr>  
-                                <th  v-if="!isHidden">Opciones</th>
+                                
                                     <th>Fecha de Venta</th>
                                     
                                     <th>Articulo</th>
@@ -68,19 +77,7 @@
                             </thead>
                             <tbody>
                                 <tr v-for="historial2 in arrayDetalle" :key="historial2.id">
-                                    <td  v-if="!isHidden"  align="center">
-                                        <template v-if="historial2.estado === 'Venta Interna'">
-                                        <button type="button" @click="abrirModal('historial2','actualizar',historial2)" class="btn btn-danger btn-sm">
-                                          Devolver Venta Interna de Articulo
-                                        </button>          
-                                         </template>     
-                                         <template v-if="historial2.estado === 'Venta Devuelta'">
-                                        <button type="button"  class="btn btn-primary btn-sm">
-                                          Articulo ya Devuelto
-                                        </button>          
-                                         </template>   
-                                                          
-                                    </td>
+                                    
                                    
                                     <td v-text="historial2.created_at"></td>
                                    

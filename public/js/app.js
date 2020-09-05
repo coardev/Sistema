@@ -62398,9 +62398,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -62659,217 +62656,275 @@ var render = function() {
         _c("div", { staticClass: "card-body" }, [
           _c("div", { staticClass: "form-group row" }, [
             _c("div", { staticClass: "col-md-12" }, [
-              _c("div", { staticClass: "input-group" }, [
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.criterio2,
-                        expression: "criterio2"
-                      }
-                    ],
-                    staticClass: "form-control col-md-1",
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.criterio2 = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      }
-                    }
-                  },
-                  [
-                    _c("option", { attrs: { value: "articulo" } }, [
-                      _vm._v("Articulo")
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
+              _c(
+                "div",
+                { staticClass: "input-group" },
+                [
+                  _c(
+                    "select",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.buscar2,
-                      expression: "buscar2"
-                    }
-                  ],
-                  staticClass: "form-control;col-md-2",
-                  attrs: { type: "text", placeholder: "Escribe el Articulo" },
-                  domProps: { value: _vm.buscar2 },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.criterio2,
+                          expression: "criterio2"
+                        }
+                      ],
+                      staticClass: "form-control col-md-1",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.criterio2 = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
                       }
-                      _vm.buscar2 = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.criterio1,
-                        expression: "criterio1"
-                      }
-                    ],
-                    staticClass: "form-control col-md-2",
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.criterio1 = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      }
-                    }
-                  },
-                  [
-                    _c("option", { attrs: { value: "created_at" } }, [
-                      _vm._v("Fecha Inicial")
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.buscar1,
-                      expression: "buscar1"
-                    }
-                  ],
-                  staticClass: "form-control;col-md-3",
-                  attrs: { type: "date", placeholder: "Escribe el Articulo" },
-                  domProps: { value: _vm.buscar1 },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.buscar1 = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.criterio,
-                        expression: "criterio"
-                      }
-                    ],
-                    staticClass: "form-control col-md-2",
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.criterio = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      }
-                    }
-                  },
-                  [
-                    _c("option", { attrs: { value: "created_at" } }, [
-                      _vm._v("Fecha Final")
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.buscar,
-                      expression: "buscar"
-                    }
-                  ],
-                  staticClass: "form-control;col-md-2",
-                  attrs: {
-                    type: "date",
-                    placeholder: "Escribe el Articulo a Buscar"
-                  },
-                  domProps: { value: _vm.buscar },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.buscar = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "submit" },
-                    on: {
-                      click: function($event) {
-                        return _vm.listarDetalle(
-                          1,
-                          _vm.buscar2,
-                          _vm.criterio2,
-                          _vm.buscar1,
-                          _vm.criterio1,
-                          _vm.buscar,
-                          _vm.criterio
+                    },
+                    [
+                      _c("option", { attrs: { value: "articulo" } }, [
+                        _vm._v("Articulo")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "estado" } }, [
+                        _vm._v("Estado")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm.criterio2 === "articulo"
+                    ? [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.buscar2,
+                              expression: "buscar2"
+                            }
+                          ],
+                          staticClass: "form-control;col-md-2",
+                          attrs: {
+                            type: "text",
+                            placeholder: "Escribe el Articulo"
+                          },
+                          domProps: { value: _vm.buscar2 },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.buscar2 = $event.target.value
+                            }
+                          }
+                        })
+                      ]
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.criterio2 === "estado"
+                    ? [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.buscar2,
+                                expression: "buscar2"
+                              }
+                            ],
+                            staticClass: "form-control;col-md-2",
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.buscar2 = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "" } }, [
+                              _vm._v("Completo")
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "option",
+                              { attrs: { value: "Venta Interna" } },
+                              [_vm._v("Ventas Internas")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "option",
+                              { attrs: { value: "Venta Cancelada" } },
+                              [_vm._v("Ventas Canceladas")]
+                            )
+                          ]
                         )
+                      ]
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.criterio1,
+                          expression: "criterio1"
+                        }
+                      ],
+                      staticClass: "form-control col-md-2",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.criterio1 = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "created_at" } }, [
+                        _vm._v("Fecha Inicial")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.buscar1,
+                        expression: "buscar1"
+                      }
+                    ],
+                    staticClass: "form-control;col-md-3",
+                    attrs: { type: "date", placeholder: "Escribe el Articulo" },
+                    domProps: { value: _vm.buscar1 },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.buscar1 = $event.target.value
                       }
                     }
-                  },
-                  [_c("i", { staticClass: "fa fa-search" }), _vm._v(" Buscar")]
-                )
-              ])
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.criterio,
+                          expression: "criterio"
+                        }
+                      ],
+                      staticClass: "form-control col-md-2",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.criterio = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "created_at" } }, [
+                        _vm._v("Fecha Final")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.buscar,
+                        expression: "buscar"
+                      }
+                    ],
+                    staticClass: "form-control;col-md-2",
+                    attrs: {
+                      type: "date",
+                      placeholder: "Escribe el Articulo a Buscar"
+                    },
+                    domProps: { value: _vm.buscar },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.buscar = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "submit" },
+                      on: {
+                        click: function($event) {
+                          return _vm.listarDetalle(
+                            1,
+                            _vm.buscar2,
+                            _vm.criterio2,
+                            _vm.buscar1,
+                            _vm.criterio1,
+                            _vm.buscar,
+                            _vm.criterio
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "fa fa-search" }),
+                      _vm._v(" Buscar")
+                    ]
+                  )
+                ],
+                2
+              )
             ])
           ]),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              on: {
-                click: function($event) {
-                  _vm.isHidden = !_vm.isHidden
-                }
-              }
-            },
-            [_vm._v("Mostrar")]
-          ),
           _vm._v(" "),
           _c(
             "div",
@@ -62886,11 +62941,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("thead", [
                     _c("tr", [
-                      !_vm.isHidden ? _c("th") : _vm._e(),
-                      _vm._v(" "),
-                      _c("th", [
-                        _vm._v("Total: " + _vm._s(_vm.arrayDetalle.length))
-                      ]),
+                      _c("th"),
                       _vm._v(" "),
                       _c("th"),
                       _vm._v(" "),
@@ -62901,77 +62952,13 @@ var render = function() {
                       _c("th")
                     ]),
                     _vm._v(" "),
-                    _c("tr", [
-                      !_vm.isHidden ? _c("th", [_vm._v("Opciones")]) : _vm._e(),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Fecha de Venta")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Articulo")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Cantidad")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Precio")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Estado")])
-                    ])
+                    _vm._m(2)
                   ]),
                   _vm._v(" "),
                   _c(
                     "tbody",
                     _vm._l(_vm.arrayDetalle, function(historial2) {
                       return _c("tr", { key: historial2.id }, [
-                        !_vm.isHidden
-                          ? _c(
-                              "td",
-                              { attrs: { align: "center" } },
-                              [
-                                historial2.estado === "Venta Interna"
-                                  ? [
-                                      _c(
-                                        "button",
-                                        {
-                                          staticClass: "btn btn-danger btn-sm",
-                                          attrs: { type: "button" },
-                                          on: {
-                                            click: function($event) {
-                                              return _vm.abrirModal(
-                                                "historial2",
-                                                "actualizar",
-                                                historial2
-                                              )
-                                            }
-                                          }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                  Devolver Venta Interna de Articulo\n                                "
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                historial2.estado === "Venta Devuelta"
-                                  ? [
-                                      _c(
-                                        "button",
-                                        {
-                                          staticClass: "btn btn-primary btn-sm",
-                                          attrs: { type: "button" }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                  Articulo ya Devuelto\n                                "
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  : _vm._e()
-                              ],
-                              2
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
                         _c("td", {
                           domProps: {
                             textContent: _vm._s(historial2.created_at)
@@ -63278,6 +63265,22 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("caption", [
       _c("h2", [_vm._v("Reporte Salida - Inventario Interno")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("Fecha de Venta")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Articulo")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Cantidad")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Precio")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Estado")])
     ])
   }
 ]
@@ -85869,6 +85872,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -86397,7 +86422,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.directive("autofocus", __WEBPACK_IMP
             var _this2 = this;
 
             swal({
-                title: 'Esta seguro de anular esta venta?',
+                title: 'Seguro que quieres Cancelar la Venta?',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -86412,11 +86437,12 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.directive("autofocus", __WEBPACK_IMP
                 if (result.value) {
                     var me = _this2;
 
-                    axios.put(_this2.ruta + '/venta/desactivar', {
+                    axios.put(_this2.ruta + '/interna/desactivar', {
                         'id': id
                     }).then(function (response) {
+                        me.listarArticulo(me.buscarA, me.criterioA);
                         me.listarVenta(1, '', 'id');
-                        swal('Anulado!', 'La venta ha sido anulada con éxito.', 'success');
+                        swal('Cancelada!', 'La venta se cancelo correctamente, los articulos han sido devueltos.', 'success');
                     }).catch(function (error) {
                         console.log(error);
                     });
@@ -86709,142 +86735,162 @@ var render = function() {
                               _c(
                                 "tbody",
                                 _vm._l(_vm.arrayArticulo, function(articulo) {
-                                  return _c("tr", { key: articulo.id }, [
-                                    _c(
-                                      "td",
-                                      [
-                                        articulo.inventariable === 1
-                                          ? [
-                                              articulo.stock >= 1
-                                                ? [
-                                                    _c(
-                                                      "button",
-                                                      {
-                                                        staticClass:
-                                                          "btn btn-success btn-sm active",
-                                                        attrs: {
-                                                          type: "button",
-                                                          "aria-pressed": "true"
-                                                        },
-                                                        on: {
-                                                          click: function(
-                                                            $event
-                                                          ) {
-                                                            return _vm.agregarDetalleModal(
-                                                              articulo
-                                                            )
-                                                          }
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("i", {
+                                  return _c(
+                                    "tr",
+                                    { key: articulo.id },
+                                    [
+                                      _c(
+                                        "td",
+                                        [
+                                          articulo.inventariable === 1
+                                            ? [
+                                                articulo.stock >= 1
+                                                  ? [
+                                                      _c(
+                                                        "button",
+                                                        {
                                                           staticClass:
-                                                            "icon-check"
-                                                        })
-                                                      ]
-                                                    )
-                                                  ]
-                                                : _vm._e(),
-                                              _vm._v(" "),
-                                              articulo.stock == 0
-                                                ? [_vm._m(2, true)]
-                                                : _vm._e()
-                                            ]
-                                          : _vm._e()
-                                      ],
-                                      2
-                                    ),
-                                    _vm._v(" "),
-                                    _c("td", {
-                                      staticStyle: { display: "none" },
-                                      domProps: {
-                                        textContent: _vm._s(
-                                          articulo.inventariable
-                                        )
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("td", {
-                                      domProps: {
-                                        textContent: _vm._s(articulo.codigo)
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("td", {
-                                      domProps: {
-                                        textContent: _vm._s(articulo.nombre)
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("td", {
-                                      domProps: {
-                                        textContent: _vm._s(
-                                          articulo.nombre_categoria
-                                        )
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("td", {
-                                      staticStyle: { display: "none" },
-                                      domProps: {
-                                        textContent: _vm._s(
-                                          articulo.precio_proveedor
-                                        )
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("td", {
-                                      staticStyle: { display: "none" },
-                                      domProps: {
-                                        textContent: _vm._s(
-                                          articulo.precio_proveedor1
-                                        )
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("td", {
-                                      domProps: {
-                                        textContent: _vm._s(
-                                          articulo.precio_venta
-                                        )
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("td", {
-                                      staticStyle: { color: "red" },
-                                      domProps: {
-                                        textContent: _vm._s(articulo.stock)
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "td",
-                                      { staticStyle: { display: "none" } },
-                                      [
-                                        articulo.condicion
-                                          ? _c("div", [
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "badge badge-success"
-                                                },
-                                                [_vm._v("Activo")]
-                                              )
-                                            ])
-                                          : _c("div", [
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "badge badge-danger"
-                                                },
-                                                [_vm._v("Desactivado")]
-                                              )
-                                            ])
-                                      ]
-                                    )
-                                  ])
+                                                            "btn btn-success btn-sm active",
+                                                          attrs: {
+                                                            type: "button",
+                                                            "aria-pressed":
+                                                              "true"
+                                                          },
+                                                          on: {
+                                                            click: function(
+                                                              $event
+                                                            ) {
+                                                              return _vm.agregarDetalleModal(
+                                                                articulo
+                                                              )
+                                                            }
+                                                          }
+                                                        },
+                                                        [
+                                                          _c("i", {
+                                                            staticClass:
+                                                              "icon-check"
+                                                          })
+                                                        ]
+                                                      )
+                                                    ]
+                                                  : _vm._e(),
+                                                _vm._v(" "),
+                                                articulo.stock == 0
+                                                  ? [_vm._m(2, true)]
+                                                  : _vm._e()
+                                              ]
+                                            : _vm._e()
+                                        ],
+                                        2
+                                      ),
+                                      _vm._v(" "),
+                                      _c("td", {
+                                        staticStyle: { display: "none" },
+                                        domProps: {
+                                          textContent: _vm._s(
+                                            articulo.inventariable
+                                          )
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("td", {
+                                        domProps: {
+                                          textContent: _vm._s(articulo.codigo)
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("td", {
+                                        domProps: {
+                                          textContent: _vm._s(articulo.nombre)
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("td", {
+                                        domProps: {
+                                          textContent: _vm._s(
+                                            articulo.nombre_categoria
+                                          )
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("td", {
+                                        staticStyle: { display: "none" },
+                                        domProps: {
+                                          textContent: _vm._s(
+                                            articulo.precio_proveedor
+                                          )
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("td", {
+                                        staticStyle: { display: "none" },
+                                        domProps: {
+                                          textContent: _vm._s(
+                                            articulo.precio_proveedor1
+                                          )
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("td", {
+                                        domProps: {
+                                          textContent: _vm._s(
+                                            articulo.precio_venta
+                                          )
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      articulo.stock >= 1
+                                        ? [
+                                            _c("td", {
+                                              domProps: {
+                                                textContent: _vm._s(
+                                                  articulo.stock
+                                                )
+                                              }
+                                            })
+                                          ]
+                                        : [
+                                            _c("td", {
+                                              staticStyle: { color: "red" },
+                                              domProps: {
+                                                textContent: _vm._s(
+                                                  articulo.stock
+                                                )
+                                              }
+                                            })
+                                          ],
+                                      _vm._v(" "),
+                                      _c(
+                                        "td",
+                                        { staticStyle: { display: "none" } },
+                                        [
+                                          articulo.condicion
+                                            ? _c("div", [
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "badge badge-success"
+                                                  },
+                                                  [_vm._v("Activo")]
+                                                )
+                                              ])
+                                            : _c("div", [
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "badge badge-danger"
+                                                  },
+                                                  [_vm._v("Desactivado")]
+                                                )
+                                              ])
+                                        ]
+                                      )
+                                    ],
+                                    2
+                                  )
                                 }),
                                 0
                               )
@@ -87646,17 +87692,17 @@ var render = function() {
                                       [_c("i", { staticClass: "icon-eye" })]
                                     ),
                                     _vm._v(" "),
-                                    interna.tipo_comprobante == "TICKET"
+                                    interna.estado === "Venta Interna"
                                       ? [
                                           _c(
                                             "button",
                                             {
                                               staticClass:
-                                                "btn btn-warning btn-lg",
+                                                "btn btn-danger btn-lg",
                                               attrs: { type: "button" },
                                               on: {
                                                 click: function($event) {
-                                                  return _vm.pdfTicket(
+                                                  return _vm.desactivarVenta(
                                                     interna.id
                                                   )
                                                 }
@@ -87664,36 +87710,144 @@ var render = function() {
                                             },
                                             [
                                               _c("i", {
-                                                staticClass: "fas fa-ticket-alt"
+                                                staticClass:
+                                                  "fa fa-window-close",
+                                                attrs: { "aria-hidden": "true" }
                                               })
                                             ]
-                                          ),
-                                          _vm._v(
-                                            "  \n                                    "
                                           )
                                         ]
                                       : _vm._e(),
                                     _vm._v(" "),
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-danger btn-lg",
-                                        attrs: { type: "button" },
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.pdfVenta(interna.id)
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _c("i", {
-                                          staticClass: "fa fa-file-pdf-o"
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(
-                                      "  \n                                    \n\n                                  \n                                     \n                                    \n                                    \n                                "
-                                    )
+                                    interna.estado === "Venta Cancelada"
+                                      ? [
+                                          _c(
+                                            "button",
+                                            {
+                                              staticClass:
+                                                "btn btn-danger btn-lg",
+                                              attrs: {
+                                                type: "button",
+                                                disabled: ""
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.desactivarVenta(
+                                                    interna.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass:
+                                                  "fa fa-window-close",
+                                                attrs: { "aria-hidden": "true" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    interna.tipo_comprobante == "TICKET"
+                                      ? [
+                                          interna.estado === "Venta Interna"
+                                            ? _c(
+                                                "button",
+                                                {
+                                                  staticClass:
+                                                    "btn btn-warning btn-lg",
+                                                  attrs: { type: "button" },
+                                                  on: {
+                                                    click: function($event) {
+                                                      return _vm.pdfTicket(
+                                                        interna.id
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _c("i", {
+                                                    staticClass:
+                                                      "fas fa-ticket-alt"
+                                                  })
+                                                ]
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          interna.estado === "Venta Cancelada"
+                                            ? _c(
+                                                "button",
+                                                {
+                                                  staticClass:
+                                                    "btn btn-warning btn-lg",
+                                                  attrs: {
+                                                    type: "button",
+                                                    disabled: ""
+                                                  },
+                                                  on: {
+                                                    click: function($event) {
+                                                      return _vm.pdfTicket(
+                                                        interna.id
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _c("i", {
+                                                    staticClass:
+                                                      "fas fa-ticket-alt"
+                                                  })
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ]
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    interna.estado === "Venta Interna"
+                                      ? _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "btn btn-danger btn-lg",
+                                            attrs: { type: "button" },
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.pdfVenta(interna.id)
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _c("i", {
+                                              staticClass: "fa fa-file-pdf-o"
+                                            })
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    interna.estado === "Venta Cancelada"
+                                      ? _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "btn btn-danger btn-lg",
+                                            attrs: {
+                                              type: "button",
+                                              disabled: ""
+                                            },
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.pdfVenta(interna.id)
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _c("i", {
+                                              staticClass: "fa fa-file-pdf-o"
+                                            })
+                                          ]
+                                        )
+                                      : _vm._e()
                                   ],
                                   2
                                 ),

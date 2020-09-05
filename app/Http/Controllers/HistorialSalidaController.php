@@ -56,7 +56,7 @@ class HistorialSalidaController extends Controller
         $criterio = $request->criterio;
         
         if ($buscar==''){
-            $historial2 = DetalleInterna::where('inventariable','=','1')
+            $historial2 = DetalleInterna::where('estado','=','Venta Interna')
             ->where('fecha_hora','=', Carbon :: today())
             ->orderBy('id', 'desc')->paginate(10000);
         }
