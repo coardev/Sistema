@@ -88936,6 +88936,69 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -88972,6 +89035,8 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue2
             arrayCliente: [],
             arrayDetalle: [],
             listado: 1,
+            disabled: false,
+            isHidden: false,
             modal: 0,
             tituloModal: '',
             tipoAccion: 0,
@@ -89359,7 +89424,11 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue2
             window.open(this.ruta + '/venta/pdf/' + id + ',' + '_blank');
         },
         pdfTicket: function pdfTicket(id) {
+            var me = this;
             window.open(this.ruta + '/venta/pdfTicket/' + id + ',' + '_blank');
+            me.cerrarModal();
+            me.ocultarDetalle();
+            me.listarVenta(1, me.buscar, me.criterio);
         },
         pdfTicket1: function pdfTicket1(id) {
             window.open(this.ruta + '/venta/pdfTicket1/' + id + ',' + '_blank');
@@ -89402,7 +89471,9 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue2
         verVenta: function verVenta(id) {
             var me = this;
             me.listado = 2;
-
+            me.efectivo = 0;
+            me.tarjeta = 0;
+            me.vales = 0;
             //Obtener los datos del ingreso
             var arrayVentaT = [];
             var url = this.ruta + '/venta/obtenerCabecera?id=' + id;
@@ -89453,9 +89524,9 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue2
                 'cambio': this.cambio,
                 'id': this.id
             }).then(function (response) {
-                me.cerrarModal();
-                me.ocultarDetalle();
-                me.listarVenta(1, me.buscar, me.criterio);
+                // me.cerrarModal();
+                // me.ocultarDetalle();
+                //me.listarVenta(1,me.buscar,me.criterio);
             }).catch(function (error) {
                 console.log(error);
             });
@@ -89758,9 +89829,20 @@ var render = function() {
                                 expression: "dinero"
                               }
                             ],
-                            attrs: { name: "txtm", id: "txtm", type: "number" },
+                            ref: "test",
+                            attrs: {
+                              name: "txtm",
+                              id: "txtm",
+                              type: "number",
+                              min: 0,
+                              placeholder: "0"
+                            },
                             domProps: { value: _vm.dinero },
                             on: {
+                              keypress: function($event) {
+                                return _vm.isNumber(_vm.event)
+                              },
+                              blur: _vm.onBlur,
                               input: function($event) {
                                 if ($event.target.composing) {
                                   return
@@ -89908,571 +89990,940 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", { attrs: { id: "printMe" } }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "table-wrapper-scroll-y my-custom-scrollbar"
-                      },
-                      [
-                        _c(
-                          "table",
-                          {
-                            staticClass:
-                              "table table-bordered table-striped table-sm",
-                            attrs: { id: "table_trans" }
-                          },
-                          [
-                            _c("thead", [
-                              _c("tr", [
-                                _c("th"),
-                                _vm._v(" "),
-                                _c("th"),
-                                _vm._v(" "),
-                                _c("th"),
-                                _vm._v(" "),
-                                _c("th"),
-                                _vm._v(" "),
-                                _c("th"),
-                                _vm._v(" "),
-                                _c("th", [
-                                  _vm._v("$ " + _vm._s(_vm.calcularEfectivo))
-                                ]),
-                                _vm._v(" "),
-                                _c("th", [
-                                  _vm._v("$ " + _vm._s(_vm.calcularTarjeta))
-                                ]),
-                                _vm._v(" "),
-                                _c("th", [
-                                  _vm._v("$ " + _vm._s(_vm.calcularVales))
-                                ]),
-                                _vm._v(" "),
-                                _c("th", [
-                                  _vm._v("$ " + _vm._s(_vm.calcularCambio))
-                                ]),
-                                _vm._v(" "),
-                                _c("th", [
-                                  _vm._v("$ " + _vm._s(_vm.calcularCorte))
-                                ]),
-                                _vm._v(" "),
-                                _c("th", [
-                                  _vm._v("$ " + _vm._s(_vm.calcularReal))
-                                ]),
-                                _vm._v(" "),
-                                _c("th")
-                              ]),
-                              _vm._v(" "),
-                              _vm._m(7)
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "tbody",
-                              _vm._l(_vm.arrayVenta, function(venta) {
-                                return _c("tr", { key: venta.id }, [
-                                  _c(
-                                    "td",
-                                    [
-                                      _c(
-                                        "button",
-                                        {
-                                          staticClass: "btn btn-success btn-lg",
-                                          attrs: { type: "button" },
-                                          on: {
-                                            click: function($event) {
-                                              return _vm.verVenta(venta.id)
-                                            }
-                                          }
-                                        },
-                                        [_c("i", { staticClass: "icon-eye" })]
-                                      ),
-                                      _vm._v(" "),
-                                      venta.estado === "Venta Registrada"
-                                        ? [
-                                            _c(
-                                              "button",
-                                              {
-                                                staticClass:
-                                                  "btn btn-warning btn-lg",
-                                                attrs: {
-                                                  type: "button",
-                                                  disabled: ""
-                                                },
-                                                on: {
-                                                  click: function($event) {
-                                                    return _vm.pdfTicket(
-                                                      venta.id
-                                                    )
-                                                  }
-                                                }
-                                              },
-                                              [
-                                                _c("i", {
-                                                  staticClass:
-                                                    "fas fa-ticket-alt"
-                                                })
-                                              ]
-                                            ),
-                                            _vm._v(
-                                              "    \n                                    "
-                                            )
-                                          ]
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      venta.estado === "Venta Cobrada"
-                                        ? [
-                                            _c(
-                                              "button",
-                                              {
-                                                staticClass:
-                                                  "btn btn-warning btn-lg",
-                                                attrs: { type: "button" },
-                                                on: {
-                                                  click: function($event) {
-                                                    return _vm.pdfTicket(
-                                                      venta.id
-                                                    )
-                                                  }
-                                                }
-                                              },
-                                              [
-                                                _c("i", {
-                                                  staticClass:
-                                                    "fas fa-ticket-alt"
-                                                })
-                                              ]
-                                            ),
-                                            _vm._v(
-                                              "    \n                                    "
-                                            )
-                                          ]
-                                        : _vm._e()
-                                    ],
-                                    2
-                                  ),
-                                  _vm._v(" "),
-                                  _c("td", {
-                                    domProps: { textContent: _vm._s(venta.id) }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("td", {
-                                    domProps: {
-                                      textContent: _vm._s(venta.usuario)
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("td", {
-                                    domProps: {
-                                      textContent: _vm._s(venta.nombre)
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("td", {
-                                    domProps: {
-                                      textContent: _vm._s(venta.created_at)
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("td", {
-                                    domProps: {
-                                      textContent: _vm._s(venta.efectivo)
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("td", {
-                                    domProps: {
-                                      textContent: _vm._s(venta.tarjeta)
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("td", {
-                                    domProps: {
-                                      textContent: _vm._s(venta.vales)
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("td", {
-                                    domProps: {
-                                      textContent: _vm._s(venta.cambio)
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("td", {
-                                    domProps: {
-                                      textContent: _vm._s(venta.total)
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("td", {
-                                    domProps: {
-                                      textContent: _vm._s(venta.efectivo1)
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("td", {
-                                    domProps: {
-                                      textContent: _vm._s(venta.estado)
-                                    }
-                                  })
-                                ])
-                              }),
-                              0
-                            )
-                          ]
-                        )
-                      ]
-                    )
-                  ])
-                ])
-              ]
-            : _vm.listado == 2
-            ? [
-                _c("div", { staticClass: "card-body" }, [
-                  _c("div", { staticClass: "form-group row border" }, [
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "" } }, [
-                          _vm._v("Folio de Ticket")
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { domProps: { textContent: _vm._s(_vm.id) } })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "" } }, [
-                          _vm._v("Cliente")
-                        ]),
-                        _vm._v(" "),
-                        _c("p", {
-                          domProps: { textContent: _vm._s(_vm.cliente) }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-3" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "" } }, [_vm._v("Fecha")]),
-                        _vm._v(" "),
-                        _c("p", {
-                          domProps: { textContent: _vm._s(_vm.created_at) }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-4" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("Tipo Comprobante")]),
-                        _vm._v(" "),
-                        _c("p", {
-                          domProps: {
-                            textContent: _vm._s(_vm.tipo_comprobante)
-                          }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-4" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("Tipo Comprobante")]),
-                        _vm._v(" "),
-                        _c("p", {
-                          domProps: { textContent: _vm._s(_vm.estado) }
-                        })
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group row border" }, [
-                    _c("div", { staticClass: "table-responsive col-md-12" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "table-wrapper-scroll-y my-custom-scrollbar"
+                    },
+                    [
                       _c(
                         "table",
                         {
                           staticClass:
-                            "table table-bordered table-striped table-sm"
+                            "table table-bordered table-striped table-sm",
+                          attrs: { id: "table_trans" }
                         },
                         [
-                          _vm._m(8),
+                          _c("thead", [
+                            _c("tr", [
+                              _c("th"),
+                              _vm._v(" "),
+                              _c("th"),
+                              _vm._v(" "),
+                              _c("th"),
+                              _vm._v(" "),
+                              _c("th"),
+                              _vm._v(" "),
+                              _c("th"),
+                              _vm._v(" "),
+                              _c("th", [
+                                _vm._v("$ " + _vm._s(_vm.calcularEfectivo))
+                              ]),
+                              _vm._v(" "),
+                              _c("th", [
+                                _vm._v("$ " + _vm._s(_vm.calcularTarjeta))
+                              ]),
+                              _vm._v(" "),
+                              _c("th", [
+                                _vm._v("$ " + _vm._s(_vm.calcularVales))
+                              ]),
+                              _vm._v(" "),
+                              _c("th", [
+                                _vm._v("$ " + _vm._s(_vm.calcularCambio))
+                              ]),
+                              _vm._v(" "),
+                              _c("th", [
+                                _vm._v("$ " + _vm._s(_vm.calcularCorte))
+                              ]),
+                              _vm._v(" "),
+                              _c("th", [
+                                _vm._v("$ " + _vm._s(_vm.calcularReal))
+                              ]),
+                              _vm._v(" "),
+                              _c("th")
+                            ]),
+                            _vm._v(" "),
+                            _vm._m(7)
+                          ]),
                           _vm._v(" "),
-                          _vm.arrayDetalle.length
+                          _c(
+                            "tbody",
+                            _vm._l(_vm.arrayVenta, function(venta) {
+                              return _c("tr", { key: venta.id }, [
+                                _c(
+                                  "td",
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-success btn-lg",
+                                        attrs: { type: "button" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.verVenta(venta.id)
+                                          }
+                                        }
+                                      },
+                                      [_c("i", { staticClass: "icon-eye" })]
+                                    ),
+                                    _vm._v(" "),
+                                    venta.estado === "Venta Registrada"
+                                      ? [
+                                          _c(
+                                            "button",
+                                            {
+                                              staticClass:
+                                                "btn btn-warning btn-lg",
+                                              attrs: {
+                                                type: "button",
+                                                disabled: ""
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.pdfTicket(venta.id)
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-ticket-alt"
+                                              })
+                                            ]
+                                          ),
+                                          _vm._v(
+                                            "    \n                                    "
+                                          )
+                                        ]
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    venta.estado === "Venta Cobrada"
+                                      ? [
+                                          _c(
+                                            "button",
+                                            {
+                                              staticClass:
+                                                "btn btn-warning btn-lg",
+                                              attrs: { type: "button" },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.pdfTicket(venta.id)
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-ticket-alt"
+                                              })
+                                            ]
+                                          ),
+                                          _vm._v(
+                                            "    \n                                    "
+                                          )
+                                        ]
+                                      : _vm._e()
+                                  ],
+                                  2
+                                ),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: { textContent: _vm._s(venta.id) }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(venta.usuario)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(venta.nombre)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(venta.created_at)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(venta.efectivo)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(venta.tarjeta)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: { textContent: _vm._s(venta.vales) }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(venta.cambio)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: { textContent: _vm._s(venta.total) }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(venta.efectivo1)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(venta.estado)
+                                  }
+                                })
+                              ])
+                            }),
+                            0
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                ])
+              ]
+            : _vm.listado == 2
+            ? [
+                _c(
+                  "div",
+                  { staticClass: "card-body" },
+                  [
+                    _vm.estado === "Venta Registrada"
+                      ? [
+                          _vm.isHidden
                             ? _c(
-                                "tbody",
+                                "div",
+                                {
+                                  staticClass: "form-group row border",
+                                  staticStyle: { color: "red" }
+                                },
                                 [
-                                  _vm._l(_vm.arrayDetalle, function(detalle) {
-                                    return _c(
-                                      "tr",
-                                      { key: detalle.id },
-                                      [
-                                        _c("td", {
-                                          domProps: {
-                                            textContent: _vm._s(
-                                              detalle.inventariable
-                                            )
-                                          }
-                                        }),
-                                        _vm._v(" "),
-                                        _c("td", {
-                                          domProps: {
-                                            textContent: _vm._s(
-                                              detalle.articulo
-                                            )
-                                          }
-                                        }),
-                                        _vm._v(" "),
-                                        detalle.inventariable === 1
-                                          ? [
-                                              _c("td", {
-                                                domProps: {
-                                                  textContent: _vm._s(
-                                                    detalle.precio4
-                                                  )
-                                                }
-                                              })
-                                            ]
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        detalle.inventariable === 2
-                                          ? [
-                                              _c("td", {
-                                                directives: [
-                                                  {
-                                                    name: "show",
-                                                    rawName: "v-show",
-                                                    value: detalle.precio5 > 0,
-                                                    expression:
-                                                      "detalle.precio5>0"
-                                                  }
-                                                ],
-                                                domProps: {
-                                                  textContent: _vm._s(
-                                                    detalle.precio5
-                                                  )
-                                                }
-                                              })
-                                            ]
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        detalle.inventariable === 2
-                                          ? [
-                                              _c("td", {
-                                                directives: [
-                                                  {
-                                                    name: "show",
-                                                    rawName: "v-show",
-                                                    value: detalle.precio6 > 0,
-                                                    expression:
-                                                      "detalle.precio6>0"
-                                                  }
-                                                ],
-                                                domProps: {
-                                                  textContent: _vm._s(
-                                                    detalle.precio6
-                                                  )
-                                                }
-                                              })
-                                            ]
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        detalle.inventariable === 3
-                                          ? [
-                                              _c("td", {
-                                                domProps: {
-                                                  textContent: _vm._s(
-                                                    detalle.precio3
-                                                  )
-                                                }
-                                              })
-                                            ]
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        detalle.inventariable === 1
-                                          ? [
-                                              _c("td", {
-                                                domProps: {
-                                                  textContent: _vm._s(
-                                                    detalle.cantidad
-                                                  )
-                                                }
-                                              })
-                                            ]
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        detalle.inventariable === 2
-                                          ? [
-                                              _c("td", {
-                                                directives: [
-                                                  {
-                                                    name: "show",
-                                                    rawName: "v-show",
-                                                    value:
-                                                      detalle.cantidad1 > 0,
-                                                    expression:
-                                                      "detalle.cantidad1>0"
-                                                  }
-                                                ],
-                                                domProps: {
-                                                  textContent: _vm._s(
-                                                    detalle.cantidad1
-                                                  )
-                                                }
-                                              })
-                                            ]
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        detalle.inventariable === 2
-                                          ? [
-                                              _c("td", {
-                                                directives: [
-                                                  {
-                                                    name: "show",
-                                                    rawName: "v-show",
-                                                    value:
-                                                      detalle.kilogramos > 0,
-                                                    expression:
-                                                      "detalle.kilogramos>0"
-                                                  }
-                                                ],
-                                                domProps: {
-                                                  textContent: _vm._s(
-                                                    detalle.kilogramos
-                                                  )
-                                                }
-                                              })
-                                            ]
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        detalle.inventariable === 3
-                                          ? [
-                                              _c("td", {
-                                                domProps: {
-                                                  textContent: _vm._s(
-                                                    detalle.cantidad2
-                                                  )
-                                                }
-                                              })
-                                            ]
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        detalle.inventariable === 1
-                                          ? [
-                                              _c("td", {
-                                                domProps: {
-                                                  textContent: _vm._s(
-                                                    detalle.cantidad *
-                                                      detalle.precio4
-                                                  )
-                                                }
-                                              })
-                                            ]
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        detalle.inventariable === 2
-                                          ? [
-                                              _c("td", {
-                                                directives: [
-                                                  {
-                                                    name: "show",
-                                                    rawName: "v-show",
-                                                    value: detalle.precio5 > 0,
-                                                    expression:
-                                                      "detalle.precio5>0"
-                                                  }
-                                                ],
-                                                domProps: {
-                                                  textContent: _vm._s(
-                                                    detalle.precio5
-                                                  )
-                                                }
-                                              })
-                                            ]
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        detalle.inventariable === 2
-                                          ? [
-                                              _c("td", {
-                                                directives: [
-                                                  {
-                                                    name: "show",
-                                                    rawName: "v-show",
-                                                    value: detalle.precio6 > 0,
-                                                    expression:
-                                                      "detalle.precio6>0"
-                                                  }
-                                                ],
-                                                domProps: {
-                                                  textContent: _vm._s(
-                                                    detalle.precio6
-                                                  )
-                                                }
-                                              })
-                                            ]
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        detalle.inventariable === 3
-                                          ? [
-                                              _c("td", {
-                                                domProps: {
-                                                  textContent: _vm._s(
-                                                    detalle.cantidad2 *
-                                                      detalle.precio3
-                                                  )
-                                                }
-                                              })
-                                            ]
-                                          : _vm._e()
-                                      ],
-                                      2
-                                    )
-                                  }),
-                                  _vm._v(" "),
                                   _c(
-                                    "tr",
+                                    "div",
                                     {
+                                      staticClass: "col-md-12",
                                       staticStyle: {
                                         "background-color": "#CEECF5"
-                                      }
+                                      },
+                                      attrs: { align: "center" }
                                     },
                                     [
-                                      _vm._m(9),
-                                      _vm._v(" "),
-                                      _c("td", [
-                                        _vm._v("$ " + _vm._s(_vm.total))
+                                      _c("div", { staticClass: "form-group" }, [
+                                        _c("h6", { attrs: { for: "" } }, [
+                                          _vm._v("Imprimir Ticket")
+                                        ]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "btn btn-warning btn-lg",
+                                            attrs: { type: "button" },
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.pdfTicket(_vm.id)
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _c("i", {
+                                              staticClass: "fas fa-ticket-alt"
+                                            })
+                                          ]
+                                        ),
+                                        _vm._v("  \n                        ")
                                       ])
                                     ]
                                   )
-                                ],
-                                2
+                                ]
                               )
-                            : _c("tbody", [_vm._m(10)])
+                            : _vm._e()
                         ]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group row" }, [
-                    _c(
-                      "div",
-                      { staticClass: "col-md-12" },
-                      [
-                        _vm.estado === "Venta Registrada"
-                          ? [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-secondary",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.abrirModal()
-                                    }
-                                  }
-                                },
-                                [_vm._v("Cobrar Venta")]
-                              )
-                            ]
-                          : _vm._e(),
-                        _vm._v(" "),
+                      : _vm._e(),
+                    _vm._v(" "),
+                    !_vm.isHidden
+                      ? _c("div", { staticClass: "form-group row border" }, [
+                          _c("div", { staticClass: "col-md-12" }, [
+                            _vm.estado === "Venta Registrada"
+                              ? _c(
+                                  "table",
+                                  {
+                                    staticClass:
+                                      "table table-bordered table-striped table-sm"
+                                  },
+                                  [
+                                    _vm._m(8),
+                                    _vm._v(" "),
+                                    _c("tbody", [
+                                      _c(
+                                        "td",
+                                        {
+                                          staticStyle: {
+                                            "background-color": "#CEECF5"
+                                          }
+                                        },
+                                        [
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.efectivo,
+                                                expression: "efectivo"
+                                              }
+                                            ],
+                                            ref: "test",
+                                            attrs: {
+                                              min: 0,
+                                              placeholder: "0",
+                                              type: "number"
+                                            },
+                                            domProps: { value: _vm.efectivo },
+                                            on: {
+                                              keypress: function($event) {
+                                                return _vm.isNumber(_vm.event)
+                                              },
+                                              blur: _vm.onBlur,
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.efectivo =
+                                                  $event.target.value
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "td",
+                                        {
+                                          staticStyle: {
+                                            "background-color": "#CEECF5"
+                                          }
+                                        },
+                                        [
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.tarjeta,
+                                                expression: "tarjeta"
+                                              }
+                                            ],
+                                            ref: "test1",
+                                            attrs: {
+                                              placeholder: "0",
+                                              min: 0,
+                                              type: "number"
+                                            },
+                                            domProps: { value: _vm.tarjeta },
+                                            on: {
+                                              blur: _vm.onBlur1,
+                                              keypress: function($event) {
+                                                return _vm.isNumber(_vm.event)
+                                              },
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.tarjeta =
+                                                  $event.target.value
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "td",
+                                        {
+                                          staticStyle: {
+                                            "background-color": "#CEECF5"
+                                          }
+                                        },
+                                        [
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.vales,
+                                                expression: "vales"
+                                              }
+                                            ],
+                                            ref: "test2",
+                                            attrs: {
+                                              placeholder: "0",
+                                              min: 0,
+                                              type: "number"
+                                            },
+                                            domProps: { value: _vm.vales },
+                                            on: {
+                                              blur: _vm.onBlur2,
+                                              keypress: function($event) {
+                                                return _vm.isNumber(_vm.event)
+                                              },
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.vales = $event.target.value
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "td",
+                                        {
+                                          staticStyle: {
+                                            "background-color": "#CEECF5"
+                                          }
+                                        },
+                                        [
+                                          _c("input", {
+                                            attrs: {
+                                              name: "txtb",
+                                              id: "txtb",
+                                              readonly: ""
+                                            },
+                                            domProps: { value: _vm.total },
+                                            on: {
+                                              input: function($event) {
+                                                _vm.somethingElse =
+                                                  $event.target.value
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "td",
+                                        {
+                                          staticStyle: {
+                                            "background-color": "#CEECF5"
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "button",
+                                            {
+                                              staticClass:
+                                                "btn btn-success btn-lg",
+                                              attrs: {
+                                                type: "button",
+                                                disabled: _vm.disabled
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.actualizarVenta(
+                                                    "venta",
+                                                    "actualizar",
+                                                    _vm.venta
+                                                  )
+                                                  _vm.disabled = !_vm.disabled
+                                                  _vm.isHidden = !_vm.isHidden
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass:
+                                                  "fas fa-money-bill-wave"
+                                              })
+                                            ]
+                                          ),
+                                          _vm._v(
+                                            "  \n                                        \n                                    "
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "tr",
+                                        {
+                                          staticStyle: {
+                                            "background-color": "#CEECF5"
+                                          }
+                                        },
+                                        [
+                                          _vm._m(9),
+                                          _vm._v(" "),
+                                          _c(
+                                            "td",
+                                            {
+                                              staticStyle: {
+                                                "background-color": "#CEECF5"
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(
+                                                  (_vm.cambio =
+                                                    _vm.calcularTotal +
+                                                    (_vm.calcularTotal1 +
+                                                      _vm.calcularTotal2))
+                                                )
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  ]
+                                )
+                              : _vm._e()
+                          ])
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    !_vm.isHidden
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "form-group row border",
+                            staticStyle: { color: "red" }
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "col-md-4",
+                                staticStyle: { "background-color": "#CEECF5" },
+                                attrs: { align: "center" }
+                              },
+                              [
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c("h6", { attrs: { for: "" } }, [
+                                    _vm._v("Folio de Ticket")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("h6", [
+                                    _c("p", {
+                                      domProps: { textContent: _vm._s(_vm.id) }
+                                    })
+                                  ])
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "col-md-4",
+                                staticStyle: { "background-color": "#CEECF5" },
+                                attrs: { align: "center" }
+                              },
+                              [
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c("h6", { attrs: { for: "" } }, [
+                                    _vm._v("Fecha")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("h6", [
+                                    _c("p", {
+                                      domProps: {
+                                        textContent: _vm._s(_vm.created_at)
+                                      }
+                                    })
+                                  ])
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "col-md-4",
+                                staticStyle: { "background-color": "#CEECF5" },
+                                attrs: { align: "center" }
+                              },
+                              [
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c("h6", [_vm._v("Estado de Venta")]),
+                                  _vm._v(" "),
+                                  _c("h6", [
+                                    _c("p", {
+                                      domProps: {
+                                        textContent: _vm._s(_vm.estado)
+                                      }
+                                    })
+                                  ])
+                                ])
+                              ]
+                            )
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.estado === "Venta Cobrada"
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "form-group row border",
+                            staticStyle: { color: "red" }
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "col-md-4",
+                                staticStyle: { "background-color": "#CEECF5" },
+                                attrs: { align: "center" }
+                              },
+                              [
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c("h6", { attrs: { for: "" } }, [
+                                    _vm._v("Folio de Ticket")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("h6", [
+                                    _c("p", {
+                                      domProps: { textContent: _vm._s(_vm.id) }
+                                    })
+                                  ])
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "col-md-4",
+                                staticStyle: { "background-color": "#CEECF5" },
+                                attrs: { align: "center" }
+                              },
+                              [
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c("h6", { attrs: { for: "" } }, [
+                                    _vm._v("Fecha")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("h6", [
+                                    _c("p", {
+                                      domProps: {
+                                        textContent: _vm._s(_vm.created_at)
+                                      }
+                                    })
+                                  ])
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "col-md-4",
+                                staticStyle: { "background-color": "#CEECF5" },
+                                attrs: { align: "center" }
+                              },
+                              [
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c("h6", [_vm._v("Estado de Venta")]),
+                                  _vm._v(" "),
+                                  _c("h6", [
+                                    _c("p", {
+                                      domProps: {
+                                        textContent: _vm._s(_vm.estado)
+                                      }
+                                    })
+                                  ])
+                                ])
+                              ]
+                            )
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row border" }, [
+                      _c("div", { staticClass: "table-responsive col-md-12" }, [
+                        _c(
+                          "table",
+                          {
+                            staticClass:
+                              "table table-bordered table-striped table-sm"
+                          },
+                          [
+                            _vm._m(10),
+                            _vm._v(" "),
+                            _vm.arrayDetalle.length
+                              ? _c(
+                                  "tbody",
+                                  [
+                                    _vm._l(_vm.arrayDetalle, function(detalle) {
+                                      return _c(
+                                        "tr",
+                                        { key: detalle.id },
+                                        [
+                                          _c("td", {
+                                            domProps: {
+                                              textContent: _vm._s(
+                                                detalle.inventariable
+                                              )
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("td", {
+                                            domProps: {
+                                              textContent: _vm._s(
+                                                detalle.articulo
+                                              )
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          detalle.inventariable === 1
+                                            ? [
+                                                _c("td", {
+                                                  domProps: {
+                                                    textContent: _vm._s(
+                                                      detalle.precio4
+                                                    )
+                                                  }
+                                                })
+                                              ]
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          detalle.inventariable === 2
+                                            ? [
+                                                _c("td", {
+                                                  directives: [
+                                                    {
+                                                      name: "show",
+                                                      rawName: "v-show",
+                                                      value:
+                                                        detalle.precio5 > 0,
+                                                      expression:
+                                                        "detalle.precio5>0"
+                                                    }
+                                                  ],
+                                                  domProps: {
+                                                    textContent: _vm._s(
+                                                      detalle.precio5
+                                                    )
+                                                  }
+                                                })
+                                              ]
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          detalle.inventariable === 2
+                                            ? [
+                                                _c("td", {
+                                                  directives: [
+                                                    {
+                                                      name: "show",
+                                                      rawName: "v-show",
+                                                      value:
+                                                        detalle.precio6 > 0,
+                                                      expression:
+                                                        "detalle.precio6>0"
+                                                    }
+                                                  ],
+                                                  domProps: {
+                                                    textContent: _vm._s(
+                                                      detalle.precio6
+                                                    )
+                                                  }
+                                                })
+                                              ]
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          detalle.inventariable === 3
+                                            ? [
+                                                _c("td", {
+                                                  domProps: {
+                                                    textContent: _vm._s(
+                                                      detalle.precio3
+                                                    )
+                                                  }
+                                                })
+                                              ]
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          detalle.inventariable === 1
+                                            ? [
+                                                _c("td", {
+                                                  domProps: {
+                                                    textContent: _vm._s(
+                                                      detalle.cantidad
+                                                    )
+                                                  }
+                                                })
+                                              ]
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          detalle.inventariable === 2
+                                            ? [
+                                                _c("td", {
+                                                  directives: [
+                                                    {
+                                                      name: "show",
+                                                      rawName: "v-show",
+                                                      value:
+                                                        detalle.cantidad1 > 0,
+                                                      expression:
+                                                        "detalle.cantidad1>0"
+                                                    }
+                                                  ],
+                                                  domProps: {
+                                                    textContent: _vm._s(
+                                                      detalle.cantidad1
+                                                    )
+                                                  }
+                                                })
+                                              ]
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          detalle.inventariable === 2
+                                            ? [
+                                                _c("td", {
+                                                  directives: [
+                                                    {
+                                                      name: "show",
+                                                      rawName: "v-show",
+                                                      value:
+                                                        detalle.kilogramos > 0,
+                                                      expression:
+                                                        "detalle.kilogramos>0"
+                                                    }
+                                                  ],
+                                                  domProps: {
+                                                    textContent: _vm._s(
+                                                      detalle.kilogramos
+                                                    )
+                                                  }
+                                                })
+                                              ]
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          detalle.inventariable === 3
+                                            ? [
+                                                _c("td", {
+                                                  domProps: {
+                                                    textContent: _vm._s(
+                                                      detalle.cantidad2
+                                                    )
+                                                  }
+                                                })
+                                              ]
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          detalle.inventariable === 1
+                                            ? [
+                                                _c("td", {
+                                                  domProps: {
+                                                    textContent: _vm._s(
+                                                      detalle.cantidad *
+                                                        detalle.precio4
+                                                    )
+                                                  }
+                                                })
+                                              ]
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          detalle.inventariable === 2
+                                            ? [
+                                                _c("td", {
+                                                  directives: [
+                                                    {
+                                                      name: "show",
+                                                      rawName: "v-show",
+                                                      value:
+                                                        detalle.precio5 > 0,
+                                                      expression:
+                                                        "detalle.precio5>0"
+                                                    }
+                                                  ],
+                                                  domProps: {
+                                                    textContent: _vm._s(
+                                                      detalle.precio5
+                                                    )
+                                                  }
+                                                })
+                                              ]
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          detalle.inventariable === 2
+                                            ? [
+                                                _c("td", {
+                                                  directives: [
+                                                    {
+                                                      name: "show",
+                                                      rawName: "v-show",
+                                                      value:
+                                                        detalle.precio6 > 0,
+                                                      expression:
+                                                        "detalle.precio6>0"
+                                                    }
+                                                  ],
+                                                  domProps: {
+                                                    textContent: _vm._s(
+                                                      detalle.precio6
+                                                    )
+                                                  }
+                                                })
+                                              ]
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          detalle.inventariable === 3
+                                            ? [
+                                                _c("td", {
+                                                  domProps: {
+                                                    textContent: _vm._s(
+                                                      detalle.cantidad2 *
+                                                        detalle.precio3
+                                                    )
+                                                  }
+                                                })
+                                              ]
+                                            : _vm._e()
+                                        ],
+                                        2
+                                      )
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "tr",
+                                      {
+                                        staticStyle: {
+                                          "background-color": "#CEECF5"
+                                        }
+                                      },
+                                      [
+                                        _vm._m(11),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v("$ " + _vm._s(_vm.total))
+                                        ])
+                                      ]
+                                    )
+                                  ],
+                                  2
+                                )
+                              : _c("tbody", [_vm._m(12)])
+                          ]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c("div", { staticClass: "col-md-12" }, [
                         _c(
                           "button",
                           {
@@ -90486,11 +90937,11 @@ var render = function() {
                           },
                           [_vm._v("Cerrar")]
                         )
-                      ],
-                      2
-                    )
-                  ])
-                ])
+                      ])
+                    ])
+                  ],
+                  2
+                )
               ]
             : _vm._e()
         ],
@@ -90555,7 +91006,7 @@ var render = function() {
                           "table table-bordered table-striped table-sm"
                       },
                       [
-                        _vm._m(11),
+                        _vm._m(13),
                         _vm._v(" "),
                         _c("tbody", [
                           _c(
@@ -90716,7 +91167,7 @@ var render = function() {
                             "tr",
                             { staticStyle: { "background-color": "#CEECF5" } },
                             [
-                              _vm._m(12),
+                              _vm._m(14),
                               _vm._v(" "),
                               _c(
                                 "td",
@@ -90868,6 +91319,50 @@ var staticRenderFns = [
       _c("th", [_vm._v("Efectivo en Caja")]),
       _vm._v(" "),
       _c("th", [_vm._v("Estado")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [
+          _vm._v("Efectivo   "),
+          _c("i", {
+            staticClass: "fa fa-money",
+            staticStyle: { "font-size": "24px" }
+          })
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v("Tarjeta   "),
+          _c("i", {
+            staticClass: "fa fa-cc-visa",
+            staticStyle: { "font-size": "24px" }
+          })
+        ]),
+        _vm._v(" "),
+        _c("th", [
+          _vm._v("Vales   "),
+          _c("i", {
+            staticClass: "fa fa-sticky-note-o",
+            staticStyle: { "font-size": "24px" }
+          })
+        ]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Total\n                               ")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Cobrar Venta\n                               ")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { attrs: { colspan: "4", align: "right" } }, [
+      _c("strong", [_vm._v("Cambio:")])
     ])
   },
   function() {

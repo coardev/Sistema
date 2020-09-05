@@ -40,7 +40,7 @@
                             <img src="img/cash.png"  class="img-responsive" height="100" width="100" alt="">
                             </div>
                             <div class="form-group">  
-                            <input name="txtm" id="txtm" type="number"  v-model="dinero">
+                            <input name="txtm" id="txtm" type="number" v-bind:min="0" v-on:keypress="isNumber(event)" placeholder="0" ref="test" @blur="onBlur" v-model="dinero">
                             </div></div>
                             <div align="center" class="col-md-2">
                             <div>
@@ -86,7 +86,6 @@
                             
                             </div>
                         
-                                <div id="printMe">
                         <div class="table-wrapper-scroll-y my-custom-scrollbar">
                             <table id="table_trans" class="table table-bordered table-striped table-sm">
                                 <thead>
@@ -158,7 +157,7 @@
                                 </tbody>
                             </table>
                         </div>
-                                </div>
+                                
                     </div>
                     </template>
                     <!--Fin Listado-->
@@ -168,40 +167,107 @@
                     <!-- Ver ingreso -->
                     <template v-else-if="listado==2">
                     <div class="card-body">
-                        <div class="form-group row border">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="">Folio de Ticket</label>
-                                    <p v-text="id"></p>
+                     <template v-if="estado === 'Venta Registrada'">   
+                    <div v-if="isHidden" style="color:red;" class="form-group row border">
+                            <div style="background-color: #CEECF5" align="center" class="col-md-12">
+                                <div  class="form-group">
+                                    <h6 for="">Imprimir Ticket</h6>
+                                    <button type="button"  @click="pdfTicket(id)" class="btn btn-warning btn-lg">
+                                                <i class='fas fa-ticket-alt'></i>
+                                                </button> &nbsp;
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="">Cliente</label>
-                                    <p v-text="cliente"></p>
+                            </div>
+                     </template>
+                    <div v-if="!isHidden" class="form-group row border">
+                    <div class="col-md-12">
+                     <table v-if="estado === 'Venta Registrada'" class="table table-bordered table-striped table-sm">
+                                    <thead>
+                                       
+                                        <tr>
+                                        <th>Efectivo&nbsp;&nbsp;&nbsp;<i class="fa fa-money" style="font-size:24px"></i>
+                                       </th>
+                                        <th>Tarjeta&nbsp;&nbsp;&nbsp;<i class="fa fa-cc-visa" style="font-size:24px"></i>
+                                       </th>
+                                        <th>Vales&nbsp;&nbsp;&nbsp;<i class="fa fa-sticky-note-o" style="font-size:24px"></i>
+                                       </th>
+                                       
+                                        
+                                       
+                                       <th>Total
+                                       </th>
+                                        <th>Cobrar Venta
+                                       </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            <td style="background-color: #CEECF5"><input  v-bind:min="0" v-model="efectivo" v-on:keypress="isNumber(event)" placeholder="0" ref="test" @blur="onBlur" type="number"></td>
+                                            <td style="background-color: #CEECF5"><input placeholder="0" ref="test1" @blur="onBlur1" v-bind:min="0" v-model="tarjeta" v-on:keypress="isNumber(event)" type="number"></td>
+                                            <td style="background-color: #CEECF5"><input placeholder="0" ref="test2" @blur="onBlur2"  v-bind:min="0" v-model="vales" v-on:keypress="isNumber(event)" type="number"></td>
+                                            <td style="background-color: #CEECF5">
+                                                <input name="txtb" id="txtb" v-bind:value="total" v-on:input="somethingElse = $event.target.value" readonly /></td>
+                                            <td  style="background-color: #CEECF5">
+                                                <button  type="button"  @click="actualizarVenta('venta','actualizar',venta);disabled = !disabled;isHidden = !isHidden" :disabled="disabled" class="btn btn-success btn-lg">
+                                                <i class="fas fa-money-bill-wave"></i>
+                                                </button> &nbsp;
+                                                
+                                            </td>
+                                            <tr style="background-color: #CEECF5;">
+                                            <td colspan="4" align="right"><strong>Cambio:</strong></td>
+                                            <td style="background-color: #CEECF5">{{cambio=calcularTotal+(calcularTotal1+calcularTotal2)}}</td>
+                                        </tr>
+                                    </tbody>                  
+                                </table>
+                    </div>
+                    </div>
+                        <div v-if="!isHidden" style="color:red;" class="form-group row border">
+                            <div style="background-color: #CEECF5" align="center" class="col-md-4">
+                                <div  class="form-group">
+                                    <h6 for="">Folio de Ticket</h6>
+                                    <h6><p v-text="id"></p></h6>
                                 </div>
                             </div>
-                       
-                             
-                            <div class="col-md-3">
+                            
+                            <div style="background-color: #CEECF5" align="center" class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Fecha</label>
-                                    <p v-text="created_at"></p>
+                                    <h6 for="">Fecha</h6>
+                                    <h6> <p v-text="created_at"></p></h6>
                                 </div>
                             </div>
                            
-                            <div class="col-md-4">
+
+                            <div style="background-color: #CEECF5" align="center" class="col-md-4">
                                 <div class="form-group">
-                                    <label>Tipo Comprobante</label>
-                                    <p v-text="tipo_comprobante"></p>
+                                    <h6>Estado de Venta</h6>
+                                    <h6><p v-text="estado"></p></h6>
                                     
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
+                            
+                            
+                          
+                        </div>
+                        <div  v-if="estado === 'Venta Cobrada'" style="color:red;" class="form-group row border">
+                            <div style="background-color: #CEECF5" align="center" class="col-md-4">
+                                <div  class="form-group">
+                                    <h6 for="">Folio de Ticket</h6>
+                                    <h6><p v-text="id"></p></h6>
+                                </div>
+                            </div>
+                            
+                            <div style="background-color: #CEECF5" align="center" class="col-md-4">
                                 <div class="form-group">
-                                    <label>Tipo Comprobante</label>
-                                    <p v-text="estado"></p>
+                                    <h6 for="">Fecha</h6>
+                                    <h6> <p v-text="created_at"></p></h6>
+                                </div>
+                            </div>
+                           
+
+                            <div style="background-color: #CEECF5" align="center" class="col-md-4">
+                                <div class="form-group">
+                                    <h6>Estado de Venta</h6>
+                                    <h6><p v-text="estado"></p></h6>
                                     
                                 </div>
                             </div>
@@ -304,10 +370,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <template v-if="estado === 'Venta Registrada'">
-                                <button type="button" @click="abrirModal()"  class="btn btn-secondary">Cobrar Venta</button>
-                                </template>
-                                <button type="button" @click="ocultarDetalle()" class="btn btn-secondary">Cerrar</button>
+                               <button type="button" @click="ocultarDetalle()" class="btn btn-secondary">Cerrar</button>
                                 
                             </div>
                         </div>
@@ -433,6 +496,8 @@
                 arrayCliente: [],
                 arrayDetalle : [],
                 listado:1,
+                disabled: false,
+                isHidden: false,
                 modal : 0,
                 tituloModal : '',
                 tipoAccion : 0,
@@ -827,7 +892,11 @@ localStorage.setItem('area_total6', JSON.stringify(total));
                 window.open(this.ruta + '/venta/pdf/'+ id + ',' + '_blank');
             },
             pdfTicket(id){
+                let me = this;
                 window.open(this.ruta + '/venta/pdfTicket/'+ id + ',' + '_blank');
+                 me.cerrarModal();
+                   me.ocultarDetalle();
+                    me.listarVenta(1,me.buscar,me.criterio);
             },
             pdfTicket1(id){
                 window.open(this.ruta + '/venta/pdfTicket1/'+ id + ',' + '_blank');
@@ -870,7 +939,9 @@ localStorage.setItem('area_total6', JSON.stringify(total));
             verVenta(id){
                 let me=this;
                 me.listado=2;
-                
+                me.efectivo=0;
+                me.tarjeta=0;
+                me.vales=0;
                 //Obtener los datos del ingreso
                 var arrayVentaT=[];
                 var url= this.ruta + '/venta/obtenerCabecera?id=' + id;
@@ -923,9 +994,9 @@ localStorage.setItem('area_total6', JSON.stringify(total));
                     'cambio': this.cambio,
                     'id': this.id
                 }).then(function (response) {
-                    me.cerrarModal();
-                    me.ocultarDetalle();
-                    me.listarVenta(1,me.buscar,me.criterio);
+                   // me.cerrarModal();
+                   // me.ocultarDetalle();
+                    //me.listarVenta(1,me.buscar,me.criterio);
                 }).catch(function (error) {
                     console.log(error);
                 }); 

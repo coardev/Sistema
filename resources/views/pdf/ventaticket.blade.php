@@ -509,11 +509,27 @@
         @endforeach
             <!-- Mostramos los totales de la venta en el documento HTML -->
             @foreach ($venta as $v)
+            @if($v->efectivo>0)
             <tr>
             <td>&nbsp;</td>
             <td><b><font size="3">Efectivo:</b></td>
             <td><b><font size="3">$ {{$v->efectivo}}</b></td>
             </tr>
+            @endif
+            @if($v->tarjeta>0)
+            <tr>
+            <td>&nbsp;</td>
+            <td><b><font size="3">Tarjeta C/D:</b></td>
+            <td><b><font size="3">$ {{$v->tarjeta}}</b></td>
+            </tr>
+            @endif
+            @if($v->vales>0)
+            <tr>
+            <td>&nbsp;</td>
+            <td><b><font size="3">Vales:</b></td>
+            <td><b><font size="3">$ {{$v->vales}}</b></td>
+            </tr>
+            @endif
             <tr>
             <td>&nbsp;</td>
             <td><b><font size="3">Total:</b></td>
