@@ -10,6 +10,7 @@ use App\Historial5;
 use App\Articulo;
 use App\Venta;
 use Carbon\Carbon;
+use App\DetalleVenta;
 
 
 class DetalleController extends Controller
@@ -77,7 +78,14 @@ class DetalleController extends Controller
 
         //Actualiza Estado Tabla Venta
         $this->__venta($request->idventa,$detalle->estado);
+
+        $this->__detalleVenta($request->idventa);
     }
+
+    private function __detalleVenta($idventa = null)
+{ 
+    DetalleVenta::where('idventa', $idventa)->update(['estado' => 'Venta Cancelada']);
+} 
 
 
     //Reingreso a Tabla de Entradas
