@@ -74,7 +74,7 @@ class DetalleController extends Controller
         //$this->__historial5($detalle->articulo,$detalle->cantidad,$detalle->stock2,$detalle->precio_proveedor,$detalle->precio1,$detalle->total);
         
         //Actualiza Stock Tabla Articulos
-        $this->__articulo($request->idarticulo,$detalle->articulo,$detalle->cantidad);
+        //$this->__articulo($request->idarticulo,$detalle->articulo,$detalle->cantidad);
 
         //Actualiza Estado Tabla Venta
         $this->__venta($request->idventa,$detalle->estado);
@@ -85,6 +85,9 @@ class DetalleController extends Controller
     private function __detalleVenta($idventa = null)
 { 
     DetalleVenta::where('idventa', $idventa)->update(['estado' => 'Venta Cancelada']);
+        //$articulo->articulo = $request->articulo;
+       
+       
 } 
 
 

@@ -320,9 +320,19 @@ class VentaController extends Controller
         if (!$request->ajax()) return redirect('/');
         $venta = Venta::findOrFail($request->id);
         $venta->efectivo = $request->efectivo;
-        $venta->estado = 'Venta Concretada';
+        $venta->estado = 'Venta Cancelada';
         $venta->save();
+
+        $this->__detalleVenta1($request->id);
     }
+
+    private function __detalleVenta1($id = null)
+{ 
+    DetalleVenta::where('idventa', $id)->update(['estado' => 'Venta Cancelada']);
+        //$articulo->articulo = $request->articulo;
+       
+       
+} 
 
     public function update(Request $request)
     {

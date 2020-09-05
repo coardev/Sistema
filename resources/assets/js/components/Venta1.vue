@@ -345,13 +345,33 @@
                                            <button type="button" @click="verVenta(venta.id)" class="btn btn-primary btn-lg">
                                             <i class="icon-eye"></i>
                                             </button>
-
+                                            <template v-if="venta.estado === 'Venta Registrada'">
+                                            <button type="button" @click="desactivarVenta(venta.id)" class="btn btn-danger btn-lg">
+                                            <i class="fa fa-window-close" aria-hidden="true"></i>
+                                            </button>
+                                            </template>
+                                            <template v-if="venta.estado === 'Venta Cobrada'">
+                                            <button type="button" @click="desactivarVenta(venta.id)" class="btn btn-danger btn-lg">
+                                            <i class="fa fa-window-close" aria-hidden="true"></i>
+                                            </button>
+                                            </template>
+                                            <template v-if="venta.estado === 'Venta Cancelada'">
+                                            <button type="button" @click="desactivarVenta(venta.id)" class="btn btn-danger btn-lg" disabled>
+                                            <i class="fa fa-window-close" aria-hidden="true"></i>
+                                            </button>
+                                            </template>
                                             
 
                                             <template v-if="venta.tipo_comprobante=='TICKET'">
-                                                <button type="button" @click="pdfTicket1(venta.id)" class="btn btn-secondary btn-lg">
+                                                <button v-if="venta.estado === 'Venta Registrada'" type="button" @click="pdfTicket1(venta.id)" class="btn btn-secondary btn-lg">
                                                <i class='fas fa-cash-register'></i>
-                                                </button> &nbsp;
+                                                </button>
+                                                <button v-if="venta.estado === 'Venta Cobrada'" type="button" @click="pdfTicket1(venta.id)" class="btn btn-secondary btn-lg">
+                                               <i class='fas fa-cash-register'></i>
+                                                </button>
+                                                 <button v-if="venta.estado === 'Venta Cancelada'" type="button" @click="pdfTicket1(venta.id)" class="btn btn-secondary btn-lg" disabled>
+                                               <i class='fas fa-cash-register'></i>
+                                                </button>
                                             </template>
 
                                           
@@ -493,7 +513,7 @@
                                     </tbody>                                    
                                 </table>
                             </div>
-                        </div>
+                            </div>
                          </div>
                     </template>
                     <!-- fin ver ingreso -->
@@ -1063,7 +1083,7 @@ listarVenta (page,buscar,criterio){
             },
             desactivarVenta(id){
                swal({
-                title: 'Esta seguro de anular esta venta?',
+                title: 'Esta seguro que desea Cancelar la Venta?',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -1081,10 +1101,12 @@ listarVenta (page,buscar,criterio){
                     axios.put(this.ruta + '/venta/desactivar',{
                         'id': id
                     }).then(function (response) {
+                        me.listarArticulo(me.buscarA,me.criterioA);
                         me.listarVenta(1,'','id');
+
                         swal(
-                        'Anulado!',
-                        'La venta ha sido anulada con éxito.',
+                        'Anulada!',
+                        'La venta ha sido cancelada con éxito.',
                         'success'
                         )
                     }).catch(function (error) {

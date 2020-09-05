@@ -22,7 +22,7 @@
                             
 
                             <li align="center" @click="menu=19" class="nav-item">
-                                <a class="nav-link" href="#"><i class="icon-notebook"></i>Cancelacion Venta Articulo</a>
+                                <a class="nav-link" href="#"><i class="icon-notebook"></i>Detalle Salida Inventario</a>
                             </li>
 
                             <li align="center" @click="menu=23" class="nav-item">

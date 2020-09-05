@@ -8,7 +8,7 @@
                 <!-- Ejemplo de tabla Listado -->
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i>Cancelacion Venta
+                        <i class="fa fa-align-justify"></i>Venta de Articulos
                     </div>
                     <div class="card-body">
                        <div class="form-group row">
@@ -36,13 +36,13 @@
                                     </button>
                         </div>
                        
-                         <button v-on:click="isHidden = !isHidden">Mostrar</button>
+                         
                          <div class="table-wrapper-scroll-y my-custom-scrollbar">
                         <table id="table_trans" class="table table-bordered table-striped table-sm">
-                            <caption><h2>Cancelacion de Ventas</h2></caption>
+                            <caption><h2>Reporte Articulos Vendidos</h2></caption>
                            
                              <thead>
-                                 <tr>  <th v-if="!isHidden"></th>
+                                 <tr>
                                     <th>Total: {{ arrayDetalle.length}}</th>
                                     <th></th>
                                     <th></th>
@@ -52,7 +52,7 @@
                                     <th></th>
                                   
                                 </tr>
-                              <tr>  <th v-if="!isHidden">Cancelar Articulo</th>
+                              <tr>  
                                     <th>Fecha de Venta</th>
                                     <th>Ticket de Venta</th>
                                     <th>Articulo</th>
@@ -65,24 +65,7 @@
                             </thead>
                             <tbody>
                                 <tr v-for="detalle in arrayDetalle" :key="detalle.id">
-                                    
-                                    <td v-if="!isHidden" align="center">
-                                        <template v-if="detalle.estado === 'Venta Concretada'">
-                                        <button type="button" @click="abrirModal('detalle','actualizar',detalle)" class="btn btn-danger btn-sm">
-                                          Cancelar Venta de Articulo
-                                        </button>          
-                                         </template>  
-                                         <template v-if="detalle.estado === 'Venta Cobrada'">
-                                        <button type="button" @click="abrirModal('detalle','actualizar',detalle)" class="btn btn-danger btn-sm">
-                                          Cancelar Venta de Articulo
-                                        </button>          
-                                         </template>      
-                                         <template v-if="detalle.estado === 'Venta Cancelada'">
-                                        <button type="button"  class="btn btn-primary btn-sm">
-                                          Venta ya Cancelada
-                                        </button>          
-                                         </template>                    
-                                    </td>
+                                   
                                     <td v-text="detalle.created_at"></td>
                                     <td v-text="detalle.idventa"></td>
                                     <td v-text="detalle.articulo"></td>

@@ -63573,23 +63573,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -63952,18 +63935,6 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c(
-            "button",
-            {
-              on: {
-                click: function($event) {
-                  _vm.isHidden = !_vm.isHidden
-                }
-              }
-            },
-            [_vm._v("Mostrar")]
-          ),
-          _vm._v(" "),
-          _c(
             "div",
             { staticClass: "table-wrapper-scroll-y my-custom-scrollbar" },
             [
@@ -63978,8 +63949,6 @@ var render = function() {
                   _vm._v(" "),
                   _c("thead", [
                     _c("tr", [
-                      !_vm.isHidden ? _c("th") : _vm._e(),
-                      _vm._v(" "),
                       _c("th", [
                         _vm._v("Total: " + _vm._s(_vm.arrayDetalle.length))
                       ]),
@@ -63997,25 +63966,7 @@ var render = function() {
                       _c("th")
                     ]),
                     _vm._v(" "),
-                    _c("tr", [
-                      !_vm.isHidden
-                        ? _c("th", [_vm._v("Cancelar Articulo")])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Fecha de Venta")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Ticket de Venta")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Articulo")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Salida")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Precio Venta")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Importe")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Estado de Venta")])
-                    ])
+                    _vm._m(2)
                   ]),
                   _vm._v(" "),
                   _c(
@@ -64025,87 +63976,6 @@ var render = function() {
                         "tr",
                         { key: detalle.id },
                         [
-                          !_vm.isHidden
-                            ? _c(
-                                "td",
-                                { attrs: { align: "center" } },
-                                [
-                                  detalle.estado === "Venta Concretada"
-                                    ? [
-                                        _c(
-                                          "button",
-                                          {
-                                            staticClass:
-                                              "btn btn-danger btn-sm",
-                                            attrs: { type: "button" },
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.abrirModal(
-                                                  "detalle",
-                                                  "actualizar",
-                                                  detalle
-                                                )
-                                              }
-                                            }
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n                                  Cancelar Venta de Articulo\n                                "
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  detalle.estado === "Venta Cobrada"
-                                    ? [
-                                        _c(
-                                          "button",
-                                          {
-                                            staticClass:
-                                              "btn btn-danger btn-sm",
-                                            attrs: { type: "button" },
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.abrirModal(
-                                                  "detalle",
-                                                  "actualizar",
-                                                  detalle
-                                                )
-                                              }
-                                            }
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n                                  Cancelar Venta de Articulo\n                                "
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  detalle.estado === "Venta Cancelada"
-                                    ? [
-                                        _c(
-                                          "button",
-                                          {
-                                            staticClass:
-                                              "btn btn-primary btn-sm",
-                                            attrs: { type: "button" }
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n                                  Venta ya Cancelada\n                                "
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    : _vm._e()
-                                ],
-                                2
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
                           _c("td", {
                             domProps: {
                               textContent: _vm._s(detalle.created_at)
@@ -64546,14 +64416,34 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("i", { staticClass: "fa fa-align-justify" }),
-      _vm._v("Cancelacion Venta\n            ")
+      _vm._v("Venta de Articulos\n            ")
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("caption", [_c("h2", [_vm._v("Cancelacion de Ventas")])])
+    return _c("caption", [_c("h2", [_vm._v("Reporte Articulos Vendidos")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("Fecha de Venta")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Ticket de Venta")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Articulo")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Salida")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Precio Venta")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Importe")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Estado de Venta")])
+    ])
   }
 ]
 render._withStripped = true
@@ -76357,6 +76247,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -76891,7 +76801,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.directive("autofocus", __WEBPACK_IMP
             var _this2 = this;
 
             swal({
-                title: 'Esta seguro de anular esta venta?',
+                title: 'Esta seguro que desea Cancelar la Venta?',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -76909,8 +76819,10 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.directive("autofocus", __WEBPACK_IMP
                     axios.put(_this2.ruta + '/venta/desactivar', {
                         'id': id
                     }).then(function (response) {
+                        me.listarArticulo(me.buscarA, me.criterioA);
                         me.listarVenta(1, '', 'id');
-                        swal('Anulado!', 'La venta ha sido anulada con éxito.', 'success');
+
+                        swal('Anulada!', 'La venta ha sido cancelada con éxito.', 'success');
                     }).catch(function (error) {
                         console.log(error);
                     });
@@ -78355,17 +78267,17 @@ var render = function() {
                                       [_c("i", { staticClass: "icon-eye" })]
                                     ),
                                     _vm._v(" "),
-                                    venta.tipo_comprobante == "TICKET"
+                                    venta.estado === "Venta Registrada"
                                       ? [
                                           _c(
                                             "button",
                                             {
                                               staticClass:
-                                                "btn btn-secondary btn-lg",
+                                                "btn btn-danger btn-lg",
                                               attrs: { type: "button" },
                                               on: {
                                                 click: function($event) {
-                                                  return _vm.pdfTicket1(
+                                                  return _vm.desactivarVenta(
                                                     venta.id
                                                   )
                                                 }
@@ -78374,13 +78286,147 @@ var render = function() {
                                             [
                                               _c("i", {
                                                 staticClass:
-                                                  "fas fa-cash-register"
+                                                  "fa fa-window-close",
+                                                attrs: { "aria-hidden": "true" }
                                               })
                                             ]
-                                          ),
-                                          _vm._v(
-                                            "  \n                                    "
                                           )
+                                        ]
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    venta.estado === "Venta Cobrada"
+                                      ? [
+                                          _c(
+                                            "button",
+                                            {
+                                              staticClass:
+                                                "btn btn-danger btn-lg",
+                                              attrs: { type: "button" },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.desactivarVenta(
+                                                    venta.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass:
+                                                  "fa fa-window-close",
+                                                attrs: { "aria-hidden": "true" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    venta.estado === "Venta Cancelada"
+                                      ? [
+                                          _c(
+                                            "button",
+                                            {
+                                              staticClass:
+                                                "btn btn-danger btn-lg",
+                                              attrs: {
+                                                type: "button",
+                                                disabled: ""
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.desactivarVenta(
+                                                    venta.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass:
+                                                  "fa fa-window-close",
+                                                attrs: { "aria-hidden": "true" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    venta.tipo_comprobante == "TICKET"
+                                      ? [
+                                          venta.estado === "Venta Registrada"
+                                            ? _c(
+                                                "button",
+                                                {
+                                                  staticClass:
+                                                    "btn btn-secondary btn-lg",
+                                                  attrs: { type: "button" },
+                                                  on: {
+                                                    click: function($event) {
+                                                      return _vm.pdfTicket1(
+                                                        venta.id
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _c("i", {
+                                                    staticClass:
+                                                      "fas fa-cash-register"
+                                                  })
+                                                ]
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          venta.estado === "Venta Cobrada"
+                                            ? _c(
+                                                "button",
+                                                {
+                                                  staticClass:
+                                                    "btn btn-secondary btn-lg",
+                                                  attrs: { type: "button" },
+                                                  on: {
+                                                    click: function($event) {
+                                                      return _vm.pdfTicket1(
+                                                        venta.id
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _c("i", {
+                                                    staticClass:
+                                                      "fas fa-cash-register"
+                                                  })
+                                                ]
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          venta.estado === "Venta Cancelada"
+                                            ? _c(
+                                                "button",
+                                                {
+                                                  staticClass:
+                                                    "btn btn-secondary btn-lg",
+                                                  attrs: {
+                                                    type: "button",
+                                                    disabled: ""
+                                                  },
+                                                  on: {
+                                                    click: function($event) {
+                                                      return _vm.pdfTicket1(
+                                                        venta.id
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _c("i", {
+                                                    staticClass:
+                                                      "fas fa-cash-register"
+                                                  })
+                                                ]
+                                              )
+                                            : _vm._e()
                                         ]
                                       : _vm._e()
                                   ],
