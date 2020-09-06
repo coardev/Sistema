@@ -12,7 +12,7 @@
                             <i class="fa fa-cog fa-spin"></i>&nbsp;Detalle Salida Inventario Interno
                         </button>
                         <button type="button" @click="tableToExcel('table_trans', 'name', 'Reporte.xls')" class="btn btn-info">
-                            <i class="fa fa-file-excel-o"></i>&nbsp;Obtener Reporte Excel
+                            <i class="fa fa-file-excel-o"></i>&nbsp;Reporte Excel
                         </button>
                         <button type="button" v-print="printObj" class="btn btn-warning">Imprimir Reporte  <i class="fa fa-print"></i>
                         </button>

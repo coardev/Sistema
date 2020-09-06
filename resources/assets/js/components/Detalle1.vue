@@ -8,32 +8,49 @@
                 <!-- Ejemplo de tabla Listado -->
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i>Venta de Articulos
+                    <button type="button" class="btn btn-secondary">
+                            <i class="fa fa-cog fa-spin"></i>&nbsp;Venta de Articulos
+                        </button>
+                    
+                    <button type="button" @click="tableToExcel('table_trans', 'name', 'Reporte Detalle Articulos.xls')" class="btn btn-info">
+                     <i class="fa fa-file-excel-o"></i>&nbsp;Reporte Excel
+                    </button>
+                    <button type="button" v-print="printObj" class="btn btn-warning">Imprimir Reporte  <i class="fa fa-print"></i>
+                        </button>
                     </div>
                     <div class="card-body">
                        <div class="form-group row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="input-group">
-                                    <select class="form-control col-md-6" v-model="criterio">
-                                      <option value="idventa">Folio de Venta</option>
-                                      <option value="created_at">Fecha de Venta</option>
+                                    <select class="form-control col-md-1" v-model="criterio2">
+                                      <option value="articulo">Articulo</option>
+                                      <option value="estado">Estado</option>
+                                    </select>  
+                                    <template v-if="criterio2 === 'articulo'">                                  
+                                    <input type="text" v-model="buscar2" class="form-control;col-md-2" placeholder="Escribe el Articulo">
+                                    </template>
+                                    <template v-if="criterio2 === 'estado'">                                  
+                                     <select class="form-control;col-md-2" v-model="buscar2">
+                                            <option value="">Completo</option>
+                                            <option value="Venta Cancelada">Ventas Canceladas</option>
+                                    </select>  
+                                    </template>
+                                    <select class="form-control col-md-2" v-model="criterio1">
+                                      <option value="created_at">Fecha Inicial</option>
+                                    </select>                                    
+                                    <input type="date" v-model="buscar1" class="form-control;col-md-3" placeholder="Escribe el Articulo">
+                                     <select class="form-control col-md-2" v-model="criterio">
                                       
-                                     
+                                      <option value="created_at">Fecha Final</option>
+                                      
                                     </select>
-                                    <template v-if="criterio === 'idventa'">
-                                    <input type="text" v-model="buscar" class="form-control" placeholder="Texto a buscar">
-                                    </template>
-                                    <template v-if="criterio === 'created_at'">
-                                    <input type="date" v-model="buscar"  class="form-control" placeholder="Texto a buscar">
-                                    </template>
-                                    <button type="submit" @click="listarDetalle(1,buscar,criterio);salida3(); importe()" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                                    <input type="date" v-model="buscar"  class="form-control;col-md-2" placeholder="Escribe el Articulo a Buscar">
+                                    <button type="submit" @click="listarDetalle(1,buscar2,criterio2,buscar1,criterio1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                                     
                                 </div>
                                
                             </div>
-                             <button type="button" @click="tableToExcel('table_trans', 'name', 'Reporte-Cancelaciones.xls')" class="btn btn-info">
-                                    <i class="fa fa-file-excel-o"></i>&nbsp;Reporte Excel
-                                    </button>
+                             
                         </div>
                        
                          
@@ -43,7 +60,7 @@
                            
                              <thead>
                                  <tr>
-                                    <th>Total: {{ arrayDetalle.length}}</th>
+                                    <th></th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
@@ -192,7 +209,7 @@ Vue.use(Print);
             return {
                 printObj: {
               id: "table_trans",
-              popTitle: '',
+              popTitle: 'Reporte Detalle Venta de Articulos',
               extraCss: 'https://www.google.com,https://www.google.com',
               extraHead: '<meta http-equiv="Content-Language"content="zh-cn"/>'
             },
@@ -220,8 +237,12 @@ Vue.use(Print);
                     'to' : 0,
                 },
                 offset : 3,
+                criterio2 : 'articulo',
+                buscar2 : '',
+                criterio1 : 'created_at',
+                buscar1 : '',
                 criterio : 'created_at',
-                buscar : ''
+                buscar : '',
             }
         },
         computed:{
@@ -305,9 +326,9 @@ Vue.use(Print);
                     }
                 }
                },
-            listarDetalle (page,buscar,criterio){
+            listarDetalle (page,buscar2,criterio2,buscar1,criterio1,buscar,criterio){
                 let me=this;
-                var url= this.ruta + '/cancelacion?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
+                var url= this.ruta + '/cancelacion?page=' + page + '&buscar2='+ buscar2 + '&criterio2='+ criterio2 + '&buscar1='+ buscar1 + '&criterio1='+ criterio1 + '&buscar='+ buscar + '&criterio='+ criterio;
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
                     me.arrayDetalle = respuesta.detalle.data;
@@ -317,12 +338,12 @@ Vue.use(Print);
                     console.log(error);
                 });
             },
-            cambiarPagina(page,buscar,criterio){
+            cambiarPagina(page,buscar2,criterio2,buscar1,criterio1,buscar,criterio){
                 let me = this;
                 //Actualiza la página actual
                 me.pagination.current_page = page;
                 //Envia la petición para visualizar la data de esa página
-                me.listarDetalle(page,buscar,criterio);
+                me.listarDetalle(page,buscar2,criterio2,buscar1,criterio1,buscar,criterio);
             },
              cerrarModal(){
                 this.modal=0;
@@ -365,7 +386,7 @@ Vue.use(Print);
      timer: 2000
      });
                    me.cerrarModal();
-                   me.listarDetalle(1,me.buscar,me.criterio);
+                   me.listarDetalle(1,me.buscar2,me.criterio2,me.buscar1,me.criterio1,me.buscar,me.criterio);
                     
                 }).catch(function (error) {
                     console.log(error);
@@ -373,7 +394,7 @@ Vue.use(Print);
             }
         },
         mounted() {
-            this.listarDetalle(1,this.buscar,this.criterio);
+            this.listarDetalle(1,this.buscar2,this.criterio2,this.buscar1,this.criterio1,this.buscar,this.criterio);
         }
     }
 </script>
