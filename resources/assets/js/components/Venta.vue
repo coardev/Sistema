@@ -8,7 +8,7 @@
                 <!-- Ejemplo de tabla Listado -->
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i> Administrador Ventas
+                        
                        <button type="button" @click="mostrarDetalle()" class="btn btn-secondary">
                             <i class="fa fa-cog fa-spin"></i>&nbsp;Ventas
                         </button>

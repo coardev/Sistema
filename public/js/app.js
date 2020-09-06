@@ -74298,8 +74298,6 @@ var render = function() {
         { staticClass: "card" },
         [
           _c("div", { staticClass: "card-header" }, [
-            _c("i", { staticClass: "fa fa-align-justify" }),
-            _vm._v(" Administrador Ventas\n               "),
             _c(
               "button",
               {
