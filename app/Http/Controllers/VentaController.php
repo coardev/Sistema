@@ -70,6 +70,7 @@ class VentaController extends Controller
             ->select('ventas.id','ventas.tipo_comprobante',
             'ventas.created_at','ventas.fecha_hora','ventas.efectivo','ventas.efectivo1','ventas.tarjeta','ventas.vales','ventas.cambio','ventas.total',
             'ventas.estado','personas.nombre','users.usuario')
+            ->whereIn('ventas.estado', ['Venta Cobrada', 'Venta Registrada'])
             ->where('ventas.fecha_hora','=', Carbon :: today())
             ->orderBy('ventas.id', 'desc')
             ->paginate(250);

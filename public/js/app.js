@@ -89383,6 +89383,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -90488,6 +90493,35 @@ var render = function() {
                                               staticClass:
                                                 "btn btn-warning btn-lg",
                                               attrs: { type: "button" },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.pdfTicket(venta.id)
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-ticket-alt"
+                                              })
+                                            ]
+                                          ),
+                                          _vm._v(
+                                            "    \n                                    "
+                                          )
+                                        ]
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    venta.estado === "Venta Cancelada"
+                                      ? [
+                                          _c(
+                                            "button",
+                                            {
+                                              staticClass:
+                                                "btn btn-warning btn-lg",
+                                              attrs: {
+                                                type: "button",
+                                                disabled: ""
+                                              },
                                               on: {
                                                 click: function($event) {
                                                   return _vm.pdfTicket(venta.id)

@@ -138,6 +138,11 @@
                                                 <i class='fas fa-ticket-alt'></i>
                                                 </button> &nbsp;  
                                             </template>
+                                             <template v-if="venta.estado === 'Venta Cancelada'">
+                                            <button type="button" @click="pdfTicket(venta.id)" class="btn btn-warning btn-lg" disabled>
+                                                <i class='fas fa-ticket-alt'></i>
+                                                </button> &nbsp;  
+                                            </template>
                                         </td>
                                         <td v-text="venta.id"></td>
                                         <td v-text="venta.usuario"></td>
