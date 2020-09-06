@@ -87992,8 +87992,7 @@ var render = function() {
                                       ? _c(
                                           "button",
                                           {
-                                            staticClass:
-                                              "btn btn-danger btn-lg",
+                                            staticClass: "btn btn-info btn-lg",
                                             attrs: { type: "button" },
                                             on: {
                                               click: function($event) {
@@ -88013,8 +88012,7 @@ var render = function() {
                                       ? _c(
                                           "button",
                                           {
-                                            staticClass:
-                                              "btn btn-danger btn-lg",
+                                            staticClass: "btn btn-info btn-lg",
                                             attrs: {
                                               type: "button",
                                               disabled: ""

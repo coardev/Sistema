@@ -343,10 +343,10 @@
                                             </template>
 
                                             
-                                                <button v-if="interna.estado === 'Venta Interna'" type="button" @click="pdfVenta(interna.id)" class="btn btn-danger btn-lg">
+                                                <button v-if="interna.estado === 'Venta Interna'" type="button" @click="pdfVenta(interna.id)" class="btn btn-info btn-lg">
                                                 <i class="fa fa-file-pdf-o"></i>
                                                 </button>
-                                                <button v-if="interna.estado === 'Venta Cancelada'" type="button" @click="pdfVenta(interna.id)" class="btn btn-danger btn-lg" disabled>
+                                                <button v-if="interna.estado === 'Venta Cancelada'" type="button" @click="pdfVenta(interna.id)" class="btn btn-info btn-lg" disabled>
                                                 <i class="fa fa-file-pdf-o"></i>
                                                 </button>
                                             
