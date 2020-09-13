@@ -31,7 +31,7 @@ Vue.component('detalle3', require('./components/Detalle3.vue'));
 Vue.component('detalle1', require('./components/Detalle1.vue'));
 Vue.component('detalle2', require('./components/Detalle2.vue'));
 Vue.component('historial', require('./components/Historial.vue'));
-Vue.component('historial2', require('./components/Historial2.vue'));
+Vue.component('registro', require('./components/Registro.vue'));
 Vue.component('user', require('./components/User.vue'));
 Vue.component('ingreso', require('./components/Ingreso.vue'));
 Vue.component('venta', require('./components/Venta.vue'));

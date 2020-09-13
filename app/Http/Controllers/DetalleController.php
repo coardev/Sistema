@@ -68,7 +68,7 @@ class DetalleController extends Controller
         $detalle->save();
 
         //Reingreso Tabla Entrada
-        $this->__historial($detalle->articulo, $detalle->cantidad, $detalle->precio_proveedor);
+        //$this->__historial($detalle->articulo, $detalle->cantidad, $detalle->precio_proveedor);
 
         //Cancelacion de Articulo
         //$this->__historial5($detalle->articulo,$detalle->cantidad,$detalle->stock2,$detalle->precio_proveedor,$detalle->precio1,$detalle->total);

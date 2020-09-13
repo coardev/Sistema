@@ -185,7 +185,6 @@ class ArticuloController extends Controller
       
         //Registrar en Inventario Entrada + Salida
         //$this->__registro($articulo->nombre,$articulo->inventariable,$articulo->stock, $articulo->existencia,  $articulo->precio_proveedor, $articulo->precio_proveedor1, $articulo->total);
-
        
 
        
@@ -235,10 +234,10 @@ class ArticuloController extends Controller
         $articulo->save();
 
         //REgistrar Tabla Entradas - Articulo Agregados
-        $this->__historial4($articulo->nombre,$articulo->stock1, $articulo->precio_proveedor);
+        $this->__agregados($articulo->nombre,$articulo->stock1,$articulo->precio_proveedor);
 
          //Registro Inventaros Salida + Entrada
-        
+        $this->__registro1($articulo->nombre,$articulo->stock,$articulo->stock1, $articulo->precio_proveedor,$articulo->precio_proveedor1,$articulo->inventariable,$articulo->total);
     }
 
     public function restar(Request $request)
@@ -289,44 +288,62 @@ class ArticuloController extends Controller
         $historial->stock = $stock ;
         $historial->precio_proveedor = $precio_proveedor ;
         $historial->importe = $stock*$precio_proveedor ;
-        $historial->estado = 'Ingreso' ;
+        $historial->estado = 'Nuevo Ingreso' ;
         $historial->tipo = $inventariable;
         $historial->fecha_hora = $mytime->toDateString();
         $historial->save();
     }    
 
     //Actualizacion Tabla Entradas 
-    private function __historial4($nombre = '', $stock1 = '', $precio_proveedor = '' )
+    private function __agregados($nombre = '', $stock1 = '', $precio_proveedor = '' )
     {
         $mytime= Carbon::now('America/Lima');
-        $historial4 = new Historial4();
-        $historial4->nombre = $nombre;
-        $historial4->stock1 = $stock1 ;
-        $historial4->precio_proveedor = $precio_proveedor ;
-        $historial4->importe = $stock1*$precio_proveedor;
-        $historial4->fecha_hora = $mytime->toDateString();
-        $historial4->estado = 'Agregados' ;
-        $historial4->save();
+        $agregados = new Historial4();
+        $agregados->nombre = $nombre;
+        $agregados->stock1 = $stock1 ;
+        $agregados->precio_proveedor = $precio_proveedor ;
+        $agregados->reingreso = $precio_proveedor*$stock1;
+        $agregados->fecha_hora = $mytime->toDateString();
+        $agregados->estado = 'Agregados' ;
+        $agregados->save();
     }    
+
+    private function __registro1($nombre = '', $stock = '', $stock1 = '', $precio_proveedor = '', $precio_proveedor1 = '', $inventariable = '', $total = '' )
+    {
+        $mytime= Carbon::now('America/Lima');
+        $registro1 = new Registro();
+        $registro1->nombre = $nombre;
+        $registro1->stock = $stock1 ;
+        $registro1->existencia = $stock ;
+        $registro1->tipo = $inventariable ;
+        $registro1->precio_proveedor = $precio_proveedor;
+        $registro1->precio1 = $precio_proveedor1;
+        $registro1->saldo1 = $stock1*$precio_proveedor;
+        $registro1->total = $total;
+        $registro1->fecha_hora = $mytime->toDateString();
+        $registro1->estado = 'Agregados' ;
+        $registro1->save();
+    }    
+    
     
 
     //Registro Tabla 3 Entradas + Salidas
-    private function __registro($nombre = '',$inventariable = '',$stock = '', $existencia = '', $precio_proveedor = '', $precio_proveedor1 = '', $total = '')
+   
+    private function __registro($nombre = '', $stock = '',$inventariable = '', $existencia = '', $precio_proveedor = '', $precio_proveedor1 = '', $total = '')
     {
        
         $registro = new Registro();
-        $registro->articulo = $nombre;
-        $registro->inventariable = $inventariable;
-        $registro->stock = $stock ;
+        $registro->nombre = $nombre;
+        $registro->stock = $stock ; //
+        $registro->tipo = $inventariable; //
         $registro->existencia = $existencia ;
         $registro->total = $total ;
         $registro->precio_proveedor = $precio_proveedor ;
         $registro->promedio = $precio_proveedor1 ;
         $registro->precio1 = $precio_proveedor ;
         $registro->saldo1 = $stock * $precio_proveedor ;
-        $registro->fecha_hora =  Carbon :: today()  ;
         $registro->save();
-    }    
+    }   
 
     private function __historial3($nombre = '',$stock = '',$stock1 = '',$precio_proveedor = '',$precio_proveedor1 = '',$salida1 = '',$total = '')
     {

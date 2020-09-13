@@ -68,7 +68,7 @@
             </template>
 
             <template v-if="menu==16">
-                <historial2 :ruta="ruta"></historial2>
+                <registro :ruta="ruta"></registro>
             </template>
 
             <template v-if="menu==17">

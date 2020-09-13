@@ -59,6 +59,7 @@
                                     <th> # {{ calcularReingreso }}</th>
                                     <th></th>
                                     <th> $ {{ calcularImporte }}</th>
+                                    <th>$ {{ calcularImporte2 }}</th>
                                     <th></th>
                                   
                                 </tr>
@@ -66,9 +67,10 @@
                                     <th>Fecha de Registro</i></th>
                                     <th>Nombre</i></th>
                                     <th>Entrada</i></th>
-                                    <th>Reingreso</i></th>
+                                    <th>Agregados/Reingresados</i></th>
                                     <th>Precio Proveedor</i></th>
                                     <th>Importe Entrada</i></th>
+                                    <th>Importe Agregado/Reingresado</i></th>
                                     <th>Estatus</i></th>
                                   
                                   
@@ -84,6 +86,7 @@
                                     <td  v-text="historial.stock1"></td>
                                     <td  v-text="historial.precio_proveedor"></td>
                                     <td  v-text="historial.importe"></td>
+                                    <td  v-text="historial.reingreso"></td>
                                     <td style="color: red;font-size:18px"  v-text="historial.estado"></td>
                                     
                                    
@@ -156,6 +159,14 @@ import Datepicker from 'vuejs-datepicker';
                  resultado1=resultado1+(this.arrayHistorial[i].importe*1)
                 }
                 return resultado1;
+            },
+            calcularImporte2: function(){
+                var resultado1=0.0;
+                
+                for(var i=0;i<this.arrayHistorial.length;i++){
+                 resultado1=resultado1+(this.arrayHistorial[i].reingreso*1)
+                }
+                return resultado1.toFixed(2);
             },
             calcularEntrada: function(){
                 var resultado1=0.0;

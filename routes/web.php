@@ -177,7 +177,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/rol', 'RolController@index');
         Route::get('/rol/selectRol', 'RolController@selectRol');
         Route::get('/historial', 'HistorialController@index');
-        Route::get('/historial2', 'RegistroController@index');
+        Route::get('/registro', 'RegistroController@index');
         Route::get('/rol/selectRol', 'RolController@selectRol');
         Route::get('/detalle', 'DetalleController@index');
         Route::get('/cancelacion', 'DetalleCancelacionController@index');

@@ -16,8 +16,8 @@ class RegistroController extends Controller
         $criterio = $request->criterio;
         
         if ($buscar==''){
-            $registro = Registro::where('inventariable','=','1')
-            ->where('fecha_hora','=', Carbon :: today())
+            $registro = Registro::where('tipo','=','1')
+            //->where('fecha_hora','=', Carbon :: today())
             ->orderBy('id', 'desc')->paginate(100000000);
         }
         else{

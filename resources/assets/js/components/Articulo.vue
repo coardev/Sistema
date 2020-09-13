@@ -231,10 +231,10 @@
                                     </div>
                                      <label class="col-md-3 form-control-label" for="text-input">Es Inventariable</label>
                                     <div class="col-md-3">
-                                    <input type="radio" id="cinco" value="1" v-model="inventariable">
+                                    <input type="radio"  value="1" v-model="inventariable">
                                     <label for="uno">&nbsp;    Si</label>
                                     &nbsp;     
-                                    <input type="radio" id="seis" value="2" v-model="inventariable">
+                                    <input type="radio"  value="2" v-model="inventariable">
                                     <label for="Dos">&nbsp;    No</label>
                                     <br>
                                     </div>
@@ -340,6 +340,11 @@
                                     <label for="Dos">&nbsp;    No</label>
                                     <br>
                                     </div>
+                                    <label class="col-md-3 form-control-label" for="text-input">Es un Servicio?</label>
+                                    <div class="col-md-3">
+                                    <input type="radio"  value="3" v-model="inventariable">
+                                    <label for="tres">&nbsp;    Si</label>
+                                    </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="text-input">Código</label>
@@ -349,11 +354,7 @@
                                             Generando código de barras.    
                                         </barcode>                                       
                                     </div>
-                                    <label class="col-md-3 form-control-label" for="text-input">Es un Servicio?</label>
-                                    <div class="col-md-3">
-                                    <input type="radio"  value="3" v-model="inventariable">
-                                    <label for="tres">&nbsp;    Si</label>
-                                    </div>
+                                    
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="text-input">Articulo o Servicio</label>
@@ -434,6 +435,10 @@
                                     <label class="col-md-3 form-control-label" for="text-input">Articulo o Servicio</label>
                                     <div class="col-md-3">
                                         <input id="x2"   type="text" v-model="nombre" class="form-control" disabled placeholder="Nombre de artículo">                                        
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <input id="x2"   type="text" v-model="precio_proveedor" class="form-control" disabled placeholder="Nombre de artículo">                                        
                                     </div>
                                     
                                     </div>

@@ -25,7 +25,7 @@
                                     <input type="date" v-model="buscar"  class="form-control" placeholder="Elige la Fecha">
                                     </template>
                                    
-                                    <button type="submit" @click="listarHistorial2(1,buscar,criterio);entrada(); salida(); entrada2(); salida1()" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                                    <button type="submit" @click="listarHistorial2(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                                                               </div>
                             </div>
                         </div>
@@ -68,12 +68,12 @@
                                 <tr style="text-align:center" v-for="registro in arrayRegistro" :key="registro.id">
                                     
                                     <td v-text="registro.created_at"></td>
-                                    <td v-text="registro.articulo"></td>
+                                    <td v-text="registro.nombre"></td>
                                     <td style="background-color:#ffd480" v-text="registro.stock"></td>
                                     <td style="background-color:#b3ccff" v-text="registro.cantidad"></td>
                                     <td v-text="registro.existencia"></td>
-                                    <td style="background-color:#ffd480" v-text="registro.precio1"></td>
-                                    <td style="background-color:#ff9980" v-text="registro.promedio"></td>
+                                    <td style="background-color:#ffd480" v-text="registro.precio_proveedor"></td>
+                                    <td style="background-color:#ff9980" v-text="registro.precio1"></td>
                                     <td style="background-color:#ffd480" v-text="registro.saldo1"></td>
                                     <td style="background-color:#b3ccff" v-text="registro.saldo"></td>
                                     <td style="background-color:#b3ffb6" v-text="registro.reingreso"></td>
@@ -206,7 +206,7 @@ document.getElementById('area_total3').innerText = total;
     },
             listarHistorial2 (page,buscar,criterio){
                 let me=this;
-                var url= this.ruta + '/historial2?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
+                var url= this.ruta + '/registro?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
                     me.arrayRegistro = respuesta.registro.data;

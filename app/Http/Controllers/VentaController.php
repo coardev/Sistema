@@ -380,7 +380,7 @@ class VentaController extends Controller
         $registro = new Registro();
         
         $registro->articulo = $articulo ;
-        $registro->inventariable = $inventariable ;
+        $registro->tipo = $inventariable ;
         $registro->cantidad = $cantidad ;
         $registro->existencia = $stock - $cantidad ;
         $registro->promedio = $precio4 ;
