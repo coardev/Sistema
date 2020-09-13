@@ -125,7 +125,7 @@
                                 <tbody>
                                     <tr v-for="venta in arrayVenta" :key="venta.id">
                                         <td>
-                                           <button type="button" @click="verVenta(venta.id)" class="btn btn-success btn-lg">
+                                           <button type="button"  @click="verVenta(venta.id)" class="btn btn-success btn-lg">
                                             <i class="icon-eye"></i>
                                             </button> 
                                             <template v-if="venta.estado === 'Venta Registrada'">
@@ -172,60 +172,9 @@
                     <!-- Ver ingreso -->
                     <template v-else-if="listado==2">
                     <div class="card-body">
-                     <template v-if="estado === 'Venta Registrada'">   
-                    <div v-if="isHidden" style="color:red;" class="form-group row border">
-                            <div style="background-color: #CEECF5" align="center" class="col-md-12">
-                                <div  class="form-group">
-                                    <h6 for="">Imprimir Ticket</h6>
-                                    <button type="button"  @click="pdfTicket(id)" class="btn btn-warning btn-lg">
-                                                <i class='fas fa-ticket-alt'></i>
-                                                </button> &nbsp;
-                                </div>
-                            </div>
-                            </div>
-                     </template>
-                    <div v-if="!isHidden" class="form-group row border">
-                    <div class="col-md-12">
-                     <table v-if="estado === 'Venta Registrada'" class="table table-bordered table-striped table-sm">
-                                    <thead>
-                                       
-                                        <tr>
-                                        <th>Efectivo&nbsp;&nbsp;&nbsp;<i class="fa fa-money" style="font-size:24px"></i>
-                                       </th>
-                                        <th>Tarjeta&nbsp;&nbsp;&nbsp;<i class="fa fa-cc-visa" style="font-size:24px"></i>
-                                       </th>
-                                        <th>Vales&nbsp;&nbsp;&nbsp;<i class="fa fa-sticky-note-o" style="font-size:24px"></i>
-                                       </th>
-                                       
-                                        
-                                       
-                                       <th>Total
-                                       </th>
-                                        <th>Cobrar Venta
-                                       </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                            <td style="background-color: #CEECF5"><input  v-bind:min="0" v-model="efectivo" v-on:keypress="isNumber(event)" placeholder="0" ref="test" @blur="onBlur" type="number"></td>
-                                            <td style="background-color: #CEECF5"><input placeholder="0" ref="test1" @blur="onBlur1" v-bind:min="0" v-model="tarjeta" v-on:keypress="isNumber(event)" type="number"></td>
-                                            <td style="background-color: #CEECF5"><input placeholder="0" ref="test2" @blur="onBlur2"  v-bind:min="0" v-model="vales" v-on:keypress="isNumber(event)" type="number"></td>
-                                            <td style="background-color: #CEECF5">
-                                                <input name="txtb" id="txtb" v-bind:value="total" v-on:input="somethingElse = $event.target.value" readonly /></td>
-                                            <td  style="background-color: #CEECF5">
-                                                <button  type="button"  @click="actualizarVenta('venta','actualizar',venta);disabled = !disabled;isHidden = !isHidden" :disabled="disabled" class="btn btn-success btn-lg">
-                                                <i class="fas fa-money-bill-wave"></i>
-                                                </button> &nbsp;
-                                                
-                                            </td>
-                                            <tr style="background-color: #CEECF5;">
-                                            <td colspan="4" align="right"><strong>Cambio:</strong></td>
-                                            <td style="background-color: #CEECF5">{{cambio=calcularTotal+(calcularTotal1+calcularTotal2)}}</td>
-                                        </tr>
-                                    </tbody>                  
-                                </table>
-                    </div>
-                    </div>
-                        <div v-if="!isHidden" style="color:red;" class="form-group row border">
+                    
+                    
+                        <div   style="color:red;" class="form-group row border">
                             <div style="background-color: #CEECF5" align="center" class="col-md-4">
                                 <div  class="form-group">
                                     <h6 for="">Folio de Ticket</h6>
@@ -248,38 +197,6 @@
                                     
                                 </div>
                             </div>
-
-                            
-                            
-                          
-                        </div>
-                        <div  v-if="estado === 'Venta Cobrada'" style="color:red;" class="form-group row border">
-                            <div style="background-color: #CEECF5" align="center" class="col-md-4">
-                                <div  class="form-group">
-                                    <h6 for="">Folio de Ticket</h6>
-                                    <h6><p v-text="id"></p></h6>
-                                </div>
-                            </div>
-                            
-                            <div style="background-color: #CEECF5" align="center" class="col-md-4">
-                                <div class="form-group">
-                                    <h6 for="">Fecha</h6>
-                                    <h6> <p v-text="created_at"></p></h6>
-                                </div>
-                            </div>
-                           
-
-                            <div style="background-color: #CEECF5" align="center" class="col-md-4">
-                                <div class="form-group">
-                                    <h6>Estado de Venta</h6>
-                                    <h6><p v-text="estado"></p></h6>
-                                    
-                                </div>
-                            </div>
-
-                            
-                            
-                          
                         </div>
                         <div class="form-group row border">
                             <div class="table-responsive col-md-12">
@@ -375,6 +292,11 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-md-12">
+                                
+                                <template v-if="estado === 'Venta Registrada'">
+                                <button type="button"  @click="abrirModal()"  class="btn btn-secondary">Cobrar Venta</button>
+                                </template>
+
                                <button type="button" @click="ocultarDetalle()" class="btn btn-secondary">Cerrar</button>
                                 
                             </div>
@@ -410,13 +332,11 @@
                                        </th>
                                         <th>Vales&nbsp;&nbsp;&nbsp;<i class="fa fa-sticky-note-o" style="font-size:24px"></i>
                                        </th>
-                                       
-                                        
-                                       
                                        <th>Total
                                        </th>
-                                        <th>Imprimir Ticket
+                                        <th>Cobrar Venta
                                        </th>
+                                       
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -426,13 +346,22 @@
                                             <td style="background-color: #CEECF5">
                                                 <input name="txtb" id="txtb" v-bind:value="total" v-on:input="somethingElse = $event.target.value" readonly /></td>
                                             <td  style="background-color: #CEECF5">
-                                                <button type="button" @click="actualizarVenta('venta','actualizar',venta);pdfTicket(id)" class="btn btn-warning btn-lg">
-                                                <i class='fas fa-ticket-alt'></i>
-                                                </button> &nbsp;
+                                                <button type="button"
+                                                @click="actualizarVenta('venta','actualizar',venta)" class="btn btn-success btn-lg">
+                                                <i class="fas fa-money-bill-wave"></i>
+                                                </button>
                                             </td>
+                                           
                                             <tr style="background-color: #CEECF5;">
-                                            <td colspan="4" align="right"><strong>Cambio:</strong></td>
-                                            <td style="background-color: #CEECF5">{{cambio=calcularTotal+(calcularTotal1+calcularTotal2)}}</td>
+                                               
+                                            
+                                            <td colspan="3" align="right"><h4>Cambio:</h4></td>
+                                            <td style="background-color: #CEECF5"><h4>{{cambio=calcularTotal+(calcularTotal1+calcularTotal2)}}</h4></td>
+                                             <td  style="background-color: #CEECF5">
+                                               <h6 for="Name">Imprimir Ticket</h6>
+                                                <button type="button" @click="pdfTicket(id)" class="btn btn-warning btn-lg">
+                                                <i class='fas fa-ticket-alt'></i>
+                                                </button></td>
                                         </tr>
                                             
 
@@ -501,8 +430,8 @@
                 arrayCliente: [],
                 arrayDetalle : [],
                 listado:1,
-                disabled: false,
                 isHidden: false,
+
                 modal : 0,
                 tituloModal : '',
                 tipoAccion : 0,
@@ -999,6 +928,12 @@ localStorage.setItem('area_total6', JSON.stringify(total));
                     'cambio': this.cambio,
                     'id': this.id
                 }).then(function (response) {
+                    swal({
+  title: "Venta",
+  text: "La venta fue cobrada correctamente!!.",
+  timer: 2000,
+  showConfirmButton: false
+});
                    // me.cerrarModal();
                    // me.ocultarDetalle();
                     //me.listarVenta(1,me.buscar,me.criterio);
@@ -1143,7 +1078,7 @@ localStorage.setItem('area_total6', JSON.stringify(total));
 </script>
 <style>    
     .modal-content{
-        width: 100% !important;
+        
         position: absolute !important;
     }
     .mostrar{
