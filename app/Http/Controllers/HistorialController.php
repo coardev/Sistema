@@ -22,7 +22,8 @@ class HistorialController extends Controller
        
         
         if ($buscar==''){
-            $historial = Historial::where('fecha_hora','=', Carbon :: today())
+            $historial = Historial::where('tipo','=','1')
+            ->where('fecha_hora','=', Carbon :: today())
             ->orderBy('id', 'desc')->paginate(100000);
         }
         else{

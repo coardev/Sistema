@@ -234,7 +234,7 @@ class ArticuloController extends Controller
         $articulo->save();
 
         //REgistrar Tabla Entradas - Articulo Agregados
-        $this->__agregados($articulo->nombre,$articulo->stock1,$articulo->precio_proveedor);
+        $this->__agregados($articulo->nombre,$articulo->stock1,$articulo->precio_proveedor,$articulo->inventariable);
 
          //Registro Inventaros Salida + Entrada
         $this->__registro1($articulo->nombre,$articulo->stock,$articulo->stock1, $articulo->precio_proveedor,$articulo->precio_proveedor1,$articulo->inventariable,$articulo->total);
@@ -295,13 +295,14 @@ class ArticuloController extends Controller
     }    
 
     //Actualizacion Tabla Entradas 
-    private function __agregados($nombre = '', $stock1 = '', $precio_proveedor = '' )
+    private function __agregados($nombre = '', $stock1 = '', $precio_proveedor = '', $inventariable = '' )
     {
         $mytime= Carbon::now('America/Lima');
         $agregados = new Historial4();
         $agregados->nombre = $nombre;
         $agregados->stock1 = $stock1 ;
         $agregados->precio_proveedor = $precio_proveedor ;
+        $agregados->tipo = $inventariable ;
         $agregados->reingreso = $precio_proveedor*$stock1;
         $agregados->fecha_hora = $mytime->toDateString();
         $agregados->estado = 'Agregados' ;
