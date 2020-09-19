@@ -52046,7 +52046,7 @@ var render = function() {
     _c("ol", { staticClass: "breadcrumb" }),
     _vm._v(" "),
     _c("div", { staticClass: "container-fluid" }, [
-      _c("div", { staticClass: "card", staticStyle: { height: "37rem" } }, [
+      _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-header" }, [
           _c("i", { staticClass: "fa fa-align-justify" }),
           _vm._v(" Artículos\n                "),

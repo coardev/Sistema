@@ -6,7 +6,7 @@
             </ol>
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
-                <div class="card" style="height: 37rem;">
+                <div class="card" >
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> Artículos
                         <button type="button" @click="abrirModal('articulo','registrar')" class="btn btn-secondary">
