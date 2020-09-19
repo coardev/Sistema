@@ -131,7 +131,10 @@
                                     </td>
                                     <td v-if="!isHidden">
                                      <template v-if="articulo.inventariable === 1">
-                                      <button type="button" class="btn btn-danger btn-sm" @click="abrirModal('articulo','restar',articulo)">
+                                      <button v-if="articulo.stock >= 1"  type="button" class="btn btn-danger btn-sm" @click="abrirModal('articulo','restar',articulo)">
+                                      -
+                                      </button>
+                                      <button v-if="articulo.stock == 0"  type="button" class="btn btn-danger btn-sm" @click="abrirModal('articulo','restar',articulo)" disabled>
                                       -
                                       </button>
                                       </template>
@@ -501,13 +504,16 @@
                                 </div>
                                
                                 
-                                <div v-show="errorArticulo" class="form-group row div-error">
+                                <div class="div-error">
+                                <div v-show="errorArticulo1" class="alert alert-danger alert-dismissible fade show">
                                     <div class="text-center text-error">
-                                        <div v-for="error in errorMostrarMsjArticulo" :key="error" v-text="error">
+                                        <h4 class="alert-heading"><i class="fa fa-warning"></i>Error al realizar la Operacion</h4>
+                                        <div v-for="error in errorMostrarMsjArticulo1" :key="error" v-text="error">
 
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
                                 </template>     
                             </form>
@@ -568,6 +574,8 @@ Vue.use(Print);
                 tipoAccion : 0,
                 errorArticulo : 0,
                 errorMostrarMsjArticulo : [],
+                errorArticulo1 : 0,
+                errorMostrarMsjArticulo1 : [],
                 pagination : {
                     'total' : 0,
                     'current_page' : 0,
@@ -588,6 +596,14 @@ Vue.use(Print);
         computed:{
             isActived: function(){
                 return this.pagination.current_page;
+            },
+            calcularStock: function(){
+               
+                var resultado3=0;
+                
+                 resultado3=resultado3+(this.stock-this.stock2)
+                
+                return resultado3;
             },
             //Calcula los elementos de la paginación
             pagesNumber: function() {
@@ -823,7 +839,7 @@ Vue.use(Print);
                 }); 
             },
             actualizarArticulo2(){
-               if (this.validarArticulo()){
+               if (this.validarArticulo1()){
                     return;
                 }
                 
@@ -932,6 +948,17 @@ Vue.use(Print);
                 }
                 }) 
             },
+            validarArticulo1(){
+                
+                this.errorArticulo1=0;
+                this.errorMostrarMsjArticulo1 =[];
+                
+                if (this.calcularStock<0) this.errorMostrarMsjArticulo1.push("* Error al Restar Articulos, la cantidad no puede ser mayor con la que cuentas en inventario!!.");
+
+                if (this.errorMostrarMsjArticulo1.length) this.errorArticulo1 = 1;
+                setTimeout(() => this.errorArticulo1 = false, 3500);
+                return this.errorArticulo1;
+            },
             validarArticulo(){
                 this.errorArticulo=0;
                 this.errorMostrarMsjArticulo =[];
@@ -966,7 +993,8 @@ Vue.use(Print);
                 this.stock = 0;
                 this.minimo = 0;
                 this.descripcion = '';
-		        this.errorArticulo=0;
+                this.errorArticulo=0;
+                this.errorArticulo1=0;
             },
             abrirModal(modelo, accion, data = []){
                 switch(modelo){
@@ -1099,8 +1127,8 @@ Vue.use(Print);
         justify-content: center;
       
        position: fixed;
-       left: 30%;
-       top: 0%;
+       left: 40%;
+       top: 20%;
        z-index: 999;
     }
     .text-error{

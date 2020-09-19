@@ -48386,7 +48386,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.modal-content{\n    width: 100% !important;\n    position: absolute !important;\n}\n.mostrar{\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    background-color: #3c29297a !important;\n}\n.div-error{\n    \n  \n    justify-content: center;\n  \n   position: fixed;\n   left: 30%;\n   top: 0%;\n   z-index: 999;\n}\n.text-error{\n    color: red !important;\n    font-weight: bold;\n}\n", ""]);
+exports.push([module.i, "\n.modal-content{\n    width: 100% !important;\n    position: absolute !important;\n}\n.mostrar{\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    background-color: #3c29297a !important;\n}\n.div-error{\n    \n  \n    justify-content: center;\n  \n   position: fixed;\n   left: 40%;\n   top: 20%;\n   z-index: 999;\n}\n.text-error{\n    color: red !important;\n    font-weight: bold;\n}\n", ""]);
 
 // exports
 
@@ -48401,6 +48401,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_barcode__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_barcode___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_barcode__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -48971,6 +48977,8 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default.a);
             tipoAccion: 0,
             errorArticulo: 0,
             errorMostrarMsjArticulo: [],
+            errorArticulo1: 0,
+            errorMostrarMsjArticulo1: [],
             pagination: {
                 'total': 0,
                 'current_page': 0,
@@ -48992,6 +49000,14 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default.a);
     computed: {
         isActived: function isActived() {
             return this.pagination.current_page;
+        },
+        calcularStock: function calcularStock() {
+
+            var resultado3 = 0;
+
+            resultado3 = resultado3 + (this.stock - this.stock2);
+
+            return resultado3;
         },
         //Calcula los elementos de la paginación
         pagesNumber: function pagesNumber() {
@@ -49221,7 +49237,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default.a);
             });
         },
         actualizarArticulo2: function actualizarArticulo2() {
-            if (this.validarArticulo()) {
+            if (this.validarArticulo1()) {
                 return;
             }
 
@@ -49315,8 +49331,22 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default.a);
                 result.dismiss === swal.DismissReason.cancel) {}
             });
         },
-        validarArticulo: function validarArticulo() {
+        validarArticulo1: function validarArticulo1() {
             var _this3 = this;
+
+            this.errorArticulo1 = 0;
+            this.errorMostrarMsjArticulo1 = [];
+
+            if (this.calcularStock < 0) this.errorMostrarMsjArticulo1.push("* Error al Restar Articulos, la cantidad no puede ser mayor con la que cuentas en inventario!!.");
+
+            if (this.errorMostrarMsjArticulo1.length) this.errorArticulo1 = 1;
+            setTimeout(function () {
+                return _this3.errorArticulo1 = false;
+            }, 3500);
+            return this.errorArticulo1;
+        },
+        validarArticulo: function validarArticulo() {
+            var _this4 = this;
 
             this.errorArticulo = 0;
             this.errorMostrarMsjArticulo = [];
@@ -49332,7 +49362,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default.a);
 
             if (this.errorMostrarMsjArticulo.length) this.errorArticulo = 1;
             setTimeout(function () {
-                return _this3.errorArticulo = false;
+                return _this4.errorArticulo = false;
             }, 3500);
             return this.errorArticulo;
         },
@@ -49353,6 +49383,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default.a);
             this.minimo = 0;
             this.descripcion = '';
             this.errorArticulo = 0;
+            this.errorArticulo1 = 0;
         },
         abrirModal: function abrirModal(modelo, accion) {
             var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
@@ -52530,28 +52561,58 @@ var render = function() {
                                 [
                                   articulo.inventariable === 1
                                     ? [
-                                        _c(
-                                          "button",
-                                          {
-                                            staticClass:
-                                              "btn btn-danger btn-sm",
-                                            attrs: { type: "button" },
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.abrirModal(
-                                                  "articulo",
-                                                  "restar",
-                                                  articulo
+                                        articulo.stock >= 1
+                                          ? _c(
+                                              "button",
+                                              {
+                                                staticClass:
+                                                  "btn btn-danger btn-sm",
+                                                attrs: { type: "button" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.abrirModal(
+                                                      "articulo",
+                                                      "restar",
+                                                      articulo
+                                                    )
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                              -\n                              "
                                                 )
-                                              }
-                                            }
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n                              -\n                              "
+                                              ]
                                             )
-                                          ]
-                                        )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        articulo.stock == 0
+                                          ? _c(
+                                              "button",
+                                              {
+                                                staticClass:
+                                                  "btn btn-danger btn-sm",
+                                                attrs: {
+                                                  type: "button",
+                                                  disabled: ""
+                                                },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.abrirModal(
+                                                      "articulo",
+                                                      "restar",
+                                                      articulo
+                                                    )
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                              -\n                              "
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e()
                                       ]
                                     : _vm._e(),
                                   _vm._v(" "),
@@ -54528,35 +54589,45 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: _vm.errorArticulo,
-                                  expression: "errorArticulo"
-                                }
-                              ],
-                              staticClass: "form-group row div-error"
-                            },
-                            [
-                              _c(
-                                "div",
-                                { staticClass: "text-center text-error" },
-                                _vm._l(_vm.errorMostrarMsjArticulo, function(
-                                  error
-                                ) {
-                                  return _c("div", {
-                                    key: error,
-                                    domProps: { textContent: _vm._s(error) }
-                                  })
-                                }),
-                                0
-                              )
-                            ]
-                          )
+                          _c("div", { staticClass: "div-error" }, [
+                            _c(
+                              "div",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errorArticulo1,
+                                    expression: "errorArticulo1"
+                                  }
+                                ],
+                                staticClass:
+                                  "alert alert-danger alert-dismissible fade show"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  { staticClass: "text-center text-error" },
+                                  [
+                                    _vm._m(3),
+                                    _vm._v(" "),
+                                    _vm._l(
+                                      _vm.errorMostrarMsjArticulo1,
+                                      function(error) {
+                                        return _c("div", {
+                                          key: error,
+                                          domProps: {
+                                            textContent: _vm._s(error)
+                                          }
+                                        })
+                                      }
+                                    )
+                                  ],
+                                  2
+                                )
+                              ]
+                            )
+                          ])
                         ]
                       : _vm._e()
                   ],
@@ -54688,6 +54759,15 @@ var staticRenderFns = [
         },
         [_vm._v("Precio Venta:")]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", { staticClass: "alert-heading" }, [
+      _c("i", { staticClass: "fa fa-warning" }),
+      _vm._v("Error al realizar la Operacion")
     ])
   }
 ]

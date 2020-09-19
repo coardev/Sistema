@@ -160,7 +160,7 @@ class ArticuloController extends Controller
     {
         if (!$request->ajax()) return redirect('/');
      
-
+       
         $articulo = new Articulo();
         $articulo->idcategoria = $request->idcategoria;
         $articulo->codigo = $request->codigo;
