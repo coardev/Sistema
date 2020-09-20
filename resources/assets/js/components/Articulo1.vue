@@ -6,7 +6,7 @@
             </ol>
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
-                <div class="card" style="height: 37rem;">
+                <div class="card" >
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> Artículos
                         <button type="button" @click="abrirModal('articulo','registrar')" class="btn btn-secondary">
@@ -159,7 +159,7 @@
                                     <td v-text="articulo.ieps"></td>
                                     <td v-text="articulo.descripcion"></td>
                                     <template v-if="articulo.inventariable === 1">
-                                    <td v-text="articulo.stock*articulo.precio_proveedor1"></td>
+                                    <td v-text="articulo.total"></td>
                                     </template>
                                     <template v-if="articulo.inventariable === 2">
                                     <td>N/A</td>
@@ -345,10 +345,7 @@
                                
                                 
                                   <div class="form-group row">
-                                    <label class="col-md-3 form-control-label" for="text-input">Precio Proveedor:</label>
-                                    <div class="col-md-3">
-                                        <input type="number" v-model="precio_proveedor" v-bind:min="0" v-on:keypress="isNumber(event)" class="form-control"  placeholder="">                                        
-                                 </div>
+                                    
                                     <div class="col-md-3">
                                         <label class="col-md-3 form-control-label" for="text-input">Precio Venta:</label>                                        
                                     </div>
@@ -412,6 +409,10 @@
                                     <div class="col-md-3">
                                         <input id="x2"   type="text" v-model="nombre" class="form-control" disabled placeholder="Nombre de artículo">                                        
                                     </div>
+                                    <label class="col-md-3 form-control-label" for="text-input">Precio Proveedor</label>
+                                    <div class="col-md-3">
+                                        <input id="x2"   type="text" v-model="precio_proveedor" class="form-control" disabled  placeholder="Nombre de artículo">                                        
+                                    </div>
                                     
                                     </div>
                                
@@ -424,11 +425,7 @@
                                    
                                     <label class="col-md-3 form-control-label" for="text-input">Agregar:</label>
                                     <div class="col-md-3">
-<<<<<<< HEAD
                                         <input id="x10" type="number" v-model="stock1" v-bind:min="0" v-on:keypress="isNumber(event)" @keyup.enter="actualizarArticulo1()" class="form-control" placeholder="">                                        
-=======
-                                        <input id="x10" type="number" v-model="stock1" v-bind:min="1" @keyup.enter="actualizarArticulo1()" class="form-control" placeholder="">                                        
->>>>>>> ebfa3001d5438580579651544eb0b2a7cee56941
                                     </div>
                                                                      
                                 </div>
@@ -747,7 +744,7 @@ Vue.use(Print);
                     'idcategoria': this.idcategoria,
                     'codigo': this.codigo,
                     'nombre': this.nombre,
-                    'stock': this.stock,
+                    
                     'minimo': this.minimo,
                     'stock1': this.stock1,
                     'precio_proveedor': this.precio_proveedor,

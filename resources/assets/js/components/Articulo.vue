@@ -435,7 +435,7 @@
                                     <div class="col-md-3">
                                         <input id="x2"   type="text" v-model="nombre" class="form-control" disabled placeholder="Nombre de artículo">                                        
                                     </div>
-
+                                    <label class="col-md-3 form-control-label" for="text-input">Precio Proveedor</label>
                                     <div class="col-md-3">
                                         <input id="x2"   type="text" v-model="precio_proveedor" class="form-control"  placeholder="Nombre de artículo">                                        
                                     </div>
@@ -446,7 +446,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="text-input">Stock:</label>
                                     <div class="col-md-3">
-                                        <input id="x4"  type="number" v-model="stock" v-bind:min="0" v-on:keypress="isNumber(event)" class="form-control"  placeholder="">                                        
+                                        <input id="x4"  type="number" v-model="stock" v-bind:min="0" v-on:keypress="isNumber(event)" class="form-control" disabled placeholder="">                                        
                                     </div>
                                    
                                     <label class="col-md-3 form-control-label" for="text-input">Agregar:</label>

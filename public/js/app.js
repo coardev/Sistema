@@ -54181,6 +54181,15 @@ var render = function() {
                               })
                             ]),
                             _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "col-md-3 form-control-label",
+                                attrs: { for: "text-input" }
+                              },
+                              [_vm._v("Precio Proveedor")]
+                            ),
+                            _vm._v(" "),
                             _c("div", { staticClass: "col-md-3" }, [
                               _c("input", {
                                 directives: [
@@ -54235,6 +54244,7 @@ var render = function() {
                                   id: "x4",
                                   type: "number",
                                   min: 0,
+                                  disabled: "",
                                   placeholder: ""
                                 },
                                 domProps: { value: _vm.stock },
@@ -55337,9 +55347,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -55580,7 +55587,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_print_nb___default.a);
                 'idcategoria': this.idcategoria,
                 'codigo': this.codigo,
                 'nombre': this.nombre,
-                'stock': this.stock,
+
                 'minimo': this.minimo,
                 'stock1': this.stock1,
                 'precio_proveedor': this.precio_proveedor,
@@ -55890,10 +55897,10 @@ var render = function() {
     _c("ol", { staticClass: "breadcrumb" }),
     _vm._v(" "),
     _c("div", { staticClass: "container-fluid" }, [
-      _c("div", { staticClass: "card", staticStyle: { height: "37rem" } }, [
+      _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-header" }, [
           _c("i", { staticClass: "fa fa-align-justify" }),
-          _vm._v(" Artículos\n                        "),
+          _vm._v(" Artículos\n                "),
           _c(
             "button",
             {
@@ -55907,7 +55914,7 @@ var render = function() {
             },
             [
               _c("i", { staticClass: "icon-plus" }),
-              _vm._v(" Nuevo\n                        ")
+              _vm._v(" Nuevo\n                ")
             ]
           ),
           _vm._v(" "),
@@ -55927,7 +55934,7 @@ var render = function() {
             },
             [
               _c("i", { staticClass: "fa fa-print" }),
-              _vm._v(" Imprimir Reporte\n                        ")
+              _vm._v(" Imprimir Reporte\n                ")
             ]
           ),
           _vm._v(" "),
@@ -55944,7 +55951,7 @@ var render = function() {
             },
             [
               _c("i", { staticClass: "fa fa-file-excel-o" }),
-              _vm._v(" Reporte Excel\n                        ")
+              _vm._v(" Reporte Excel\n                ")
             ]
           )
         ]),
@@ -56309,7 +56316,7 @@ var render = function() {
                                   [_c("i", { staticClass: "icon-pencil" })]
                                 ),
                                 _vm._v(
-                                  "  \n                                                                           \n                                       \n                                       \n                                    "
+                                  "  \n                                                                   \n                               \n                               \n                            "
                                 )
                               ])
                             : _vm._e(),
@@ -56338,7 +56345,7 @@ var render = function() {
                                           },
                                           [
                                             _vm._v(
-                                              "\n                                      +\n                                      "
+                                              "\n                              +\n                              "
                                             )
                                           ]
                                         )
@@ -56359,7 +56366,7 @@ var render = function() {
                                           },
                                           [
                                             _vm._v(
-                                              "\n                                      +\n                                      "
+                                              "\n                              +\n                              "
                                             )
                                           ]
                                         )
@@ -56380,7 +56387,7 @@ var render = function() {
                                           },
                                           [
                                             _vm._v(
-                                              "\n                                      +\n                                      "
+                                              "\n                              +\n                              "
                                             )
                                           ]
                                         )
@@ -56480,10 +56487,7 @@ var render = function() {
                             ? [
                                 _c("td", {
                                   domProps: {
-                                    textContent: _vm._s(
-                                      articulo.stock *
-                                        articulo.precio_proveedor1
-                                    )
+                                    textContent: _vm._s(articulo.total)
                                   }
                                 })
                               ]
@@ -56680,7 +56684,7 @@ var render = function() {
                                 _vm._v("     Si")
                               ]),
                               _vm._v(
-                                "\n                                          \n                                    "
+                                "\n                                  \n                            "
                               ),
                               _c("input", {
                                 directives: [
@@ -56764,7 +56768,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                            Generando código de barras.    \n                                        "
+                                      "\n                                    Generando código de barras.    \n                                "
                                     )
                                   ]
                                 )
@@ -56996,7 +57000,7 @@ var render = function() {
                                 _vm._v("     Si")
                               ]),
                               _vm._v(
-                                "\n                                          \n                                    "
+                                "\n                                  \n                            "
                               ),
                               _c("input", {
                                 directives: [
@@ -57063,7 +57067,7 @@ var render = function() {
                                 _vm._v("     Si")
                               ]),
                               _vm._v(
-                                "  \n                                          \n                                    "
+                                "  \n                                  \n                            "
                               ),
                               _c("input", {
                                 directives: [
@@ -57329,7 +57333,7 @@ var render = function() {
                                 _vm._v("     Si")
                               ]),
                               _vm._v(
-                                "\n                                          \n                                    "
+                                "\n                                  \n                            "
                               ),
                               _c("input", {
                                 directives: [
@@ -57413,7 +57417,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                            Generando código de barras.    \n                                        "
+                                      "\n                                    Generando código de barras.    \n                                "
                                     )
                                   ]
                                 )
@@ -57534,46 +57538,6 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "form-group row" }, [
-                            _c(
-                              "label",
-                              {
-                                staticClass: "col-md-3 form-control-label",
-                                attrs: { for: "text-input" }
-                              },
-                              [_vm._v("Precio Proveedor:")]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-md-3" }, [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.precio_proveedor,
-                                    expression: "precio_proveedor"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: {
-                                  type: "number",
-                                  min: 0,
-                                  placeholder: ""
-                                },
-                                domProps: { value: _vm.precio_proveedor },
-                                on: {
-                                  keypress: function($event) {
-                                    return _vm.isNumber(_vm.event)
-                                  },
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.precio_proveedor = $event.target.value
-                                  }
-                                }
-                              })
-                            ]),
-                            _vm._v(" "),
                             _vm._m(2),
                             _vm._v(" "),
                             _c("div", { staticClass: "col-md-3" }, [
@@ -57645,7 +57609,7 @@ var render = function() {
                                 _vm._v("     Si")
                               ]),
                               _vm._v(
-                                "\n                                          \n                                    "
+                                "\n                                  \n                            "
                               ),
                               _c("input", {
                                 directives: [
@@ -57712,7 +57676,7 @@ var render = function() {
                                 _vm._v("     Si")
                               ]),
                               _vm._v(
-                                "  \n                                          \n                                    "
+                                "  \n                                  \n                            "
                               ),
                               _c("input", {
                                 directives: [
@@ -57870,7 +57834,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                            Generando código de barras.    \n                                        "
+                                      "\n                                    Generando código de barras.    \n                                "
                                     )
                                   ]
                                 )
@@ -57913,6 +57877,44 @@ var render = function() {
                                       return
                                     }
                                     _vm.nombre = $event.target.value
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "col-md-3 form-control-label",
+                                attrs: { for: "text-input" }
+                              },
+                              [_vm._v("Precio Proveedor")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-3" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.precio_proveedor,
+                                    expression: "precio_proveedor"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  id: "x2",
+                                  type: "text",
+                                  disabled: "",
+                                  placeholder: "Nombre de artículo"
+                                },
+                                domProps: { value: _vm.precio_proveedor },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.precio_proveedor = $event.target.value
                                   }
                                 }
                               })
@@ -57969,9 +57971,6 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c("div", { staticClass: "col-md-3" }, [
-                              _vm._v(
-                                "\n<<<<<<< HEAD\n                                        "
-                              ),
                               _c("input", {
                                 directives: [
                                   {
@@ -58015,54 +58014,7 @@ var render = function() {
                                     _vm.stock1 = $event.target.value
                                   }
                                 }
-                              }),
-                              _vm._v(
-                                "                                        \n=======\n                                        "
-                              ),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.stock1,
-                                    expression: "stock1"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: {
-                                  id: "x10",
-                                  type: "number",
-                                  min: 1,
-                                  placeholder: ""
-                                },
-                                domProps: { value: _vm.stock1 },
-                                on: {
-                                  keyup: function($event) {
-                                    if (
-                                      !$event.type.indexOf("key") &&
-                                      _vm._k(
-                                        $event.keyCode,
-                                        "enter",
-                                        13,
-                                        $event.key,
-                                        "Enter"
-                                      )
-                                    ) {
-                                      return null
-                                    }
-                                    return _vm.actualizarArticulo1()
-                                  },
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.stock1 = $event.target.value
-                                  }
-                                }
-                              }),
-                              _vm._v(
-                                "                                        \n>>>>>>> ebfa3001d5438580579651544eb0b2a7cee56941\n                                    "
-                              )
+                              })
                             ])
                           ]),
                           _vm._v(" "),
@@ -58151,7 +58103,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                            Generando código de barras.    \n                                        "
+                                      "\n                                    Generando código de barras.    \n                                "
                                     )
                                   ]
                                 )
