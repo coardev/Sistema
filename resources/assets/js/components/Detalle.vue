@@ -66,26 +66,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="historial2 in arrayDetalle" :key="historial2.id">
+                                <tr v-for="salidas in arrayDetalle" :key="salidas.id">
                                                                        
-                                    <td v-text="historial2.created_at"></td>
+                                    <td v-text="salidas.created_at"></td>
                                    
-                                    <td v-text="historial2.articulo"></td>
-                                    <td v-text="historial2.cantidad"></td>
-                                    <td v-text="historial2.precio4"></td>
-                                    <template v-if="historial2.estado === 'Venta Devuelta'">
-                                    <td v-text="historial2.precio4*historial2.cantidad"></td>
+                                    <td v-text="salidas.articulo"></td>
+                                    <td v-text="salidas.cantidad"></td>
+                                    <td v-text="salidas.precio4"></td>
+                                    <template v-if="salidas.estado === 'Venta Devuelta'">
+                                    <td v-text="salidas.precio4*historial2.cantidad"></td>
                                     </template>
-                                    <template v-if="historial2.estado === 'Restado by Admin'">
-                                    <td v-text="historial2.precio4*historial2.cantidad"></td>
+                                    <template v-if="salidas.estado === 'Restado by Admin'">
+                                    <td v-text="salidas.precio4*salidas.cantidad"></td>
                                     </template> 
-                                    <template v-if="historial2.estado === 'Venta Interna'">
-                                    <td v-text="historial2.precio4*historial2.cantidad"></td>
+                                    <template v-if="salidas.estado === 'Venta Interna'">
+                                    <td v-text="salidas.precio4*salidas.cantidad"></td>
                                     </template>   
-                                    <template v-if="historial2.estado === 'Venta Normal'">
-                                    <td v-text="historial2.precio4*historial2.cantidad"></td>
+                                    <template v-if="salidas.estado === 'Venta Normal'">
+                                    <td v-text="salidas.precio4*salidas.cantidad"></td>
                                     </template>
-                                    <td style="color: red" v-text="historial2.estado"></td>
+                                    <td style="color: red" v-text="salidas.estado"></td>
                                    
                                    
                                 </tr>                                
@@ -96,7 +96,7 @@
                </div>
                 </div>
                 <!-- Fin ejemplo de tabla Listado -->
-            </div>
+            
              <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-primary" role="document">
                     <div class="modal-content">
@@ -296,7 +296,7 @@ Vue.use(Print);
                 var url= this.ruta + '/salida3?page=' + page + '&buscar2='+ buscar2 + '&criterio2='+ criterio2 + '&buscar1='+ buscar1 + '&criterio1='+ criterio1 + '&buscar='+ buscar + '&criterio='+ criterio;
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
-                    me.arrayDetalle = respuesta.historial2.data;
+                    me.arrayDetalle = respuesta.salidas.data;
                     me.pagination= respuesta.pagination;
                 })
                 .catch(function (error) {

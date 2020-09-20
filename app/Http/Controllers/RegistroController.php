@@ -12,16 +12,24 @@ class RegistroController extends Controller
     {
         if (!$request->ajax()) return redirect('/');
 
+        $buscar2 = $request->buscar2;
+        $criterio2 = $request->criterio2;
+        $buscar1 = $request->buscar1;
+        $criterio1 = $request->criterio1;
         $buscar = $request->buscar;
         $criterio = $request->criterio;
         
         if ($buscar==''){
             $registro = Registro::where('tipo','=','1')
-            //->where('fecha_hora','=', Carbon :: today())
+            ->where('fecha_hora','=', Carbon :: today())
             ->orderBy('id', 'desc')->paginate(100000000);
         }
         else{
-            $registro = Registro::where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(10000000);
+            $registro = Registro::where($criterio2, 'like', '%'. $buscar2 . '%')
+            ->whereDate($criterio1, '>=', $buscar1 )
+            ->whereDate($criterio, '<=', $buscar)
+            ->where('tipo','=','1')
+            ->orderBy('id', 'desc')->paginate(10000000);
         }
         
 

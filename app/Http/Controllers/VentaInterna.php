@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Venta;
 use App\Interna;
 use App\Historial2;
+use App\Salida;
 use App\DetalleVenta;
 use App\DetalleInterna;
 
@@ -188,7 +189,7 @@ class VentaInterna extends Controller
     private function __historial2($articulo = '',$cantidad = '',$precio4 = '',$inventariable = '',$idarticulo = '',$fecha_hora = '')
     {
        
-        $historial2 = new Historial2();
+        $historial2 = new Salida();
         
         $historial2->articulo = $articulo ;
         $historial2->precio4 = $precio4 ;

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Articulo;
 use App\Historial;
 use App\Historial2;
+use App\Salida;
 use App\Registro;
 use App\Historial3;
 use App\Historial4;
@@ -198,13 +199,16 @@ class ArticuloController extends Controller
         $articulo->nombre = $request->nombre;
         $articulo->inventariable = $request->inventariable;
         $articulo->precio_proveedor = $request->precio_proveedor;
+        
         $articulo->precio_venta = $request->precio_venta;
         $articulo->iva = $request->iva;
         $articulo->ieps = $request->ieps;
         $articulo->minimo = $request->minimo;
+        
         $articulo->stock1 = $request->stock1;
         $articulo->salida1 = $request->stock1 * $request->precio_proveedor ;
         $articulo->descripcion = $request->descripcion;
+       
         $articulo->condicion = '1';
         $articulo->save();
         
@@ -229,7 +233,7 @@ class ArticuloController extends Controller
         $articulo->stock1 = $request->stock1;
         $articulo->salida1 = $request->stock1 * $request->precio_proveedor ;
         $articulo->descripcion = $request->descripcion;
-        $articulo->total = $request->stock*$request->precio_proveedor1+($request->stock1 * $request->precio_proveedor);
+        $articulo->total += $request->stock1*$request->precio_proveedor;
         $articulo->condicion = '1';
         $articulo->save();
 
@@ -237,7 +241,7 @@ class ArticuloController extends Controller
         $this->__agregados($articulo->nombre,$articulo->stock1,$articulo->precio_proveedor,$articulo->inventariable);
 
          //Registro Inventaros Salida + Entrada
-        $this->__registro1($articulo->nombre,$articulo->stock,$articulo->stock1, $articulo->precio_proveedor,$articulo->precio_proveedor1,$articulo->inventariable,$articulo->total);
+        $this->__registro1($request->id,$articulo->nombre,$articulo->stock,$articulo->stock1, $articulo->precio_proveedor,$articulo->precio_proveedor1,$articulo->inventariable,$articulo->total);
     }
 
     public function restar(Request $request)
@@ -309,10 +313,11 @@ class ArticuloController extends Controller
         $agregados->save();
     }    
 
-    private function __registro1($nombre = '', $stock = '', $stock1 = '', $precio_proveedor = '', $precio_proveedor1 = '', $inventariable = '', $total = '' )
+    private function __registro1($id = null,$nombre = '', $stock = '', $stock1 = '', $precio_proveedor = '', $precio_proveedor1 = '', $inventariable = '', $total = '' )
     {
         $mytime= Carbon::now('America/Lima');
         $registro1 = new Registro();
+        $registro1->idarticulo = $id;
         $registro1->nombre = $nombre;
         $registro1->stock = $stock1 ;
         $registro1->existencia = $stock ;
@@ -364,7 +369,7 @@ class ArticuloController extends Controller
     private function __historial6($id = null,$nombre = '',$inventariable = '',$precio_venta = '',$stock2 = '')
     {
        
-        $historial6 = new Historial2();
+        $historial6 = new Salida();
         $historial6->articulo = $nombre;
         $historial6->idarticulo = $id;
         $historial6->inventariable = $inventariable;
@@ -373,7 +378,8 @@ class ArticuloController extends Controller
         $historial6->fecha_hora =  Carbon :: today();
         $historial6->estado = 'Restado by Admin';
         $historial6->save();
-    }    
+    }  
+      
 
     
 

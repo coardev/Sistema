@@ -186,7 +186,7 @@
                                     <td v-text="articulo.ieps"></td>
                                     <td v-text="articulo.descripcion"></td>
                                     <template v-if="articulo.inventariable === 1">
-                                    <td v-text="articulo.stock*articulo.precio_proveedor1"></td>
+                                    <td v-text="articulo.total"></td>
                                     </template>
                                     <template v-if="articulo.inventariable === 2">
                                     <td>N/A</td>
@@ -372,10 +372,6 @@
                                
                                 
                                   <div class="form-group row">
-                                    <label class="col-md-3 form-control-label" for="text-input">Precio Proveedor:</label>
-                                    <div class="col-md-3">
-                                        <input type="number" v-model="precio_proveedor" v-bind:min="0" class="form-control" v-on:keypress="isNumber(event)"  placeholder="">                                        
-                                 </div>
                                     <div class="col-md-3">
                                         <label class="col-md-3 form-control-label" for="text-input">Precio Venta:</label>                                        
                                     </div>
@@ -405,7 +401,7 @@
                                 </div>
                                 
                                 <div class="form-group row">
-                                   
+                                    
                                     <label class="col-md-3 form-control-label" for="text-input">Stock Minimo:</label>
                                     <div class="col-md-3">
                                         <input id="minimo"  type="number" v-model="minimo" v-bind:min="0" v-on:keypress="isNumber(event)" class="form-control" placeholder="">                                        
@@ -441,7 +437,7 @@
                                     </div>
 
                                     <div class="col-md-3">
-                                        <input id="x2"   type="text" v-model="precio_proveedor" class="form-control" disabled placeholder="Nombre de artículo">                                        
+                                        <input id="x2"   type="text" v-model="precio_proveedor" class="form-control"  placeholder="Nombre de artículo">                                        
                                     </div>
                                     
                                     </div>
@@ -450,7 +446,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="text-input">Stock:</label>
                                     <div class="col-md-3">
-                                        <input id="x4"  type="number" v-model="stock" v-bind:min="0" v-on:keypress="isNumber(event)" class="form-control" disabled placeholder="">                                        
+                                        <input id="x4"  type="number" v-model="stock" v-bind:min="0" v-on:keypress="isNumber(event)" class="form-control"  placeholder="">                                        
                                     </div>
                                    
                                     <label class="col-md-3 form-control-label" for="text-input">Agregar:</label>
@@ -787,7 +783,7 @@ Vue.use(Print);
                     'idcategoria': this.idcategoria,
                     'codigo': this.codigo,
                     'nombre': this.nombre,
-                    'stock': this.stock,
+                    
                     'minimo': this.minimo,
                     'stock1': this.stock1,
                     'precio_proveedor': this.precio_proveedor,
@@ -1032,7 +1028,7 @@ Vue.use(Print);
                                 this.idcategoria=data['idcategoria'];
                                 this.codigo=data['codigo'];
                                 this.nombre = data['nombre'];
-                               
+                                this.stock= data['stock'];
                                 this.minimo=data['minimo'];
                                 this.stock1=0;
                                 this.precio_proveedor=data['precio_proveedor'];

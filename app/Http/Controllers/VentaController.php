@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Venta;
 use App\Historial2;
+use App\Salida;
 use App\DetalleVenta;
 use App\Registro;
 
@@ -362,7 +363,7 @@ class VentaController extends Controller
     private function __historial2($articulo = '',$cantidad = '',$precio4 = '',$inventariable = '',$idarticulo = '',$fecha_hora = '')
     {
        
-        $historial2 = new Historial2();
+        $historial2 = new Salida();
         
         $historial2->articulo = $articulo ;
         $historial2->cantidad = $cantidad ;

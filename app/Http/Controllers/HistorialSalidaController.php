@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Historial2;
 use App\DetalleInterna;
 use App\Articulo;
+use App\Salida;
 use Carbon\Carbon;
 
 class HistorialSalidaController extends Controller
@@ -96,12 +97,12 @@ class HistorialSalidaController extends Controller
         $criterio = $request->criterio;
         
         if ($buscar==''){
-            $historial2 = Historial2::where('inventariable','=','1')
+            $salidas = Salida::where('inventariable','=','1')
             ->where('fecha_hora','=', Carbon :: today())
             ->orderBy('id', 'desc')->paginate(10000);
         }
         else{
-            $historial2 = Historial2::where($criterio2, 'like', '%'. $buscar2 . '%')
+            $salidas = Salida::where($criterio2, 'like', '%'. $buscar2 . '%')
             ->whereDate($criterio1, '>=', $buscar1 )
             ->whereDate($criterio, '<=', $buscar)
             ->where('inventariable','=','1')
@@ -112,14 +113,14 @@ class HistorialSalidaController extends Controller
 
         return [
             'pagination' => [
-                'total'        => $historial2->total(),
-                'current_page' => $historial2->currentPage(),
-                'per_page'     => $historial2->perPage(),
-                'last_page'    => $historial2->lastPage(),
-                'from'         => $historial2->firstItem(),
-                'to'           => $historial2->lastItem(),
+                'total'        => $salidas->total(),
+                'current_page' => $salidas->currentPage(),
+                'per_page'     => $salidas->perPage(),
+                'last_page'    => $salidas->lastPage(),
+                'from'         => $salidas->firstItem(),
+                'to'           => $salidas->lastItem(),
             ],
-            'historial2' => $historial2
+            'salidas' => $salidas
         ];
     }
 
