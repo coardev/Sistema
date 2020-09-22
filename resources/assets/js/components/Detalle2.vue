@@ -20,7 +20,7 @@
                                      
                                     </select>
                                     <input type="date" v-model="buscar" class="form-control" placeholder="Elige el Dia...">
-                                    <button type="submit" @click="listarDetalle(1,buscar,criterio);cambio1()" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                                    <button type="submit" @click="listarDetalle(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                                      &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;<button  style="font-size:18px" v-print="printObj">Imprimir Reporte <i class="fa fa-print"></i></button>
                                 </div>
                                 </div>

@@ -65443,8 +65443,7 @@ var render = function() {
                       attrs: { type: "submit" },
                       on: {
                         click: function($event) {
-                          _vm.listarDetalle(1, _vm.buscar, _vm.criterio)
-                          _vm.cambio1()
+                          return _vm.listarDetalle(1, _vm.buscar, _vm.criterio)
                         }
                       }
                     },
