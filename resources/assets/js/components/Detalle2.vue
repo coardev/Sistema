@@ -48,9 +48,9 @@
                                 <tbody> <tr> <th colspan="2" style="text-align:center">Retiros de Efectivo:</th> 
                                <th></th> <th></th> </tr> <tr>
                                 <td><input  type="text" placeholder="Concepto del Retiro..."></td>
-                                 <td><input type="number" v-model="Concepto" @focus="onFocus" v-on:keypress="isNumber(event)" v-bind:min="0"></td> <td>
-                                 </td>
-                                 <td></td> </tr>
+                                 <td><input type="number" v-model="Concepto" @focus="onFocus" v-on:keypress="isNumber(event)" v-bind:min="0"></td> 
+                                 <th style="color: red">Efectivo sin Cobrar</th>
+                                 <td ><input style="color: red" type="number"  v-model="calcularReal2" readonly></td> </tr>
                                   <tr> <td><input type="text" placeholder="Concepto del Retiro..."></td>
                                   <td><input type="number" v-model="Concepto1" @focus="onFocus1" v-on:keypress="isNumber(event)" v-bind:min="0"></td> <th>Saldo Inicial del Dia</th>
                                    <td><input  type="number" name="txtn" id="txtn"  v-model="dinero" readonly></td> </tr>
@@ -153,6 +153,7 @@ Vue.use(Print);
                 calcularVales: 0,
                 calcularTarjeta: 0,
                 calcularReal: 0,
+                calcularReal2: 0,
                 calcularCorte: 0,
                 tituloModal : '',
                 tipoAccion : 0,
@@ -505,6 +506,9 @@ document.getElementById('area_total1').innerText = total;
     if (localStorage.calcularReal) {
       this.calcularReal = localStorage.calcularReal;
     }
+    if (localStorage.calcularReal2) {
+      this.calcularReal2 = localStorage.calcularReal2;
+    }
     if (localStorage.calcularTarjeta) {
       this.calcularTarjeta = localStorage.calcularTarjeta;
     }
@@ -534,6 +538,9 @@ document.getElementById('area_total1').innerText = total;
     },
     calcularReal(newName) {
       localStorage.calcularReal = newName;
+    },
+    calcularReal2(newName) {
+      localStorage.calcularReal2 = newName;
     },
     calcularTarjeta(newName) {
       localStorage.calcularTarjeta = newName;

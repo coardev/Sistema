@@ -35,7 +35,7 @@
                                      <th class="form-control">Total Ventas Cobradas: $ {{ calcularReal }}</th>
                                      </div>
                                      <div class="col-md-3">
-                                     <th style="color: red" class="form-control">Total Ventas Sin Cobrar: $ {{ No=calcularCorte-calcularReal }}</th>
+                                     <th style="color: red" class="form-control">Total Ventas Sin Cobrar: $ {{ calcularReal2 }}</th>
                                      </div>
                             </div>
                             <div class="form-group row border">
@@ -541,7 +541,17 @@
                 var resultado1=0.0;
                 
                 for(var i=0;i<this.arrayVenta.length;i++){
-                 resultado1=resultado1+(this.arrayVenta[i].efectivo - this.arrayVenta[i].cambio)
+                 resultado1=resultado1+(this.arrayVenta[i].efectivo1*1)
+                }
+                return resultado1;
+            },
+            calcularReal2: function(){
+                var resultado1=0.0;
+               
+                for(var i=0;i<this.arrayVenta.length;i++){
+                    if(this.arrayVenta[i].estado == "Venta Registrada") {
+                 resultado1=resultado1+(this.arrayVenta[i].total *1)
+                }
                 }
                 return resultado1;
             },
@@ -1018,6 +1028,9 @@ localStorage.setItem('area_total6', JSON.stringify(total));
     if (localStorage.calcularReal) {
       this.calcularReal = localStorage.calcularReal;
     }
+    if (localStorage.calcularReal2) {
+      this.calcularReal2 = localStorage.calcularReal2;
+    }
     if (localStorage.calcularTarjeta) {
       this.calcularTarjeta = localStorage.calcularTarjeta;
     }
@@ -1047,6 +1060,9 @@ localStorage.setItem('area_total6', JSON.stringify(total));
     },
     calcularReal(newName) {
       localStorage.calcularReal = newName;
+    },
+    calcularReal2(newName) {
+      localStorage.calcularReal2 = newName;
     },
     calcularTarjeta(newName) {
       localStorage.calcularTarjeta = newName;

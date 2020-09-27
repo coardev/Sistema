@@ -64967,6 +64967,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vue_
             calcularVales: 0,
             calcularTarjeta: 0,
             calcularReal: 0,
+            calcularReal2: 0,
             calcularCorte: 0,
             tituloModal: '',
             tipoAccion: 0,
@@ -65314,6 +65315,9 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vue_
         if (localStorage.calcularReal) {
             this.calcularReal = localStorage.calcularReal;
         }
+        if (localStorage.calcularReal2) {
+            this.calcularReal2 = localStorage.calcularReal2;
+        }
         if (localStorage.calcularTarjeta) {
             this.calcularTarjeta = localStorage.calcularTarjeta;
         }
@@ -65344,6 +65348,9 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vue_
         },
         calcularReal: function calcularReal(newName) {
             localStorage.calcularReal = newName;
+        },
+        calcularReal2: function calcularReal2(newName) {
+            localStorage.calcularReal2 = newName;
         },
         calcularTarjeta: function calcularTarjeta(newName) {
             localStorage.calcularTarjeta = newName;
@@ -65571,9 +65578,33 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("td"),
+                    _c("th", { staticStyle: { color: "red" } }, [
+                      _vm._v("Efectivo sin Cobrar")
+                    ]),
                     _vm._v(" "),
-                    _c("td")
+                    _c("td", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.calcularReal2,
+                            expression: "calcularReal2"
+                          }
+                        ],
+                        staticStyle: { color: "red" },
+                        attrs: { type: "number", readonly: "" },
+                        domProps: { value: _vm.calcularReal2 },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.calcularReal2 = $event.target.value
+                          }
+                        }
+                      })
+                    ])
                   ]),
                   _vm._v(" "),
                   _c("tr", [
@@ -89631,7 +89662,17 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue2
             var resultado1 = 0.0;
 
             for (var i = 0; i < this.arrayVenta.length; i++) {
-                resultado1 = resultado1 + (this.arrayVenta[i].efectivo - this.arrayVenta[i].cambio);
+                resultado1 = resultado1 + this.arrayVenta[i].efectivo1 * 1;
+            }
+            return resultado1;
+        },
+        calcularReal2: function calcularReal2() {
+            var resultado1 = 0.0;
+
+            for (var i = 0; i < this.arrayVenta.length; i++) {
+                if (this.arrayVenta[i].estado == "Venta Registrada") {
+                    resultado1 = resultado1 + this.arrayVenta[i].total * 1;
+                }
             }
             return resultado1;
         },
@@ -90091,6 +90132,9 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue2
         if (localStorage.calcularReal) {
             this.calcularReal = localStorage.calcularReal;
         }
+        if (localStorage.calcularReal2) {
+            this.calcularReal2 = localStorage.calcularReal2;
+        }
         if (localStorage.calcularTarjeta) {
             this.calcularTarjeta = localStorage.calcularTarjeta;
         }
@@ -90121,6 +90165,9 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue2
         },
         calcularReal: function calcularReal(newName) {
             localStorage.calcularReal = newName;
+        },
+        calcularReal2: function calcularReal2(newName) {
+            localStorage.calcularReal2 = newName;
         },
         calcularTarjeta: function calcularTarjeta(newName) {
             localStorage.calcularTarjeta = newName;
@@ -90313,9 +90360,7 @@ var render = function() {
                         [
                           _vm._v(
                             "Total Ventas Sin Cobrar: $ " +
-                              _vm._s(
-                                (_vm.No = _vm.calcularCorte - _vm.calcularReal)
-                              )
+                              _vm._s(_vm.calcularReal2)
                           )
                         ]
                       )
