@@ -68,8 +68,8 @@
                                     </tr>
                                   <td><input  type="text" placeholder="Concepto del Retiro..."></td>
                                  <td><input type="number" v-model="Concepto5" @focus="onFocus5" v-on:keypress="isNumber(event)" v-bind:min="0"></td>
-                                  <td></td>
-                                 <td></td> </tr> <tr>
+                                  <th>Corte del Dia</th>
+                                 <td><input type="number"  v-model="calcularCorte" readonly></td> </tr> <tr>
                                   </tr></tr> <tr> </tr>
                                   <th>Subtotal Retiros Efectivo:</th>
                                   <td>$ {{total=calcular1+calcular2+calcular3+calcular4+calcular5+calcular6}}</td>
@@ -78,7 +78,7 @@
                                    <tfoot>
                                     <tr> 
                                       <th colspan="3">Gran Total</th> 
-                                         <td>$ {{ ganancia=dia+dia1+dia2+dia3-calcular1-calcular2-calcular3-calcular4-calcular5-calcular6 }}</td> </tr>
+                                         <td>$ {{ ganancia=calcularCorte-calcular1-calcular2-calcular3-calcular4-calcular5-calcular6 }}</td> </tr>
                                           </tfoot>
 
 

@@ -84,7 +84,7 @@ class VentaController extends Controller
             'ventas.estado','personas.nombre','users.usuario')
             ->where('ventas.'.$criterio, 'like', '%'. $buscar . '%')
             ->orderBy('ventas.id', 'desc')
-            ->where('ventas.estado','=','Venta Cobrada')
+            ->whereIn('ventas.estado', ['Venta Registrada', 'Venta Cobrada'])
             ->paginate(250);
         }
         

@@ -411,7 +411,7 @@
                                     </div>
                                     <label class="col-md-3 form-control-label" for="text-input">Precio Proveedor</label>
                                     <div class="col-md-3">
-                                        <input id="x2"   type="text" v-model="precio_proveedor" class="form-control" disabled  placeholder="Nombre de artículo">                                        
+                                        <input id="x2"   type="number" v-model="precio_proveedor" class="form-control" disabled  placeholder="Nombre de artículo">                                        
                                     </div>
                                     
                                     </div>

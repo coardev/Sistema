@@ -269,7 +269,7 @@ class ArticuloController extends Controller
 
 
         //Funcion Restar Administrador -- Tabla Salidas 
-        $this->__historial6($request->id,$articulo->nombre,$articulo->inventariable,$articulo->precio_venta,$articulo->stock2);
+        $this->__historial6($request->id,$articulo->nombre,$articulo->inventariable,$articulo->precio_proveedor1,$articulo->stock2);
 
 
     }
@@ -366,14 +366,14 @@ class ArticuloController extends Controller
     }   
 
     //Funcion Restar Administrador -- Tabla Salidas 
-    private function __historial6($id = null,$nombre = '',$inventariable = '',$precio_venta = '',$stock2 = '')
+    private function __historial6($id = null,$nombre = '',$inventariable = '',$precio_proveedor1 = '',$stock2 = '')
     {
        
         $historial6 = new Salida();
         $historial6->articulo = $nombre;
         $historial6->idarticulo = $id;
         $historial6->inventariable = $inventariable;
-        $historial6->precio4 = $precio_venta;
+        $historial6->precio4 = $precio_proveedor1;
         $historial6->cantidad = $stock2;
         $historial6->fecha_hora =  Carbon :: today();
         $historial6->estado = 'Restado by Admin';

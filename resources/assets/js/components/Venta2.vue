@@ -31,7 +31,12 @@
                                 
                                 </div>
                                 </div>
-                               
+                                 <div class="col-md-3">
+                                     <th class="form-control">Total Ventas Cobradas: $ {{ calcularReal }}</th>
+                                     </div>
+                                     <div class="col-md-3">
+                                     <th style="color: red" class="form-control">Total Ventas Sin Cobrar: $ {{ No=calcularCorte-calcularReal }}</th>
+                                     </div>
                             </div>
                             <div class="form-group row border">
                             <div align="center" class="col-md-2">
@@ -125,9 +130,16 @@
                                 <tbody>
                                     <tr v-for="venta in arrayVenta" :key="venta.id">
                                         <td>
+                                            <template v-if="venta.estado === 'Venta Registrada'">
+                                           <button type="button"  @click="verVenta(venta.id)" class="btn btn-danger btn-lg">
+                                            <i class="icon-eye"></i>
+                                            </button> 
+                                             </template>
+                                             <template v-if="venta.estado === 'Venta Cobrada'">
                                            <button type="button"  @click="verVenta(venta.id)" class="btn btn-success btn-lg">
                                             <i class="icon-eye"></i>
                                             </button> 
+                                             </template>
                                             <template v-if="venta.estado === 'Venta Registrada'">
                                             <button type="button" @click="pdfTicket(venta.id)" class="btn btn-warning btn-lg" disabled>
                                                 <i class='fas fa-ticket-alt'></i>
@@ -154,7 +166,7 @@
                                         <td v-text="venta.cambio"></td>
                                         <td v-text="venta.total"></td>
                                         <td v-text="venta.efectivo1"></td>
-                                        <td v-text="venta.estado"></td>
+                                        <td style="color: red" v-text="venta.estado"></td>
                                        
                                         
                                         
@@ -459,7 +471,8 @@
                  precio2: 0,
                  minimo: 0,
                  cantidad:0,
-                 stock:0
+                 stock:0,
+                 No:0
             }
         },
         components: {
@@ -558,35 +571,20 @@
             },
             calcularCorte: function(){
                 var resultado1=0.0;
-                var resultado2=0.0;
-                var resultado3=0.0;
+                
                 for(var i=0;i<this.arrayVenta.length;i++){
-                 resultado1=resultado1+=(this.arrayVenta[i].tarjeta*1)
+                 resultado1=resultado1+=(this.arrayVenta[i].total*1)
                 }
-                for(var i=0;i<this.arrayVenta.length;i++){
-                 resultado2=resultado2+=(this.arrayVenta[i].vales*1)
-                }
-                for(var i=0;i<this.arrayVenta.length;i++){
-                 resultado3=resultado3+=(this.arrayVenta[i].efectivo1*1)
-                }
-                return resultado1+resultado2+resultado3;
+                return resultado1;
             },
             calcularCorte1: function(){
                 var resultado1=0.0;
-                var resultado2=0.0;
-                var resultado3=0.0;
-                var resultado4=0.0;
+               
                 for(var i=0;i<this.arrayVenta.length;i++){
-                 resultado1=resultado1+=(this.arrayVenta[i].tarjeta*1)
+                 resultado1=resultado1+=(this.arrayVenta[i].total*1)
                 }
-                for(var i=0;i<this.arrayVenta.length;i++){
-                 resultado2=resultado2+=(this.arrayVenta[i].vales*1)
-                }
-                for(var i=0;i<this.arrayVenta.length;i++){
-                 resultado3=resultado3+=(this.arrayVenta[i].efectivo1*1)
-                }
-                resultado4=resultado4+(this.dinero*1)
-                return resultado1+resultado2+resultado3+resultado4;
+               
+                return resultado1;
             },
             calcularTotal: function(){
                 var resultado=0.0;
