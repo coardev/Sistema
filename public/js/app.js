@@ -64952,6 +64952,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vue_
             total: 0,
             total1: 0,
             stock2: 0,
+            menos: 0,
             listado: 1,
             precio_proveedor: 0,
             cantidad: 0,
@@ -65701,31 +65702,18 @@ var render = function() {
                     _c("th", [_vm._v("Efectivo Total en Caja")]),
                     _vm._v(" "),
                     _c("th", [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.calcularReal,
-                            expression: "calcularReal"
-                          }
-                        ],
-                        attrs: {
-                          type: "number",
-                          name: "txto",
-                          id: "txto",
-                          readonly: ""
-                        },
-                        domProps: { value: _vm.calcularReal },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.calcularReal = $event.target.value
-                          }
-                        }
-                      })
+                      _vm._v(
+                        _vm._s(
+                          (_vm.menos =
+                            _vm.calcularReal -
+                            _vm.calcular1 -
+                            _vm.calcular2 -
+                            _vm.calcular3 -
+                            _vm.calcular4 -
+                            _vm.calcular5 -
+                            _vm.calcular6)
+                        )
+                      )
                     ])
                   ]),
                   _vm._v(" "),
@@ -65870,30 +65858,9 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
-                  _c("th", [_vm._v("Corte del Dia")]),
+                  _c("th"),
                   _vm._v(" "),
-                  _c("td", [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.calcularCorte,
-                          expression: "calcularCorte"
-                        }
-                      ],
-                      attrs: { type: "number", readonly: "" },
-                      domProps: { value: _vm.calcularCorte },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.calcularCorte = $event.target.value
-                        }
-                      }
-                    })
-                  ]),
+                  _c("td"),
                   _vm._v(" "),
                   _c("tr"),
                   _vm._v(" "),
@@ -65924,24 +65891,10 @@ var render = function() {
                 _c("tfoot", [
                   _c("tr", [
                     _c("th", { attrs: { colspan: "3" } }, [
-                      _vm._v("Gran Total")
+                      _vm._v("Corte del Dia")
                     ]),
                     _vm._v(" "),
-                    _c("td", [
-                      _vm._v(
-                        "$ " +
-                          _vm._s(
-                            (_vm.ganancia =
-                              _vm.calcularCorte -
-                              _vm.calcular1 -
-                              _vm.calcular2 -
-                              _vm.calcular3 -
-                              _vm.calcular4 -
-                              _vm.calcular5 -
-                              _vm.calcular6)
-                          )
-                      )
-                    ])
+                    _c("td", [_vm._v("$ " + _vm._s(_vm.calcularCorte))])
                   ])
                 ])
               ]

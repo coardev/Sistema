@@ -56,7 +56,7 @@
                                    <td><input  type="number" name="txtn" id="txtn"  v-model="dinero" readonly></td> </tr>
                                    <tr> <td><input type="text" placeholder="Concepto del Retiro..."></td> 
                                <td><input type="number" v-model="Concepto2" @focus="onFocus2" v-on:keypress="isNumber(event)" v-bind:min="0"></td> <th>Efectivo Total en Caja</th>
-                                <th>{{ menos=calcularReal-calcular1-calcular2-calcular3-calcular4-calcular5-calcular6}}</th> </tr> <tr>
+                                <th><input  type="number" name="txto" id="txto"   v-model="calcularReal" readonly></th> </tr> <tr>
                                 <td><input type="text" placeholder="Concepto del Retiro..."></td>
                                  <td><input type="number" v-model="Concepto3" @focus="onFocus3" v-on:keypress="isNumber(event)" v-bind:min="0"></td>
                                   <th>Ingresos Tarjeta</th>
@@ -68,8 +68,8 @@
                                     </tr>
                                   <td><input  type="text" placeholder="Concepto del Retiro..."></td>
                                  <td><input type="number" v-model="Concepto5" @focus="onFocus5" v-on:keypress="isNumber(event)" v-bind:min="0"></td>
-                                  <th></th>
-                                 <td></td></tr> <tr>
+                                  <th>Corte del Dia</th>
+                                 <td><input type="number"  v-model="calcularCorte" readonly></td> </tr> <tr>
                                   </tr></tr> <tr> </tr>
                                   <th>Subtotal Retiros Efectivo:</th>
                                   <td>$ {{total=calcular1+calcular2+calcular3+calcular4+calcular5+calcular6}}</td>
@@ -77,8 +77,8 @@
                                    </tbody>
                                    <tfoot>
                                     <tr> 
-                                      <th colspan="3">Corte del Dia</th> 
-                                         <td>$ {{ calcularCorte }}</td> </tr>
+                                      <th colspan="3">Gran Total</th> 
+                                         <td>$ {{ ganancia=calcularCorte-calcular1-calcular2-calcular3-calcular4-calcular5-calcular6 }}</td> </tr>
                                           </tfoot>
 
 
@@ -138,7 +138,6 @@ Vue.use(Print);
                 total : 0,
                 total1 : 0,
                 stock2 : 0,
-                menos : 0,
                 listado:1,
                 precio_proveedor : 0,
                 cantidad : 0,
