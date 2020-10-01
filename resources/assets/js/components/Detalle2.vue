@@ -30,6 +30,9 @@
                         <table id="table_trans" class="table table-bordered table-striped table-sm">
                            
                             <thead> 
+                              <tr>
+                             <th colspan="4" style="text-align:right;color: red">Fecha:<p style="color: red" >{{buscar}}</p></th>
+                             </tr>
                             <tr>
                              <th colspan="4" style="text-align:center">Informe Corte del Dia</th> 
                              </tr>
@@ -78,7 +81,7 @@
                                    <tfoot>
                                     <tr> 
                                       <th colspan="3">Corte del Dia</th> 
-                                         <td>$ {{ calcularCorte }}</td> </tr>
+                                         <td>$ {{ calcularCorte1 }}</td> </tr>
                                           </tfoot>
 
 
@@ -353,7 +356,7 @@ Vue.use(Print);
       }
     },
             formatPrice(value) {
-        let val = (value/1).toFixed(2).replace('.', ',')
+        let val = (value/1).toFixed(2).replace('.', '.')
         return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
     },
             printDiv: function() {
@@ -519,6 +522,9 @@ document.getElementById('area_total1').innerText = total;
     if (localStorage.calcularCorte) {
       this.calcularCorte = localStorage.calcularCorte;
     }
+    if (localStorage.calcularCorte1) {
+      this.calcularCorte1 = localStorage.calcularCorte1;
+    }
     if (localStorage.dinero1) {
       this.dinero1 = localStorage.dinero1;
     }
@@ -551,6 +557,9 @@ document.getElementById('area_total1').innerText = total;
     },
     calcularCorte(newName) {
       localStorage.calcularCorte = newName;
+    },
+    calcularCorte1(newName) {
+      localStorage.calcularCorte1 = newName;
     },
     dinero1(newName) {
       localStorage.dinero1 = newName;

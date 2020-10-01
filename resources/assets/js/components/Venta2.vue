@@ -589,18 +589,18 @@
             },
             calcularCorte1: function(){
                 var resultado1=0.0;
-               
+               var resultado4=0.0;
                 for(var i=0;i<this.arrayVenta.length;i++){
                  resultado1=resultado1+=(this.arrayVenta[i].total*1)
                 }
-               
-                return resultado1;
+               resultado4=resultado4+(this.dinero*1)
+                return resultado1+resultado4;
             },
             calcularTotal: function(){
                 var resultado=0.0;
                 
                     resultado=resultado+(this.efectivo-this.total)
-                
+                    
                 return resultado;
             },
             calcularTotal1: function(){
@@ -1040,6 +1040,9 @@ localStorage.setItem('area_total6', JSON.stringify(total));
     if (localStorage.calcularCorte) {
       this.calcularCorte = localStorage.calcularCorte;
     }
+    if (localStorage.calcularCorte1) {
+      this.calcularCorte1 = localStorage.calcularCorte1;
+    }
     if (localStorage.dinero1) {
       this.dinero1 = localStorage.dinero1;
     }
@@ -1072,6 +1075,9 @@ localStorage.setItem('area_total6', JSON.stringify(total));
     },
     calcularCorte(newName) {
       localStorage.calcularCorte = newName;
+    },
+     calcularCorte1(newName) {
+      localStorage.calcularCorte1 = newName;
     },
     dinero1(newName) {
       localStorage.dinero1 = newName;

@@ -64917,6 +64917,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -65168,7 +65171,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vue_
             }
         },
         formatPrice: function formatPrice(value) {
-            var val = (value / 1).toFixed(2).replace('.', ',');
+            var val = (value / 1).toFixed(2).replace('.', '.');
             return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         },
 
@@ -65328,6 +65331,9 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vue_
         if (localStorage.calcularCorte) {
             this.calcularCorte = localStorage.calcularCorte;
         }
+        if (localStorage.calcularCorte1) {
+            this.calcularCorte1 = localStorage.calcularCorte1;
+        }
         if (localStorage.dinero1) {
             this.dinero1 = localStorage.dinero1;
         }
@@ -65361,6 +65367,9 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vue_
         },
         calcularCorte: function calcularCorte(newName) {
             localStorage.calcularCorte = newName;
+        },
+        calcularCorte1: function calcularCorte1(newName) {
+            localStorage.calcularCorte1 = newName;
         },
         dinero1: function dinero1(newName) {
             localStorage.dinero1 = newName;
@@ -65507,6 +65516,22 @@ var render = function() {
                 _c(
                   "thead",
                   [
+                    _c("tr", [
+                      _c(
+                        "th",
+                        {
+                          staticStyle: { "text-align": "right", color: "red" },
+                          attrs: { colspan: "4" }
+                        },
+                        [
+                          _vm._v("Fecha:"),
+                          _c("p", { staticStyle: { color: "red" } }, [
+                            _vm._v(_vm._s(_vm.buscar))
+                          ])
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
                     _vm._m(1),
                     _vm._v(" "),
                     _vm._m(2),
@@ -65894,7 +65919,7 @@ var render = function() {
                       _vm._v("Corte del Dia")
                     ]),
                     _vm._v(" "),
-                    _c("td", [_vm._v("$ " + _vm._s(_vm.calcularCorte))])
+                    _c("td", [_vm._v("$ " + _vm._s(_vm.calcularCorte1))])
                   ])
                 ])
               ]
@@ -89663,12 +89688,12 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue2
         },
         calcularCorte1: function calcularCorte1() {
             var resultado1 = 0.0;
-
+            var resultado4 = 0.0;
             for (var i = 0; i < this.arrayVenta.length; i++) {
                 resultado1 = resultado1 += this.arrayVenta[i].total * 1;
             }
-
-            return resultado1;
+            resultado4 = resultado4 + this.dinero * 1;
+            return resultado1 + resultado4;
         },
         calcularTotal: function calcularTotal() {
             var resultado = 0.0;
@@ -90097,6 +90122,9 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue2
         if (localStorage.calcularCorte) {
             this.calcularCorte = localStorage.calcularCorte;
         }
+        if (localStorage.calcularCorte1) {
+            this.calcularCorte1 = localStorage.calcularCorte1;
+        }
         if (localStorage.dinero1) {
             this.dinero1 = localStorage.dinero1;
         }
@@ -90130,6 +90158,9 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue2
         },
         calcularCorte: function calcularCorte(newName) {
             localStorage.calcularCorte = newName;
+        },
+        calcularCorte1: function calcularCorte1(newName) {
+            localStorage.calcularCorte1 = newName;
         },
         dinero1: function dinero1(newName) {
             localStorage.dinero1 = newName;
